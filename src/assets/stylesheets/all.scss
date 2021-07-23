@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions";
+@import "./helpers/variables";
+@import "~bootstrap/scss/mixins";
+@import '~bootstrap';
+@import "./helpers/reset.scss";
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+
+body {
+  font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+  font-weight: 400;
+}
+
