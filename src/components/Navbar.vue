@@ -7,7 +7,7 @@
             class="navbar-brand"
             style="font-weight: 600; letter-spacing: 1.5px"
           >
-            <router-link class="text-decoration-none text-dark fs-3" to="/"
+            <router-link class="text-dark fs-3" to="/"
               >TAbLe</router-link
             >
           </h1>
