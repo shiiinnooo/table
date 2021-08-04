@@ -214,7 +214,7 @@ $escaped-characters: (
 // Quickly modify global styling by enabling or disabling optional features.
 
 $enable-caret:                true !default;
-$enable-rounded:              false; // true !default;
+$enable-rounded:              true !default;
 $enable-shadows:              false !default;
 $enable-gradients:            false !default;
 $enable-transitions:          true !default;
@@ -642,9 +642,9 @@ $btn-link-hover-color:        $link-hover-color !default;
 $btn-link-disabled-color:     $gray-600 !default;
 
 // Allows for customizing button radius independently from global border radius
-$btn-border-radius:           $border-radius !default;
-$btn-border-radius-sm:        $border-radius-sm !default;
-$btn-border-radius-lg:        $border-radius-lg !default;
+$btn-border-radius:           none; //$border-radius !default;
+$btn-border-radius-sm:        none; //$border-radius-sm !default;
+$btn-border-radius-lg:        none; //$border-radius-lg !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
@@ -702,9 +702,9 @@ $input-border-color:                    $gray-400 !default;
 $input-border-width:                    $input-btn-border-width !default;
 $input-box-shadow:                      $box-shadow-inset !default;
 
-$input-border-radius:                   $border-radius !default;
-$input-border-radius-sm:                $border-radius-sm !default;
-$input-border-radius-lg:                $border-radius-lg !default;
+$input-border-radius:                   none; //$border-radius !default;
+$input-border-radius-sm:                none; //$border-radius-sm !default;
+$input-border-radius-lg:                none; //$border-radius-lg !default;
 
 $input-focus-bg:                        $input-bg !default;
 $input-focus-border-color:              tint-color($component-active-bg, 50%) !default;
@@ -741,8 +741,8 @@ $form-check-input-active-filter:          brightness(90%) !default;
 
 $form-check-input-bg:                     $input-bg !default;
 $form-check-input-border:                 1px solid rgba($black, .25) !default;
-$form-check-input-border-radius:          .25em !default;
-$form-check-radio-border-radius:          50% !default;
+$form-check-input-border-radius:          0; //.25em !default;
+$form-check-radio-border-radius:          0; //50% !default;
 $form-check-input-focus-border:           $input-focus-border-color !default;
 $form-check-input-focus-box-shadow:       $input-btn-focus-box-shadow !default;
 
@@ -813,7 +813,7 @@ $form-select-feedback-icon-size:        $input-height-inner-half $input-height-i
 
 $form-select-border-width:        $input-border-width !default;
 $form-select-border-color:        $input-border-color !default;
-$form-select-border-radius:       $border-radius !default;
+$form-select-border-radius:       0; //$border-radius !default;
 $form-select-box-shadow:          $box-shadow-inset !default;
 
 $form-select-focus-border-color:  $input-focus-border-color !default;
@@ -836,14 +836,14 @@ $form-range-track-width:          100% !default;
 $form-range-track-height:         .5rem !default;
 $form-range-track-cursor:         pointer !default;
 $form-range-track-bg:             $gray-300 !default;
-$form-range-track-border-radius:  1rem !default;
+$form-range-track-border-radius:  0; //1rem !default;
 $form-range-track-box-shadow:     $box-shadow-inset !default;
 
 $form-range-thumb-width:                   1rem !default;
 $form-range-thumb-height:                  $form-range-thumb-width !default;
 $form-range-thumb-bg:                      $component-active-bg !default;
 $form-range-thumb-border:                  0 !default;
-$form-range-thumb-border-radius:           1rem !default;
+$form-range-thumb-border-radius:           none; // 1rem !default;
 $form-range-thumb-box-shadow:              0 .1rem .25rem rgba($black, .1) !default;
 $form-range-thumb-focus-box-shadow:        0 0 0 1px $body-bg, $input-focus-box-shadow !default;
 $form-range-thumb-focus-box-shadow-width:  $input-focus-width !default; // For focus box shadow issue in Edge
@@ -929,13 +929,13 @@ $nav-link-disabled-color:           $gray-600 !default;
 
 $nav-tabs-border-color:             $gray-300 !default;
 $nav-tabs-border-width:             $border-width !default;
-$nav-tabs-border-radius:            $border-radius !default;
+$nav-tabs-border-radius:            none; //$border-radius !default;
 $nav-tabs-link-hover-border-color:  $gray-200 $gray-200 $nav-tabs-border-color !default;
 $nav-tabs-link-active-color:        $gray-700 !default;
 $nav-tabs-link-active-bg:           $body-bg !default;
 $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
 
-$nav-pills-border-radius:           $border-radius !default;
+$nav-pills-border-radius:           none; //$border-radius !default;
 $nav-pills-link-active-color:       $component-active-color !default;
 $nav-pills-link-active-bg:          $component-active-bg !default;
 // scss-docs-end nav-variables
@@ -959,7 +959,7 @@ $navbar-brand-margin-end:           1rem !default;
 $navbar-toggler-padding-y:          .25rem !default;
 $navbar-toggler-padding-x:          .75rem !default;
 $navbar-toggler-font-size:          $font-size-lg !default;
-$navbar-toggler-border-radius:      $btn-border-radius !default;
+$navbar-toggler-border-radius:      0; //$btn-border-radius !default;
 $navbar-toggler-focus-width:        $btn-focus-width !default;
 $navbar-toggler-transition:         box-shadow .15s ease-in-out !default;
 // scss-docs-end navbar-variables
@@ -999,9 +999,9 @@ $dropdown-font-size:                $font-size-base !default;
 $dropdown-color:                    $body-color !default;
 $dropdown-bg:                       $white !default;
 $dropdown-border-color:             rgba($black, .15) !default;
-$dropdown-border-radius:            $border-radius !default;
+$dropdown-border-radius:            0; //$border-radius !default;
 $dropdown-border-width:             $border-width !default;
-$dropdown-inner-border-radius:      subtract($dropdown-border-radius, $dropdown-border-width) !default;
+$dropdown-inner-border-radius:      0; //subtract($dropdown-border-radius, $dropdown-border-width) !default;
 $dropdown-divider-bg:               $dropdown-border-color !default;
 $dropdown-divider-margin-y:         $spacer * .5 !default;
 $dropdown-box-shadow:               $box-shadow !default;
@@ -1051,7 +1051,7 @@ $pagination-padding-x-lg:           1.5rem !default;
 $pagination-color:                  $link-color !default;
 $pagination-bg:                     $white !default;
 $pagination-border-width:           $border-width !default;
-$pagination-border-radius:          $border-radius !default;
+$pagination-border-radius:          0; //$border-radius !default;
 $pagination-margin-start:           -$pagination-border-width !default;
 $pagination-border-color:           $gray-300 !default;
 
@@ -1074,8 +1074,8 @@ $pagination-disabled-border-color:  $gray-300 !default;
 
 $pagination-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-$pagination-border-radius-sm:       $border-radius-sm !default;
-$pagination-border-radius-lg:       $border-radius-lg !default;
+$pagination-border-radius-sm:       0; //$border-radius-sm !default;
+$pagination-border-radius-lg:       0; //$border-radius-lg !default;
 // scss-docs-end pagination-variables
 
 
@@ -1086,9 +1086,9 @@ $card-spacer-y:                     $spacer !default;
 $card-spacer-x:                     $spacer !default;
 $card-title-spacer-y:               $spacer * .5 !default;
 $card-border-width:                 $border-width !default;
-$card-border-radius:                $border-radius !default;
+$card-border-radius:                0; //$border-radius !default;
 $card-border-color:                 rgba($black, .125) !default;
-$card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
+$card-inner-border-radius:          0; //subtract($card-border-radius, $card-border-width) !default;
 $card-cap-padding-y:                $card-spacer-y * .5 !default;
 $card-cap-padding-x:                $card-spacer-x !default;
 $card-cap-bg:                       rgba($black, .03) !default;
@@ -1109,8 +1109,8 @@ $accordion-color:                         $body-color !default;
 $accordion-bg:                            $body-bg !default;
 $accordion-border-width:                  $border-width !default;
 $accordion-border-color:                  rgba($black, .125) !default;
-$accordion-border-radius:                 $border-radius !default;
-$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width) !default;
+$accordion-border-radius:                 0; //$border-radius !default;
+$accordion-inner-border-radius:           0; //subtract($accordion-border-radius, $accordion-border-width) !default;
 
 $accordion-body-padding-y:                $accordion-padding-y !default;
 $accordion-body-padding-x:                $accordion-padding-x !default;
@@ -1145,7 +1145,7 @@ $tooltip-font-size:                 $font-size-sm !default;
 $tooltip-max-width:                 200px !default;
 $tooltip-color:                     $white !default;
 $tooltip-bg:                        $black !default;
-$tooltip-border-radius:             $border-radius !default;
+$tooltip-border-radius:             0; //$border-radius !default;
 $tooltip-opacity:                   .9 !default;
 $tooltip-padding-y:                 $spacer * .25 !default;
 $tooltip-padding-x:                 $spacer * .5 !default;
@@ -1163,7 +1163,7 @@ $form-feedback-tooltip-padding-x:     $tooltip-padding-x !default;
 $form-feedback-tooltip-font-size:     $tooltip-font-size !default;
 $form-feedback-tooltip-line-height:   null !default;
 $form-feedback-tooltip-opacity:       $tooltip-opacity !default;
-$form-feedback-tooltip-border-radius: $tooltip-border-radius !default;
+$form-feedback-tooltip-border-radius: 0; //$tooltip-border-radius !default;
 // scss-docs-end tooltip-feedback-variables
 
 
@@ -1175,8 +1175,8 @@ $popover-bg:                        $white !default;
 $popover-max-width:                 276px !default;
 $popover-border-width:              $border-width !default;
 $popover-border-color:              rgba($black, .2) !default;
-$popover-border-radius:             $border-radius-lg !default;
-$popover-inner-border-radius:       subtract($popover-border-radius, $popover-border-width) !default;
+$popover-border-radius:             0; //$border-radius-lg !default;
+$popover-inner-border-radius:       0; //subtract($popover-border-radius, $popover-border-width) !default;
 $popover-box-shadow:                $box-shadow !default;
 
 $popover-header-bg:                 shade-color($popover-bg, 6%) !default;
@@ -1207,7 +1207,7 @@ $toast-color:                       null !default;
 $toast-background-color:            rgba($white, .85) !default;
 $toast-border-width:                1px !default;
 $toast-border-color:                rgba(0, 0, 0, .1) !default;
-$toast-border-radius:               $border-radius !default;
+$toast-border-radius:               0; //$border-radius !default;
 $toast-box-shadow:                  $box-shadow !default;
 $toast-spacing:                     $container-padding-x !default;
 
@@ -1225,7 +1225,7 @@ $badge-font-weight:                 $font-weight-bold !default;
 $badge-color:                       $white !default;
 $badge-padding-y:                   .35em !default;
 $badge-padding-x:                   .65em !default;
-$badge-border-radius:               $border-radius !default;
+$badge-border-radius:               0; //$border-radius !default;
 // scss-docs-end badge-variables
 
 
@@ -1245,7 +1245,7 @@ $modal-content-color:               null !default;
 $modal-content-bg:                  $white !default;
 $modal-content-border-color:        rgba($black, .2) !default;
 $modal-content-border-width:        $border-width !default;
-$modal-content-border-radius:       $border-radius-lg !default;
+$modal-content-border-radius:       0; //$border-radius-lg !default;
 $modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
 $modal-content-box-shadow-xs:       $box-shadow-sm !default;
 $modal-content-box-shadow-sm-up:    $box-shadow !default;
@@ -1280,7 +1280,7 @@ $modal-scale-transform:             scale(1.02) !default;
 $alert-padding-y:               $spacer !default;
 $alert-padding-x:               $spacer !default;
 $alert-margin-bottom:           1rem !default;
-$alert-border-radius:           $border-radius !default;
+$alert-border-radius:           0; //$border-radius !default;
 $alert-link-font-weight:        $font-weight-bold !default;
 $alert-border-width:            $border-width !default;
 $alert-bg-scale:                -80% !default;
@@ -1296,7 +1296,7 @@ $alert-dismissible-padding-r:   $alert-padding-x * 3 !default; // 3x covers widt
 $progress-height:                   1rem !default;
 $progress-font-size:                $font-size-base * .75 !default;
 $progress-bg:                       $gray-200 !default;
-$progress-border-radius:            $border-radius !default;
+$progress-border-radius:            0; //$border-radius !default;
 $progress-box-shadow:               $box-shadow-inset !default;
 $progress-bar-color:                $white !default;
 $progress-bar-bg:                   $primary !default;
@@ -1312,7 +1312,7 @@ $list-group-color:                  $gray-900 !default;
 $list-group-bg:                     $white !default;
 $list-group-border-color:           rgba($black, .125) !default;
 $list-group-border-width:           $border-width !default;
-$list-group-border-radius:          $border-radius !default;
+$list-group-border-radius:          0; //$border-radius !default;
 
 $list-group-item-padding-y:         $spacer * .5 !default;
 $list-group-item-padding-x:         $spacer !default;
@@ -1342,7 +1342,7 @@ $thumbnail-padding:                 .25rem !default;
 $thumbnail-bg:                      $body-bg !default;
 $thumbnail-border-width:            $border-width !default;
 $thumbnail-border-color:            $gray-300 !default;
-$thumbnail-border-radius:           $border-radius !default;
+$thumbnail-border-radius:           0; //$border-radius !default;
 $thumbnail-box-shadow:              $box-shadow-sm !default;
 // scss-docs-end thumbnail-variables
 

@@ -19,7 +19,7 @@
         <td>{{ item.category }}</td>
         <td>
           <img
-            :src="item.imgUrl"
+            :src="item.imgUrl || item.imageUrl"
             width="120"
             height="120"
             style="object-fit: cover"
@@ -56,7 +56,12 @@
   <div class="d-flex justify-content-center">
     <Pagination :page="pagination" @get-product="getProducts"></Pagination>
   </div>
-  <Modal ref="modal" :product="tempProduct" :is-new="isNew"></Modal>
+  <Modal
+    ref="modal"
+    :product="tempProduct"
+    :is-new="isNew"
+    @update-product="updateProduct"
+  ></Modal>
   <DelModal
     ref="delModal"
     :product="tempProduct"
@@ -99,6 +104,24 @@ export default {
         }
       });
     },
+    updateProduct(product) {
+      let url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`;
+      let method = '';
+      if (this.isNew) {
+        method = 'post';
+      } else {
+        method = 'put';
+        url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${product.id}`;
+      }
+      this.$http[method](url, { data: product }).then((res) => {
+        if (res.data.success) {
+          this.getProducts();
+          this.$refs.modal.hide();
+        } else {
+          console.log(res.data.message);
+        }
+      });
+    },
     delProduct(id) {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${id}`;
       this.$http.delete(url).then((res) => {
@@ -115,15 +138,14 @@ export default {
     openModal(isNew, item) {
       if (isNew) {
         this.tempProduct = {
-          imgaesUrl: [],
+          imagesUrl: [],
         };
         this.isNew = true;
       } else {
-        this.tempProduct = { ...item };
+        this.tempProduct = JSON.parse(JSON.stringify(item));
         this.isNew = false;
       }
       this.$refs.modal.show();
-      console.log(this.tempProduct);
     },
     openDelModal(item) {
       this.tempProduct = { ...item };

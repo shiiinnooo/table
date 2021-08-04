@@ -11,29 +11,20 @@
     <div class="col-6 col-lg-3" v-for="product in products" :key="product.id">
       <div class="card h-100 border-0">
         <router-link :to="`/product/${product.id}`">
-          <!-- <div
-            style="
-              height: 270px;
-              background-size: cover;
-              background-position: center;
-            "
-            :style="{ 'background-image': `url(${product.imgUrl})` }"
-          ></div> -->
           <img
-            :src="product.imgUrl"
+            :src="product.imgUrl || product.imageUrl"
             class="card-img-top"
             style="object-fit: cover"
           />
         </router-link>
-        <div class="card-body">
+        <div class="card-body d-flex flex-column justify-content-between">
           <h6 class="card-title">
             <router-link class="text-black-50" :to="`/product/${product.id}`">
               {{ product.title }}
             </router-link>
           </h6>
           <p class="card-text">
-            NT. {{ toCurrency(product.price) }} <br />
-            {{ product.content }}
+            NT. {{ toCurrency(product.price) }}
           </p>
         </div>
       </div>
@@ -75,6 +66,7 @@ export default {
   },
   mounted() {
     this.getProducts();
+    console.log(this.products);
   },
 };
 </script>

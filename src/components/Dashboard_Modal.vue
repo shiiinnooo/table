@@ -7,7 +7,7 @@
     aria-labelledby="productModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-md">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 id="productModalLabel" class="modal-title">
@@ -22,46 +22,57 @@
           ></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="imageUrl">主要圖片</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="請輸入圖片連結"
-                />
-                <img class="img-fluid" />
-              </div>
-              <div class="mb-1">多圖新增</div>
-              <div>
-                <div class="mb-1">
-                  <div class="form-group">
-                    <label for="imageUrl">圖片網址</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="請輸入圖片連結"
-                    />
-                  </div>
-                  <img class="img-fluid" />
-                  <button class="btn btn-outline-danger d-block btn-sm w-100">
-                    刪除圖片
-                  </button>
-                </div>
-                <div>
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">
-                    新增圖片
-                  </button>
-                </div>
-              </div>
-              <div>
-                <button class="btn btn-outline-primary btn-sm d-block w-100">
-                  新增陣列圖片
-                </button>
-              </div>
-            </div>
-            <div class="col-sm-8">
+          <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="information-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#information"
+                type="button"
+                role="tab"
+                aria-controls="information"
+                aria-selected="true"
+              >
+                產品資訊
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="image-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#image"
+                type="button"
+                role="tab"
+                aria-controls="image"
+                aria-selected="false"
+              >
+                產品圖片
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="content-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#content"
+                type="button"
+                role="tab"
+                aria-controls="content"
+                aria-selected="false"
+              >
+                產品內容
+              </button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="information"
+              role="tabpanel"
+              aria-labelledby="information-tab"
+            >
               <div class="form-group">
                 <label for="title">標題</label>
                 <input
@@ -121,7 +132,77 @@
                 </div>
               </div>
               <hr />
-
+              <div class="form-group">
+                <div class="form-check">
+                  <input
+                    id="is_enabled"
+                    class="form-check-input"
+                    type="checkbox"
+                    v-model="tempProduct.is_enabled"
+                    checked
+                  />
+                  <label class="form-check-label" for="is_enabled"
+                    >是否啟用</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="image"
+              role="tabpanel"
+              aria-labelledby="image-tab"
+            >
+              <div class="form-group">
+                <label for="imageUrl">圖片連結</label>
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    id="imageUrl"
+                    class="form-control"
+                    placeholder="請輸入圖片連結"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon"
+                    v-model="tempImage"
+                  />
+                  <button
+                    class="btn btn-outline-secondary rounded-end"
+                    type="button"
+                    id="button-addon"
+                    @click="pushImage"
+                  >
+                    上傳連結
+                  </button>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap">
+                <div class="position-relative"
+                  v-for="(item, key) in tempProduct.imagesUrl"
+                  :key="key"
+                  style="width: 31.3%; margin: 1%"
+                >
+                  <span class="position-absolute material-icons fs-4"
+                    style="top: 2px; left: 2px; cursor: pointer"
+                    @click="removeImage(key)"
+                    @mouseover="active = key" @mouseleave="active = null"
+                    :class="{'text-light' : active === key }">
+                      remove_circle_outline
+                  </span>
+                  <img
+                    :src="item"
+                    class="w-100"
+                    height="120"
+                    style="object-fit: cover"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="content"
+              role="tabpanel"
+              aria-labelledby="content-tab"
+            >
               <div class="form-group">
                 <label for="description">產品描述</label>
                 <textarea
@@ -144,19 +225,6 @@
                 >
                 </textarea>
               </div>
-              <div class="form-group">
-                <div class="form-check">
-                  <input
-                    id="is_enabled"
-                    class="form-check-input"
-                    type="checkbox"
-                    v-model="tempProduct.is_enabled"
-                  />
-                  <label class="form-check-label" for="is_enabled"
-                    >是否啟用</label
-                  >
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -168,7 +236,8 @@
           >
             取消
           </button>
-          <button type="button" class="btn btn-primary">確認</button>
+          <button type="button" class="btn btn-primary"
+          @click="$emit('update-product', this.tempProduct)">確認</button>
         </div>
       </div>
     </div>
@@ -184,7 +253,7 @@ export default {
       type: Object,
       default() {
         return {
-          imgaesUrl: [],
+          imagesUrl: [],
         };
       },
     },
@@ -193,23 +262,43 @@ export default {
       default: false,
     },
   },
+  emits: ['update-product'],
   data() {
     return {
       productModal: '',
       tempProduct: {},
+      tempImage: '',
+      active: '',
     };
   },
   watch: {
     product() {
-      this.tempProduct = this.product;
+      this.tempProduct = JSON.parse(JSON.stringify(this.product));
     },
   },
   mounted() {
     this.productModal = new Modal(this.$refs.productModal);
+    this.$refs.productModal.addEventListener('hidden.bs.modal', () => {
+      this.tempProduct = {};
+    });
   },
   methods: {
     show() {
       this.productModal.show();
+    },
+    hide() {
+      this.productModal.hide();
+    },
+    pushImage() {
+      if (!this.tempProduct.imageUrl) {
+        this.tempProduct.imageUrl = this.tempImage;
+      }
+      this.tempProduct.imagesUrl.push(this.tempImage);
+      this.tempImage = '';
+    },
+    removeImage(key) {
+      this.tempProduct.imagesUrl.splice(key, 1);
+      this.active = null;
     },
   },
 };

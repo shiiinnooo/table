@@ -54,11 +54,12 @@ export default {
             this.$router.push('/login');
           }
         });
-      } else {
-        // eslint-disable-next-line no-alert
-        alert('尚未登入');
-        this.$router.push('/login');
       }
+      // else {
+      //   // eslint-disable-next-line no-alert
+      //   alert('尚未登入');
+      //   this.$router.push('/login');
+      // }
     },
   },
   created() {

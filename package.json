@@ -13,6 +13,7 @@
     "bootstrap": "^5.0.2",
     "bootstrap-icons": "^1.5.0",
     "core-js": "^3.6.5",
+    "material-design-icons": "^3.0.1",
     "mitt": "^3.0.0",
     "swiper": "^6.7.5",
     "vue": "^3.0.0",
