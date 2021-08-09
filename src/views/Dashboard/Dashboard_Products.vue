@@ -19,7 +19,7 @@
         <td>{{ item.category }}</td>
         <td>
           <img
-            :src="item.imgUrl || item.imageUrl"
+            :src="item.imageUrl"
             width="120"
             height="120"
             style="object-fit: cover"

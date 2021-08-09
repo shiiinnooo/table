@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 <template>
   <div
     id="productModal"
@@ -84,7 +85,7 @@
                 />
               </div>
 
-              <div class="row">
+              <div class="row mt-1">
                 <div class="form-group col-md-6">
                   <label for="category">分類</label>
                   <input
@@ -107,14 +108,14 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row mt-1">
                 <div class="form-group col-md-6">
                   <label for="origin_price">原價</label>
                   <input
                     id="origin_price"
                     type="number"
                     min="0"
-                    class="form-control"
+                    class="form-control mt-1"
                     placeholder="請輸入原價"
                     v-model.number="tempProduct.origin_price"
                   />
@@ -155,23 +156,38 @@
             >
               <div class="form-group">
                 <label for="imageUrl">圖片連結</label>
-                <div class="input-group mb-3">
+                <div class="input-group mb-2">
                   <input
                     type="text"
                     id="imageUrl"
                     class="form-control"
                     placeholder="請輸入圖片連結"
-                    aria-label="Recipient's username"
-                    aria-describedby="button-addon"
                     v-model="tempImage"
                   />
                   <button
                     class="btn btn-outline-secondary rounded-end"
                     type="button"
-                    id="button-addon"
-                    @click="pushImage"
+                    @click="uploadImage(tempImage)"
                   >
                     上傳連結
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="file">上傳檔案</label>
+                <div class="input-group mb-3">
+                  <input
+                    type="file"
+                    id="file"
+                    class="form-control rounded-start"
+                    placeholder="請上傳圖片檔案"
+                  />
+                  <button
+                    class="btn btn-outline-secondary rounded-end"
+                    type="button"
+                    @click="uploadFile()"
+                  >
+                    上傳檔案
                   </button>
                 </div>
               </div>
@@ -180,13 +196,18 @@
                   v-for="(item, key) in tempProduct.imagesUrl"
                   :key="key"
                   style="width: 31.3%; margin: 1%"
+                  @mouseover="iconShow = key" @mouseleave="iconShow = null"
                 >
-                  <span class="position-absolute material-icons fs-4"
-                    style="top: 2px; left: 2px; cursor: pointer"
-                    @click="removeImage(key)"
-                    @mouseover="active = key" @mouseleave="active = null"
-                    :class="{'text-light' : active === key }">
-                      remove_circle_outline
+                  <span v-if="iconShow == key"
+                    class="position-absolute material-icons remove_circle_outline"
+                    style="top: 2px; left: 2px;"
+                    @click="removeImage(item, key)">
+                  </span>
+                  <span v-if="iconShow == key"
+                    class="position-absolute
+                    material-icons material-icons-round star_border"
+                    style="top: 2px; right: 2px;"
+                    @click="mainImageSet(item)">
                   </span>
                   <img
                     :src="item"
@@ -194,6 +215,12 @@
                     height="120"
                     style="object-fit: cover"
                   />
+                  <span v-if="tempProduct.imageUrl === item"
+                    class="position-absolute
+                    material-icons material-icons-round main_image"
+                    style="top: 2px; right: 2px;">
+                    star
+                  </span>
                 </div>
               </div>
             </div>
@@ -214,7 +241,7 @@
                 >
                 </textarea>
               </div>
-              <div class="form-group">
+              <div class="form-group mt-1">
                 <label for="content">說明內容</label>
                 <textarea
                   id="description"
@@ -237,7 +264,7 @@
             取消
           </button>
           <button type="button" class="btn btn-primary"
-          @click="$emit('update-product', this.tempProduct)">確認</button>
+          @click="$emit('update-product', tempProduct)">確認</button>
         </div>
       </div>
     </div>
@@ -268,7 +295,7 @@ export default {
       productModal: '',
       tempProduct: {},
       tempImage: '',
-      active: '',
+      iconShow: '',
     };
   },
   watch: {
@@ -289,17 +316,69 @@ export default {
     hide() {
       this.productModal.hide();
     },
-    pushImage() {
+    uploadImage(image) {
+      console.log(image);
       if (!this.tempProduct.imageUrl) {
-        this.tempProduct.imageUrl = this.tempImage;
+        this.tempProduct.imageUrl = image;
       }
-      this.tempProduct.imagesUrl.push(this.tempImage);
+      this.tempProduct.imagesUrl.push(image);
       this.tempImage = '';
     },
-    removeImage(key) {
+    removeImage(item, key) {
       this.tempProduct.imagesUrl.splice(key, 1);
-      this.active = null;
+      if (!this.tempProduct.imagesUrl.length) {
+        this.tempProduct.imageUrl = '';
+      } else if (item === this.tempProduct.imageUrl) {
+        [this.tempProduct.imageUrl] = this.tempProduct.imagesUrl;
+      }
+    },
+    uploadFile() {
+      const fileInput = document.querySelector('#file');
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', file);
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
+      this.$http.post(url, formData).then((res) => {
+        if (res.data.success) {
+          const image = res.data.imageUrl;
+          this.uploadImage(image);
+          fileInput.value = '';
+        } else {
+          console.log(`上傳失敗: ${res.data.message}`);
+        }
+      });
+    },
+    mainImageSet(item) {
+      this.tempProduct.imageUrl = item;
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.material-icons {
+  opacity: 0.4;
+  font-size: 22px;
+  cursor: pointer;
+}
+.material-icons:hover {
+  opacity: 1;
+}
+.main_image {
+  opacity: 1;
+  color: rgb(255, 174, 0);
+}
+.star_border::after {
+  content: 'star_border';
+}
+.star_border:hover::after {
+  color: rgb(255, 174, 0);
+  content: 'star';
+}
+.remove_circle_outline::after {
+  content: 'remove_circle_outline';
+}
+.remove_circle_outline:hover::after {
+  content: 'remove_circle_outline';
+}
+</style>

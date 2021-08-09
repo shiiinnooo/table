@@ -79,7 +79,7 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.cart = res.data.data;
-          console.log(this.cart);
+          // console.log(this.cart);
           this.countNum();
         }
       });
