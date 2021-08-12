@@ -30,35 +30,31 @@
       </div>
     </div>
   </div>
-  <!-- <div class="d-flex flex-wrap">
-    <div class="col-3" v-for="product in products" :key="product.id" style="width: 200px;">
-      <router-link :to="`/product/${product.id}`">
-        <div
-          style="
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-          "
-          :style="{ 'background-image': `url(${product.imgUrl})` }"
-        ></div>
-      </router-link>
-    </div>
-  </div> -->
+  <div class="d-flex justify-content-center">
+    <Pagination :page="pagination" @get-product="getProducts"></Pagination>
+  </div>
 </template>
 
 <script>
+import Pagination from '../components/Pagination.vue';
+
 export default {
   data() {
     return {
       products: [],
+      pagination: {},
     };
   },
+  components: {
+    Pagination,
+  },
   methods: {
-    getProducts() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
+    getProducts(page = 1) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
+          this.pagination = res.data.pagination;
           console.log(res);
         }
       });
