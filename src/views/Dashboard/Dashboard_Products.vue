@@ -26,8 +26,8 @@
           />
         </td>
         <td>{{ item.title }}</td>
-        <td class="text-end">{{ item.origin_price }}</td>
-        <td class="text-end">{{ item.price }}</td>
+        <td class="text-start">{{ item.origin_price }}</td>
+        <td class="text-start">{{ item.price }}</td>
         <td>
           <span v-if="item.is_enabled" class="text-success">啟用</span>
           <span v-else>未啟用</span>
@@ -139,10 +139,16 @@ export default {
       if (isNew) {
         this.tempProduct = {
           imagesUrl: [],
+          unit: '',
+          category: '',
         };
         this.isNew = true;
       } else {
-        this.tempProduct = JSON.parse(JSON.stringify(item));
+        const obj = item;
+        if (item.imagesUrl === undefined) {
+          obj.imagesUrl = [];
+        }
+        this.tempProduct = JSON.parse(JSON.stringify(obj));
         this.isNew = false;
       }
       this.$refs.modal.show();

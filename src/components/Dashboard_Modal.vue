@@ -1,4 +1,3 @@
-/* eslint-disable eqeqeq */
 <template>
   <div
     id="productModal"
@@ -88,23 +87,32 @@
               <div class="row mt-1">
                 <div class="form-group col-md-6">
                   <label for="category">分類</label>
-                  <input
+                  <!-- <input
                     id="category"
                     type="text"
                     class="form-control"
                     placeholder="請輸入分類"
                     v-model="tempProduct.category"
-                  />
+                  /> -->
+                  <select class="form-select" id="category" v-model="tempProduct.category">
+                    <option value="" disabled>請選擇分類</option>
+                    <option value="玻璃杯">玻璃杯</option>
+                    <option value="馬克杯">馬克杯</option>
+                    <option value="碗">碗</option>
+                    <option value="盤子">盤子</option>
+                    <option value="其他餐具">其他餐具</option>
+                    <option value="鍋具">鍋具</option>
+                    <option value="砧板">砧板</option>
+                    <option value="托盤">托盤</option>
+                  </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="price">單位</label>
-                  <input
-                    id="unit"
-                    type="text"
-                    class="form-control"
-                    placeholder="請輸入單位"
-                    v-model="tempProduct.unit"
-                  />
+                  <label for="unit">單位</label>
+                  <select class="form-select" id="unit" v-model="tempProduct.unit">
+                    <option value="" disabled>請選擇單位</option>
+                    <option value="piece">個</option>
+                    <option value="group">組</option>
+                  </select>
                 </div>
               </div>
 
@@ -140,7 +148,6 @@
                     class="form-check-input"
                     type="checkbox"
                     v-model="tempProduct.is_enabled"
-                    checked
                   />
                   <label class="form-check-label" for="is_enabled"
                     >是否啟用</label
@@ -195,7 +202,7 @@
                 <div class="position-relative"
                   v-for="(item, key) in tempProduct.imagesUrl"
                   :key="key"
-                  style="width: 31.3%; margin: 1%"
+                  style="width: 31.3%; margin: 1%; background-color: #f5f5f5;"
                   @mouseover="iconShow = key" @mouseleave="iconShow = null"
                 >
                   <span v-if="iconShow == key"
@@ -212,8 +219,8 @@
                   <img
                     :src="item"
                     class="w-100"
-                    height="120"
-                    style="object-fit: cover"
+                    height="140"
+                    style="object-fit: contain"
                   />
                   <span v-if="tempProduct.imageUrl === item"
                     class="position-absolute
@@ -296,6 +303,7 @@ export default {
       tempProduct: {},
       tempImage: '',
       iconShow: '',
+      fileInput: '',
     };
   },
   watch: {
@@ -304,9 +312,14 @@ export default {
     },
   },
   mounted() {
+    this.fileInput = document.querySelector('#file');
     this.productModal = new Modal(this.$refs.productModal);
     this.$refs.productModal.addEventListener('hidden.bs.modal', () => {
-      this.tempProduct = {};
+      this.tempProduct = {
+        imagesUrl: [],
+      };
+      this.tempImage = '';
+      this.fileInput.value = '';
     });
   },
   methods: {
@@ -333,8 +346,7 @@ export default {
       }
     },
     uploadFile() {
-      const fileInput = document.querySelector('#file');
-      const file = fileInput.files[0];
+      const file = this.fileInput.files[0];
       const formData = new FormData();
       formData.append('file-to-upload', file);
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
@@ -342,7 +354,7 @@ export default {
         if (res.data.success) {
           const image = res.data.imageUrl;
           this.uploadImage(image);
-          fileInput.value = '';
+          this.fileInput.value = '';
         } else {
           console.log(`上傳失敗: ${res.data.message}`);
         }
