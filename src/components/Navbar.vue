@@ -30,7 +30,7 @@
                 >
               </li>
               <li class="nav-item">
-                <router-link class="nav-link fs-sm" to="/product/all"
+                <router-link class="nav-link fs-sm" to="/product"
                   >PRODUCTS</router-link
                 >
               </li>
