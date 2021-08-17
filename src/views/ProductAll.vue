@@ -19,7 +19,7 @@
         </router-link>
         <div class="card-body d-flex flex-column justify-content-between">
           <h6 class="card-title">
-            <router-link class="text-black-50" :to="`/product/${product.id}`">
+            <router-link :to="`/product/${product.id}`">
               {{ product.title }}
             </router-link>
           </h6>

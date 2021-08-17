@@ -1,5 +1,5 @@
 <template>
-  <div class="accordion accordion-flush me-2" id="accordionFlushExample">
+  <!-- <div class="accordion accordion-flush me-2" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
         <button
@@ -10,7 +10,7 @@
           aria-expanded="false"
           aria-controls="flush-collapseOne"
         >
-          杯子
+          所有商品
         </button>
       </h2>
       <div
@@ -36,7 +36,7 @@
           aria-expanded="false"
           aria-controls="flush-collapseTwo"
         >
-          鍋具
+          餐桌
         </button>
       </h2>
       <div
@@ -46,10 +46,14 @@
         data-bs-parent="#accordionFlushExample"
       >
         <div class="accordion-body">
-          Placeholder content for this accordion, which is intended to
-          demonstrate the <code>.accordion-flush</code> class. This is the
-          second item's accordion body. Let's imagine this being filled with
-          some actual content.
+          <ul>
+            <li>
+              <a href="#"></a>
+            </li>
+            <li>馬克杯</li>
+            <li>碗</li>
+            <li>盤子</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -63,7 +67,7 @@
           aria-expanded="false"
           aria-controls="flush-collapseThree"
         >
-          砧板
+          廚房
         </button>
       </h2>
       <div
@@ -92,7 +96,7 @@
           aria-expanded="false"
           aria-controls="flush-collapseFour"
         >
-          筷子/湯匙/刀/叉
+          其他
         </button>
       </h2>
       <div
@@ -111,5 +115,42 @@
         </div>
       </div>
     </div>
+  </div> -->
+  <div class="product-menu">
+    <ul>
+      <li class="my-2">
+        <a class="fw-bold" href="#">所有商品</a>
+      </li>
+      <li class="my-2">
+        <a class="fw-bold" href="#">餐桌</a>
+        <ul class="sub-product-menu">
+          <li class="my-1"><a href="#">玻璃杯</a></li>
+          <li class="my-1"><a href="#">馬克杯</a></li>
+          <li class="my-1"><a href="#">碗</a></li>
+          <li class="my-1"><a href="#">盤子</a></li>
+          <li class="my-1"><a href="#">其他餐具</a></li>
+        </ul>
+      </li>
+      <li class="my-2">
+        <a class="fw-bold" href="#">廚房</a>
+        <ul class="sub-product-menu">
+          <li class="my-1"><a href="#">鍋子</a></li>
+          <li class="my-1"><a href="#">砧板</a></li>
+          <li class="my-1"><a href="#">托盤</a></li>
+        </ul>
+      </li>
+      <li class="my-2">
+        <a class="fw-bold" href="#">香氛系列</a>
+      </li>
+      <li class="my-2">
+        <a class="fw-bold" href="#">TAbLe 選物</a>
+      </li>
+    </ul>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.sub-product-menu li {
+  text-indent: -1.5rem;
+}
+</style>

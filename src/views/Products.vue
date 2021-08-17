@@ -2,7 +2,7 @@
   <div class="container-xl">
     <div class="row">
       <div class="col-md-3 sidebar">
-        <Accordion></Accordion>
+        <ProductMenu></ProductMenu>
       </div>
       <div class="col-md-9 content">
         <router-view></router-view>
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import Accordion from '../components/Accordion.vue';
+import ProductMenu from '../components/ProductMenu.vue';
 
 export default {
   components: {
-    Accordion,
+    ProductMenu,
   },
 };
 </script>
