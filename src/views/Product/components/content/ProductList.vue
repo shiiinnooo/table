@@ -9,14 +9,14 @@
   </nav>
   <div class="row">
     <div
-      class="col-6 col-lg-3"
+      class="col-6 col-lg-3 my-4"
       v-for="product in filterProducts"
       :key="product.id"
     >
       <div class="card h-100 border-0">
         <router-link :to="`/product/${product.id}`">
           <img
-            :src="product.imgUrl || product.imageUrl"
+            :src="product.imageUrl"
             class="card-img-top"
             style="object-fit: cover"
           />
@@ -27,7 +27,16 @@
               {{ product.title }}
             </router-link>
           </h6>
-          <p class="card-text">NT. {{ toCurrency(product.price) }}</p>
+          <p class="card-text">
+            <span
+              :class="{'text-decoration-line-through' : product.price !== product.origin_price}">
+              NT. {{ toCurrency(product.origin_price) }}
+            </span>
+            <span class="text-dark ms-3" v-if="product.price !== product.origin_price"
+              style="font-weight: 500">
+              NT. {{ toCurrency(product.price) }}
+            </span>
+          </p>
         </div>
       </div>
     </div>
