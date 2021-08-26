@@ -1,6 +1,6 @@
 <template>
   <div class="sticky-top bg-white">
-    <div class="container-xl">
+    <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light my-2">
         <div class="container-fluid">
           <h1
@@ -31,6 +31,7 @@
               </li>
               <li class="nav-item">
                 <router-link class="nav-link fs-sm" to="/product"
+                @click.prevent="selectCategory('')"
                   >PRODUCTS</router-link
                 >
               </li>
@@ -89,6 +90,9 @@ export default {
       this.cart.carts.forEach((item) => {
         this.qty += item.qty;
       });
+    },
+    selectCategory(category) {
+      emitter.emit('select-category', category);
     },
   },
   mounted() {

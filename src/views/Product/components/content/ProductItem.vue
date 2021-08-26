@@ -1,27 +1,19 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <!-- <ProductMenu></ProductMenu> -->
-      </div>
-      <div class="col-md-9">
-        <div>
-          <img :src="product.imgUrl" alt="" />
-          {{ product.title }}
-          <button type="button" class="btn btn-secondary" @click="addToCart">
-            加入購物車
-          </button>
-          <p>{{ product.description }}</p>
-          <p>{{ product.content }}</p>
-        </div>
-      </div>
+    <div>
+      <img :src="product.imgUrl" alt="" />
+      {{ product.title }}
+      <button type="button" class="btn btn-secondary" @click="addToCart">
+        加入購物車
+      </button>
+      <p>{{ product.description }}</p>
+      <p>{{ product.content }}</p>
     </div>
   </div>
 </template>
 
 <script>
-// import ProductMenu from '../components/ProductMenu.vue';
-import emitter from '../assets/javascript/emitter';
+import emitter from '../../../../assets/javascript/emitter';
 
 export default {
   data() {
@@ -30,9 +22,6 @@ export default {
       id: '',
     };
   },
-  // components: {
-  //   ProductMenu,
-  // },
   methods: {
     getProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;

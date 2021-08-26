@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <ProductMenu></ProductMenu>
+        <!-- <ProductMenu></ProductMenu> -->
       </div>
       <div class="col-md-9">
         <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
@@ -16,7 +16,7 @@
         <div class="row">
           <div
             class="col-6 col-lg-3"
-            v-for="product in products"
+            v-for="product in filterProducts"
             :key="product.id"
           >
             <div class="card h-100 border-0">
@@ -38,47 +38,74 @@
             </div>
           </div>
         </div>
-        <div class="d-flex justify-content-center">
+        <!-- <div class="d-flex justify-content-center">
           <Pagination
             :page="pagination"
             @get-product="getProducts"
           ></Pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ProductMenu from '../components/ProductMenu.vue';
-import Pagination from '../components/Pagination.vue';
+import emitter from '../assets/javascript/emitter';
+// import ProductMenu from '../components/ProductMenu.vue';
+// import Pagination from '../components/Pagination.vue';
 
 export default {
   data() {
     return {
       products: [],
-      pagination: {},
+      // pagination: {},
+      // categories: [],
+      category: '',
     };
   },
   components: {
-    ProductMenu,
-    Pagination,
+    // Pagination,
+  },
+  computed: {
+    filterProducts() {
+      return this.products.filter((item) => item.category.match(this.category));
+    },
   },
   methods: {
-    getProducts(page = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+    getProducts() {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
+      // const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}
+      // /products?page=${page}`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
-          this.pagination = res.data.pagination;
+          // this.pagination = res.data.pagination;
           console.log(res);
+          // this.getCategories();
         }
       });
     },
+    selectCategory(item) {
+      this.category = item;
+    },
+    // getCategories() {
+    //   const category = new Set();
+    //   this.products.forEach((item) => {
+    //     category.add(item.category);
+    //   });
+    //   console.log(category);
+    //   this.categories = [...category];
+    //   console.log(this.categories);
+    // },
+  },
+  created() {
+    emitter.on('select-category', (category) => {
+      console.log('emitter-on', category);
+      this.selectCategory(category);
+    });
   },
   mounted() {
     this.getProducts();
-    console.log(this.products);
   },
 };
 </script>

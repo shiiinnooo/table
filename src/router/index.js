@@ -12,11 +12,23 @@ const routes = [
       },
       {
         path: 'product',
-        component: () => import('../views/Products.vue'),
-      },
-      {
-        path: 'product/:id',
-        component: () => import('../views/Product.vue'),
+        component: () => import('../views/Product/index.vue'),
+        children: [
+          {
+            path: '',
+            component: () => import('../views/Product/components/ProductContent.vue'),
+            children: [
+              {
+                path: '',
+                component: () => import('../views/Product/components/content/ProductList.vue'),
+              },
+              {
+                path: ':id',
+                component: () => import('../views/Product/components/content/ProductItem.vue'),
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'checkout',
