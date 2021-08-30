@@ -1,13 +1,35 @@
 <template>
   <div class="container">
-    <div>
-      <img :src="product.imgUrl" alt="" />
-      {{ product.title }}
-      <button type="button" class="btn btn-secondary" @click="addToCart">
-        加入購物車
-      </button>
-      <p>{{ product.description }}</p>
-      <p>{{ product.content }}</p>
+    <div class="row">
+      <div class="col-8">
+        <img class="w-100 mb-3" :src="product.imageUrl" alt="" />
+        <div v-for="image in product.imagesUrl" :key="image">
+          <img v-if="image !== product.imageUrl" class="w-100 my-3" :src="image" alt="" />
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="product-title">
+          <h4 class="py-3 fw-normal">
+            {{ product.title }}
+          </h4>
+        </div>
+        <div class="product-content">
+          <p class="fs-5">
+            <span class="text-dark me-2" v-if="product.price !== product.origin_price">
+              NT. {{ product.price }}
+            </span>
+            <span
+            :class="{'text-decoration-line-through' : product.price !== product.origin_price}">
+              NT. {{ product.origin_price }}
+            </span>
+          </p>
+          <button type="button" class="btn btn-secondary" @click="addToCart">
+            加入購物車
+          </button>
+          <p>{{ product.description }}</p>
+          <p>{{ product.content }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +50,9 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.product = res.data.product;
-          console.log(res);
+          this.recordPage(this.product);
+          // console.log(res);
+          console.log(typeof (this.product.price));
         } else {
           console.log(res.data.message);
         }
@@ -48,6 +72,9 @@ export default {
           console.log(res.data.message);
         }
       });
+    },
+    recordPage(product) {
+      emitter.emit('record-current-page', { selected: 'item', category: product.category, title: product.title });
     },
   },
   mounted() {

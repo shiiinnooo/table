@@ -1,12 +1,4 @@
 <template>
-  <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <router-link to="/">HOME</router-link>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">產品頁</li>
-    </ol>
-  </nav>
   <div class="row">
     <div
       class="col-6 col-lg-3 my-4"
@@ -21,8 +13,8 @@
             style="object-fit: cover"
           />
         </router-link>
-        <div class="card-body d-flex flex-column justify-content-between">
-          <h6 class="card-title">
+        <div class="card-body d-flex flex-column justify-content-between ps-0">
+          <h6 class="card-title" style="font-weight: 400;">
             <router-link :to="`/product/${product.id}`">
               {{ product.title }}
             </router-link>
@@ -32,8 +24,7 @@
               :class="{'text-decoration-line-through' : product.price !== product.origin_price}">
               NT. {{ toCurrency(product.origin_price) }}
             </span>
-            <span class="text-dark ms-3" v-if="product.price !== product.origin_price"
-              style="font-weight: 500">
+            <span class="text-danger ms-1" v-if="product.price !== product.origin_price">
               NT. {{ toCurrency(product.price) }}
             </span>
           </p>
@@ -71,20 +62,27 @@ export default {
     selectCategory(item) {
       this.category = item;
     },
+    recordPage(category) {
+      emitter.emit('record-current-page', { selected: 'list', category });
+    },
   },
   created() {
+    this.category = this.$route.query.category;
+    this.recordPage(this.category);
     emitter.on('select-category', (category) => {
       this.selectCategory(category);
     });
   },
   mounted() {
-    this.category = this.$route.query.category;
     this.getProducts();
   },
 };
 </script>
 
 <style lang="scss" scoped>
+* {
+  font-family: 'Rubik';
+}
 .card-img-top {
   height: 200px;
   @media (min-width: 415px) {
@@ -99,5 +97,9 @@ export default {
   @media (min-width: 1200px) {
     height: 270px;
   }
+}
+
+.card-title a:hover {
+  text-decoration: underline;
 }
 </style>

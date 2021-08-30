@@ -5,7 +5,7 @@
         <router-link
           class="fw-bold"
           to="/product"
-          @click.prevent="selectCategory('')"
+          @click.prevent="selectCategory(''); recordPage('所有商品');"
           >所有商品</router-link
         >
       </li>
@@ -28,7 +28,7 @@
           <li class="my-1" v-for="item in categories.餐桌" :key="item">
             <router-link
               :to="`/product?category=${item}`"
-              @click.prevent="selectCategory(item)"
+              @click.prevent="selectCategory(item); recordPage(item);"
             >
               {{ item }}
             </router-link>
@@ -54,7 +54,7 @@
           <li class="my-1" v-for="item in categories.廚房" :key="item">
             <router-link
               :to="`/product?category=${item}`"
-              @click.prevent="selectCategory(item)"
+              @click.prevent="selectCategory(item); recordPage(item);"
             >
               {{ item }}
             </router-link>
@@ -65,7 +65,9 @@
         <a class="fw-bold" href="#">香氛系列</a>
       </li>
       <li class="my-2">
-        <a class="fw-bold" href="#">TAbLe 選物</a>
+        <a class="fw-bold" href="#" style="font-family:'Montserrat';">
+          <span style="font-weight: 500;">TAbLe</span> 選物
+        </a>
       </li>
     </ul>
   </div>
@@ -90,6 +92,9 @@ export default {
   methods: {
     selectCategory(category) {
       emitter.emit('select-category', category);
+    },
+    recordPage(category) {
+      emitter.emit('record-current-page', { selected: 'list', category });
     },
   },
 };

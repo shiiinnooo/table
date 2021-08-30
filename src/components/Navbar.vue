@@ -7,7 +7,7 @@
             class="navbar-brand"
             style="font-weight: 600; letter-spacing: 1.5px"
           >
-            <router-link class="text-dark fs-3" to="/"
+            <router-link class="text-dark fs-1" to="/"
               >TAbLe</router-link
             >
           </h1>
@@ -31,7 +31,7 @@
               </li>
               <li class="nav-item">
                 <router-link class="nav-link fs-sm" to="/product"
-                @click.prevent="selectCategory('')"
+                @click.prevent="selectCategory(''); recordPage('所有商品');"
                   >PRODUCTS</router-link
                 >
               </li>
@@ -94,6 +94,9 @@ export default {
     selectCategory(category) {
       emitter.emit('select-category', category);
     },
+    recordPage(category) {
+      emitter.emit('record-current-page', { selected: 'list', category });
+    },
   },
   mounted() {
     this.getCart();
@@ -108,3 +111,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+</style>
