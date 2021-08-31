@@ -104,6 +104,8 @@
                     <option value="鍋具">鍋具</option>
                     <option value="砧板">砧板</option>
                     <option value="托盤">托盤</option>
+                    <option value="香氛系列">香氛系列</option>
+                    <option value="TAbLe選物">TAbLe選物</option>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
