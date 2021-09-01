@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <ProductMenu class="position-sticky" style="top: 70px;"></ProductMenu>
+        <ProductMenu class="position-sticky" style="top: 80px;"></ProductMenu>
       </div>
       <div class="col-md-9">
         <Breadcrumb></Breadcrumb>

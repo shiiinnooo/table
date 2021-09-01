@@ -25,7 +25,7 @@
           </span>
         </a>
         <ul class="sub-product-menu show collapse" id="table-collapse">
-          <li class="my-1" v-for="item in categories.餐桌" :key="item">
+          <li class="my-1" v-for="item in categories.table" :key="item">
             <router-link
               :to="`/product?category=${item}`"
               @click.prevent="selectCategory(item); recordPage(item);"
@@ -51,7 +51,7 @@
           </span>
         </a>
         <ul class="sub-product-menu show collapse" id="kitchen-collapse">
-          <li class="my-1" v-for="item in categories.廚房" :key="item">
+          <li class="my-1" v-for="item in categories.kitchen" :key="item">
             <router-link
               :to="`/product?category=${item}`"
               @click.prevent="selectCategory(item); recordPage(item);"
@@ -62,12 +62,20 @@
         </ul>
       </li>
       <li class="my-2">
-        <a class="fw-bold" href="#">香氛系列</a>
+        <router-link
+          class="fw-bold"
+          to="/product?category=香氛系列"
+          @click.prevent="selectCategory('香氛系列'); recordPage('香氛系列');"
+          >香氛系列</router-link
+        >
       </li>
       <li class="my-2">
-        <a class="fw-bold" href="#" style="font-family:'Montserrat';">
-          <span style="font-weight: 500;">TAbLe</span> 選物
-        </a>
+        <router-link
+          class="fw-bold"
+          to="/product?category=TAbLe選物"
+          @click.prevent="selectCategory('TAbLe選物'); recordPage('TAbLe選物');">
+          <span style="font-weight: 500;">TAbLe </span>選物
+        </router-link>
       </li>
     </ul>
   </div>
@@ -80,13 +88,9 @@ export default {
   data() {
     return {
       categories: {
-        所有商品: '',
-        餐桌: ['玻璃杯', '馬克杯', '碗', '盤子', '其他餐具'],
-        廚房: ['鍋具', '砧板', '托盤'],
-        香氛系列: '',
-        'TAbLe 選物': '',
+        table: ['玻璃杯', '馬克杯', '碗', '盤子', '其他餐具'],
+        kitchen: ['鍋具', '砧板', '托盤'],
       },
-      active: true,
     };
   },
   methods: {

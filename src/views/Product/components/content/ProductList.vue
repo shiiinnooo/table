@@ -13,21 +13,30 @@
             style="object-fit: cover"
           />
         </router-link>
-        <div class="card-body d-flex flex-column justify-content-between ps-0">
-          <h6 class="card-title" style="font-weight: 400;">
+        <div class="card-body d-flex flex-column justify-content-between px-0">
+          <h6 class="card-title mb-3" style="font-weight: 400;">
             <router-link :to="`/product/${product.id}`">
               {{ product.title }}
             </router-link>
           </h6>
-          <p class="card-text">
-            <span
-              :class="{'text-decoration-line-through' : product.price !== product.origin_price}">
-              NT. {{ toCurrency(product.origin_price) }}
-            </span>
-            <span class="text-danger ms-1" v-if="product.price !== product.origin_price">
-              NT. {{ toCurrency(product.price) }}
-            </span>
-          </p>
+          <div class="card-text d-flex justify-content-between">
+            <div>
+              <span
+                :class="{'text-decoration-line-through' : product.price !== product.origin_price}">
+                NT. {{ toCurrency(product.origin_price) }}
+              </span>
+              <span class="text-danger ms-2" v-if="product.price !== product.origin_price">
+                NT. {{ toCurrency(product.price) }}
+              </span>
+            </div>
+            <span class="text-danger border border-danger fs-sm px-1"
+            v-if="product.price !== product.origin_price">SALE</span>
+          </div>
+          <button type="button" class="my-2 py-1 border border-secondary fs-sm"
+            style="color: #6f6a66; letter-spacing: 1px;"
+            @click.prevent="addToCart(product.id)">
+            ADD TO BAG
+          </button>
         </div>
       </div>
     </div>
@@ -59,6 +68,21 @@ export default {
         console.log(res);
       });
     },
+    addToCart(id) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
+      const cart = {
+        product_id: id,
+        qty: 1,
+      };
+      this.$http.post(api, { data: cart }).then((res) => {
+        if (res.data.success) {
+          console.log(res);
+          emitter.emit('update-cart');
+        } else {
+          console.log(res.data.message);
+        }
+      });
+    },
     selectCategory(item) {
       this.category = item;
     },
@@ -81,7 +105,7 @@ export default {
 
 <style lang="scss" scoped>
 * {
-  font-family: 'Rubik';
+  font-family: 'Ubuntu';
 }
 .card-img-top {
   height: 200px;
@@ -98,8 +122,13 @@ export default {
     height: 270px;
   }
 }
-
 .card-title a:hover {
   text-decoration: underline;
+}
+.card-body button {
+  background: none;
+  &:hover {
+  background-color: #F5F5F5;
+  }
 }
 </style>
