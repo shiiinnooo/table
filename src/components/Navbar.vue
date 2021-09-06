@@ -42,8 +42,8 @@
                   type="button"
                   data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
                   @click="$emit('open-offcanvas')">
-                  <span class="material-icons material-icons-outlined">
-                    shopping_cart
+                  <span class="material-icons-outlined fw-lighter">
+                    shopping_bag
                   </span>
                   <div
                     class="badge rounded-pill bg-danger position-absolute"

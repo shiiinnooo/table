@@ -1,9 +1,9 @@
 <template>
   <Navbar @open-offcanvas="offcanvasShow"></Navbar>
-  <router-view></router-view>
+  <router-view style="min-height: 70vh;"></router-view>
   <Offcanvas ref="offcanvas" @close-offcanvas="offcanvasHide"></Offcanvas>
   <footer class="py-5 bg-primary">
-    <p class="text-dark">FOOTER</p>
+    <p class="text-dark m-0">FOOTER</p>
   </footer>
 </template>
 
