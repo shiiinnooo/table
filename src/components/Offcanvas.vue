@@ -28,7 +28,12 @@
           </div>
           <div class="col-7">
             <div class="card-body p-0">
-              <h6 class="card-title fs-6">{{ item.product.title }}</h6>
+              <h6 class="card-title fs-6">
+                <router-link :to="`/product/${item.product_id}`"
+                @click="changeProduct(item.product_id), $emit('close-offcanvas')">
+                  {{ item.product.title }}
+                </router-link>
+              </h6>
               <div class="card-text">
                 <p class="my-1">
                   <span class="me-2">價格</span>
@@ -132,6 +137,9 @@ export default {
     hide() {
       this.cartOffcanvas.hide();
     },
+    changeProduct(id) {
+      emitter.emit('change-product', id);
+    },
   },
   created() {
     this.getCarts();
@@ -146,6 +154,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-title a:hover {
+  text-decoration: underline;
+}
 .button {
   background-color: #af926b;
   &:hover {

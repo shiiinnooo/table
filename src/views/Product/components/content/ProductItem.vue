@@ -54,6 +54,11 @@ export default {
       id: '',
     };
   },
+  watch: {
+    id() {
+      this.getProduct();
+    },
+  },
   methods: {
     getProduct() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
@@ -92,6 +97,10 @@ export default {
     },
   },
   mounted() {
+    emitter.on('change-product', (id) => {
+      this.id = id;
+      this.getProduct();
+    });
     this.id = this.$route.params.id;
     this.getProduct();
   },
