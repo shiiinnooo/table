@@ -28,7 +28,7 @@
           </div>
           <div class="col-7">
             <div class="card-body p-0">
-              <h6 class="card-title fs-6">
+              <h6 class="card-title fs-6 fw-normal">
                 <router-link :to="`/product/${item.product_id}`"
                 @click="changeProduct(item.product_id), $emit('close-offcanvas')">
                   {{ item.product.title }}

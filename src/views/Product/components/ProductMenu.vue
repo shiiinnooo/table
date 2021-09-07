@@ -20,7 +20,7 @@
           <span>餐桌</span>
           <span
             class="material-icons-outlined align-top fs-5 fw-light"
-            style="padding-left: 48px"
+            style="padding-left: 50%"
           >
           </span>
         </a>
@@ -46,7 +46,7 @@
           <span>廚房</span>
           <span
             class="material-icons-outlined align-top fs-5 fw-light"
-            style="padding-left: 48px"
+            style="padding-left: 50%"
           >
           </span>
         </a>
@@ -109,9 +109,15 @@ export default {
   text-indent: -1.5rem;
 }
 .tableBtn .material-icons-outlined::after {
-  content: "add";
+  content: "keyboard_arrow_down";
 }
 .tableBtn[aria-expanded="true"] .material-icons-outlined::after {
-  content: "remove";
+  content: "keyboard_arrow_up";
+}
+li:hover {
+  padding-top: 0.4px;
+  a:hover {
+    color: #9b9999;
+  }
 }
 </style>
