@@ -6,12 +6,22 @@
       :key="product.id"
     >
       <div class="card h-100 border-0">
-        <router-link :to="`/product/${product.id}`">
+        <router-link :to="`/product/${product.id}`" class="card-top d-block position-relative">
           <img
             :src="product.imageUrl"
-            class="card-img-top"
-            style="object-fit: cover"
+            class="card-img-top w-100 d-block"
+            style="object-fit: cover; height: auto;"
           />
+          <div class="card-img-hover position-absolute bg-secondary w-100 h-100"
+          style="top: 0;">
+          </div>
+          <div class="card-img-icon position-absolute bg-white rounded-circle"
+          style="top: 6px; right: 6px; width: 2rem; height: 2rem;">
+            <span class="material-icons-outlined material-icons fw-lighter p-1"
+              style="font-weight: 100px;">
+              favorite_border
+            </span>
+          </div>
         </router-link>
         <div class="card-body d-flex flex-column justify-content-between px-0">
           <h6 class="card-title mb-3" style="font-weight: 400;">
@@ -105,22 +115,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-* {
-  font-family: 'Ubuntu';
+*:not(.material-icons) {
+  font-family: 'Lato';
 }
-.card-img-top {
-  height: 200px;
-  @media (min-width: 415px) {
-    height: 280px;
+// .card-img-top {
+//   height: 200px;
+//   @media (min-width: 415px) {
+//     height: 280px;
+//   }
+//   @media (min-width: 576px) {
+//     height: 320px;
+//   }
+//   @media (min-width: 992px) {
+//     height: 240px;
+//   }
+//   @media (min-width: 1200px) {
+//     height: 270px;
+//   }
+// }
+.card-top {
+  .card-img-hover, .card-img-icon {
+    display: none;
+    opacity: 0.1;
   }
-  @media (min-width: 576px) {
-    height: 320px;
+  &:hover {
+    .card-img-hover, .card-img-icon {
+      display: block;
+    }
+    .card-img-icon {
+      opacity: 1;
+    }
   }
-  @media (min-width: 992px) {
-    height: 240px;
-  }
-  @media (min-width: 1200px) {
-    height: 270px;
+  .material-icons {
+    color: #a1a1a1;
+    &:hover {
+      color: #CEB591;
+    }
   }
 }
 .card-title a:hover {
