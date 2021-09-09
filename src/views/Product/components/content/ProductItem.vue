@@ -89,7 +89,7 @@ export default {
       });
     },
     recordPage(product) {
-      emitter.emit('record-current-page', {
+      emitter.emit('record-page-to-breadcrumb', {
         selected: 'item',
         category: product.category,
         title: product.title,

@@ -98,7 +98,7 @@ export default {
       emitter.emit('select-category', category);
     },
     recordPage(category) {
-      emitter.emit('record-current-page', { selected: 'list', category });
+      emitter.emit('record-page-to-breadcrumb', { selected: 'list', category });
     },
   },
 };

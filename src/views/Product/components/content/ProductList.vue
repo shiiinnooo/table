@@ -65,6 +65,9 @@ export default {
   },
   computed: {
     filterProducts() {
+      if (this.category === '所有商品') {
+        return this.products;
+      }
       return this.products.filter((item) => item.category.match(this.category));
     },
   },
@@ -98,7 +101,7 @@ export default {
       this.category = item;
     },
     recordPage(category) {
-      emitter.emit('record-current-page', { selected: 'list', category });
+      emitter.emit('record-page-to-breadcrumb', { selected: 'list', category });
     },
   },
   created() {

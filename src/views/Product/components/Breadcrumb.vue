@@ -29,7 +29,7 @@ export default {
     };
   },
   created() {
-    emitter.on('record-current-page', (item) => {
+    emitter.on('record-page-to-breadcrumb', (item) => {
       this.title = '';
       this.selected = item.selected;
       if (item.category === undefined) {
