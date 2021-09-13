@@ -36,13 +36,13 @@
                 >
               </li>
             </ul>
-            <div class="d-flex">
-              <ul class="p-0 m-0">
-                <li class="position-relative"
+            <div>
+              <ul class="d-flex flex-row-reverse p-0 m-0">
+                <li class="position-relative ms-3"
                   type="button"
                   data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
                   @click="$emit('open-offcanvas')">
-                  <span class="material-icons-outlined fw-lighter">
+                  <span class="material-icons-outlined material-icons md-28 text-dark">
                     shopping_bag
                   </span>
                   <div
@@ -52,6 +52,13 @@
                     >
                       <small class="fw-normal">{{ qty }}</small>
                   </div>
+                </li>
+                <li class="position-relative ms-3"
+                type="button"
+                @click="pushToFavoritePage">
+                  <span class="material-icons-round material-icons md-28 text-dark">
+                    favorite_border
+                  </span>
                 </li>
               </ul>
             </div>
@@ -73,6 +80,9 @@ export default {
     };
   },
   methods: {
+    pushToFavoritePage() {
+      this.$router.push('/favorite');
+    },
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http.get(api).then((res) => {
@@ -102,6 +112,7 @@ export default {
     emitter.on('update-cart', () => {
       this.getCart();
     });
+    console.log(this.$router);
     // window.addEventListener('scroll', () => {
     //   const windowY = window.scrollY;
     //   // console.log(windowY);

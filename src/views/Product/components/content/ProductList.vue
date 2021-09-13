@@ -6,25 +6,40 @@
       :key="product.id"
     >
       <div class="card h-100 border-0">
-        <router-link :to="`/product/${product.id}`" class="card-top d-block position-relative">
+        <router-link
+          :to="`/product/${product.id}`"
+          class="card-top d-block position-relative"
+        >
           <img
             :src="product.imageUrl"
             class="card-img-top w-100 d-block"
-            style="object-fit: cover; height: auto;"
+            style="object-fit: cover; height: auto"
           />
-          <div class="card-img-hover position-absolute bg-secondary w-100 h-100"
-          style="top: 0;">
-          </div>
-          <div class="card-img-icon position-absolute bg-white rounded-circle"
-          style="top: 6px; right: 6px; width: 2rem; height: 2rem;">
-            <span class="material-icons-outlined material-icons fw-lighter p-1"
-              style="font-weight: 100px;">
-              favorite_border
+          <div
+            class="card-img-hover position-absolute bg-secondary w-100 h-100"
+            style="top: 0"
+          ></div>
+          <div
+            class="card-img-icon position-absolute position-relative bg-white rounded-circle"
+            style="top: 6px; right: 6px; width: 2rem; height: 2rem"
+          >
+            <span
+              class="material-icons-outlined material-icons favorite-icon fw-lighter p-1"
+              style="font-weight: 100px"
+              @click.prevent="addFavorite(product)"
+            >
+            </span>
+            <span v-if="myFavorite.includes(product)"
+              class="material-icons-outlined material-icons fw-lighter p-1 position-absolute"
+              style="font-weight: 100px; right: 0px; color: #ceb591;"
+              @click.prevent="addFavorite(product)"
+            >
+            favorite
             </span>
           </div>
         </router-link>
         <div class="card-body d-flex flex-column justify-content-between px-0">
-          <h6 class="card-title mb-3" style="font-weight: 400;">
+          <h6 class="card-title mb-3" style="font-weight: 400">
             <router-link :to="`/product/${product.id}`">
               {{ product.title }}
             </router-link>
@@ -32,19 +47,32 @@
           <div class="card-text d-flex justify-content-between">
             <div>
               <span
-                :class="{'text-decoration-line-through' : product.price !== product.origin_price}">
+                :class="{
+                  'text-decoration-line-through':
+                    product.price !== product.origin_price,
+                }"
+              >
                 NT. {{ toCurrency(product.origin_price) }}
               </span>
-              <span class="text-danger ms-2" v-if="product.price !== product.origin_price">
+              <span
+                class="text-danger ms-2"
+                v-if="product.price !== product.origin_price"
+              >
                 NT. {{ toCurrency(product.price) }}
               </span>
             </div>
-            <span class="text-danger border border-danger fs-sm px-1"
-            v-if="product.price !== product.origin_price">SALE</span>
+            <span
+              class="text-danger border border-danger fs-sm px-1"
+              v-if="product.price !== product.origin_price"
+              >SALE</span
+            >
           </div>
-          <button type="button" class="my-2 py-1 border border-secondary fs-sm"
-            style="color: #6f6a66; letter-spacing: 1px;"
-            @click.prevent="addToCart(product.id)">
+          <button
+            type="button"
+            class="my-2 py-1 border border-secondary fs-sm"
+            style="color: #6f6a66; letter-spacing: 1px"
+            @click.prevent="addToCart(product.id)"
+          >
             ADD TO BAG
           </button>
         </div>
@@ -56,11 +84,22 @@
 <script>
 import emitter from '../../../../assets/javascript/emitter';
 
+const storageMethods = {
+  setItem(favorite) {
+    const favoriteStr = JSON.stringify(favorite);
+    localStorage.setItem('myFavorite', favoriteStr);
+  },
+  getItem() {
+    return JSON.parse(localStorage.getItem('myFavorite'));
+  },
+};
+
 export default {
   data() {
     return {
       products: [],
       category: '',
+      myFavorite: storageMethods.getItem() || [],
     };
   },
   computed: {
@@ -97,6 +136,17 @@ export default {
         }
       });
     },
+    addFavorite(item) {
+      const myFavoriteId = this.myFavorite.map((product) => product.id);
+      if (myFavoriteId.includes(item.id)) {
+        this.myFavorite.splice(myFavoriteId.indexOf(item.id), 1);
+        console.log(item.id, '此商品已移除');
+      } else {
+        this.myFavorite.push(item);
+        storageMethods.setItem(this.myFavorite);
+        console.log(item.id, '此商品已加入');
+      }
+    },
     selectCategory(item) {
       this.category = item;
     },
@@ -119,7 +169,7 @@ export default {
 
 <style lang="scss" scoped>
 *:not(.material-icons) {
-  font-family: 'Lato';
+  font-family: "Lato";
 }
 // .card-img-top {
 //   height: 200px;
@@ -137,23 +187,29 @@ export default {
 //   }
 // }
 .card-top {
-  .card-img-hover, .card-img-icon {
+  .card-img-hover,
+  .card-img-icon {
     display: none;
     opacity: 0.1;
   }
   &:hover {
-    .card-img-hover, .card-img-icon {
+    .card-img-hover {
       display: block;
     }
     .card-img-icon {
+      display: block;
       opacity: 1;
     }
   }
-  .material-icons {
+}
+.favorite-icon{
+  &::after {
+    content: "favorite_border";
     color: #a1a1a1;
-    &:hover {
-      color: #CEB591;
-    }
+  }
+  &:hover::after {
+    content: "favorite";
+    color: #ceb591;
   }
 }
 .card-title a:hover {
@@ -162,7 +218,7 @@ export default {
 .card-body button {
   background: none;
   &:hover {
-  background-color: #F5F5F5;
+    background-color: #f5f5f5;
   }
 }
 </style>
