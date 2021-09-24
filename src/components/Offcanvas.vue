@@ -138,7 +138,7 @@ export default {
       this.cartOffcanvas.hide();
     },
     changeProduct(id) {
-      emitter.emit('change-product', id);
+      emitter.emit('cart-change-product', id);
     },
   },
   created() {

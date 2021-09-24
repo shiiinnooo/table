@@ -20,27 +20,45 @@
             style="top: 0"
           ></div>
           <div
-            class="card-img-icon position-absolute position-relative bg-white rounded-circle"
+            class="
+              card-img-icon
+              position-absolute position-relative
+              bg-white
+              rounded-circle
+            "
             style="top: 6px; right: 6px; width: 2rem; height: 2rem"
           >
             <span
-              class="material-icons-outlined material-icons favorite-icon fw-lighter p-1"
+              class="
+                material-icons-outlined material-icons
+                favorite-icon
+                fw-lighter
+                p-1
+              "
               style="font-weight: 100px"
               @click.prevent="addFavorite(product)"
             >
             </span>
-            <span v-if="myFavorite.includes(product)"
-              class="material-icons-outlined material-icons fw-lighter p-1 position-absolute"
-              style="font-weight: 100px; right: 0px; color: #ceb591;"
+            <span
+              v-if="myFavorite.includes(product)"
+              class="
+                material-icons-outlined material-icons
+                fw-lighter
+                p-1
+                position-absolute
+              "
+              style="font-weight: 100px; right: 0px; color: #ceb591"
               @click.prevent="addFavorite(product)"
             >
-            favorite
+              favorite
             </span>
           </div>
         </router-link>
         <div class="card-body d-flex flex-column justify-content-between px-0">
           <h6 class="card-title mb-3" style="font-weight: 400">
-            <router-link :to="`/product/${product.id}`">
+            <router-link
+              :to="`/product/${product.id}`"
+            >
               {{ product.title }}
             </router-link>
           </h6>
@@ -102,12 +120,13 @@ export default {
       myFavorite: storageMethods.getItem() || [],
     };
   },
+  inject: ['page'],
   computed: {
     filterProducts() {
-      if (this.category === '所有商品') {
+      if (this.page.category === '所有商品') {
         return this.products;
       }
-      return this.products.filter((item) => item.category.match(this.category));
+      return this.products.filter((item) => item.category.match(this.page.category));
     },
   },
   methods: {
@@ -147,19 +166,6 @@ export default {
         console.log(item.id, '此商品已加入');
       }
     },
-    selectCategory(item) {
-      this.category = item;
-    },
-    recordPage(category) {
-      emitter.emit('record-page-to-breadcrumb', { selected: 'list', category });
-    },
-  },
-  created() {
-    this.category = this.$route.query.category;
-    this.recordPage(this.category);
-    emitter.on('select-category', (category) => {
-      this.selectCategory(category);
-    });
   },
   mounted() {
     this.getProducts();
@@ -202,10 +208,10 @@ export default {
     }
   }
 }
-.favorite-icon{
+.favorite-icon {
   &::after {
     content: "favorite_border";
-    color: #a1a1a1;
+    color: #ceb591;
   }
   &:hover::after {
     content: "favorite";

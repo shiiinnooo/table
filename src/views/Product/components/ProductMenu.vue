@@ -2,10 +2,7 @@
   <div class="product-menu" style="min-height: 80vh">
     <ul>
       <li class="my-2">
-        <router-link
-          class="fw-bold"
-          to="/product"
-          @click.prevent="selectCategory(''); recordPage('所有商品');"
+        <router-link class="fw-bold" to="/product?category=所有商品"
           >所有商品</router-link
         >
       </li>
@@ -26,10 +23,7 @@
         </a>
         <ul class="sub-product-menu show collapse" id="table-collapse">
           <li class="my-1" v-for="item in categories.table" :key="item">
-            <router-link
-              :to="`/product?category=${item}`"
-              @click.prevent="selectCategory(item); recordPage(item);"
-            >
+            <router-link :to="`/product?category=${item}`">
               {{ item }}
             </router-link>
           </li>
@@ -52,29 +46,20 @@
         </a>
         <ul class="sub-product-menu show collapse" id="kitchen-collapse">
           <li class="my-1" v-for="item in categories.kitchen" :key="item">
-            <router-link
-              :to="`/product?category=${item}`"
-              @click.prevent="selectCategory(item); recordPage(item);"
-            >
+            <router-link :to="`/product?category=${item}`">
               {{ item }}
             </router-link>
           </li>
         </ul>
       </li>
       <li class="my-2">
-        <router-link
-          class="fw-bold"
-          to="/product?category=香氛系列"
-          @click.prevent="selectCategory('香氛系列'); recordPage('香氛系列');"
+        <router-link class="fw-bold" to="/product?category=香氛系列"
           >香氛系列</router-link
         >
       </li>
       <li class="my-2">
-        <router-link
-          class="fw-bold"
-          to="/product?category=TAbLe選物"
-          @click.prevent="selectCategory('TAbLe選物'); recordPage('TAbLe選物');">
-          <span style="font-weight: 500;">TAbLe </span>選物
+        <router-link class="fw-bold" to="/product?category=TAbLe選物">
+          <span style="font-weight: 500">TAbLe </span>選物
         </router-link>
       </li>
     </ul>
@@ -82,8 +67,6 @@
 </template>
 
 <script>
-import emitter from '../../../assets/javascript/emitter';
-
 export default {
   data() {
     return {
@@ -93,14 +76,6 @@ export default {
       },
     };
   },
-  methods: {
-    selectCategory(category) {
-      emitter.emit('select-category', category);
-    },
-    recordPage(category) {
-      emitter.emit('record-page-to-breadcrumb', { selected: 'list', category });
-    },
-  },
 };
 </script>
 
@@ -109,15 +84,12 @@ export default {
   text-indent: -1.5rem;
 }
 .tableBtn .material-icons-outlined::after {
-  content: "keyboard_arrow_down";
+  content: "add";
 }
 .tableBtn[aria-expanded="true"] .material-icons-outlined::after {
-  content: "keyboard_arrow_up";
+  content: "remove";
 }
-li:hover {
-  padding-top: 0.4px;
-  a:hover {
-    color: #9b9999;
-  }
+a:hover {
+  color: #9b9999;
 }
 </style>

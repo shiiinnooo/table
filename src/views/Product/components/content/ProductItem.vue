@@ -51,22 +51,15 @@ export default {
   data() {
     return {
       product: {},
-      id: '',
     };
   },
-  watch: {
-    id() {
-      this.getProduct();
-    },
-  },
+  inject: ['page'],
   methods: {
-    getProduct() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
+    getProduct(id) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.product = res.data.product;
-          this.recordPage(this.product);
-          // console.log(res);
           console.log(typeof this.product.price);
         } else {
           console.log(res.data.message);
@@ -88,21 +81,12 @@ export default {
         }
       });
     },
-    recordPage(product) {
-      emitter.emit('record-page-to-breadcrumb', {
-        selected: 'item',
-        category: product.category,
-        title: product.title,
-      });
-    },
   },
   mounted() {
-    emitter.on('change-product', (id) => {
-      this.id = id;
-      this.getProduct();
+    emitter.on('cart-change-product', (id) => {
+      this.getProduct(id);
     });
-    this.id = this.$route.params.id;
-    this.getProduct();
+    this.getProduct(this.page.id);
   },
 };
 </script>

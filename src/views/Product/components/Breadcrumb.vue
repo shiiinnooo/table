@@ -4,44 +4,22 @@
       <li class="breadcrumb-item">
         <router-link to="/">HOME</router-link>
       </li>
-      <li class="breadcrumb-item" :class="{active : selected === 'list'}" aria-current="page">
-        <router-link :to="`/product?category=${category}`">
-          {{ category }}
+      <li class="breadcrumb-item" :class="{active : page.selected === 'list'}" aria-current="page">
+        <router-link :to="`/product?category=${page.category}`">
+          {{ page.category }}
         </router-link>
       </li>
-      <li v-if="selected === 'item'"
+      <li v-if="page.selected === 'item'"
         class="breadcrumb-item active" aria-current="page">
-        {{ title }}
+        {{ page.title }}
       </li>
     </ol>
   </nav>
 </template>
 
 <script>
-import emitter from '../../../assets/javascript/emitter';
-
 export default {
-  data() {
-    return {
-      selected: '',
-      category: '',
-      title: '',
-    };
-  },
-  created() {
-    emitter.on('record-page-to-breadcrumb', (item) => {
-      this.title = '';
-      this.selected = item.selected;
-      if (item.category === undefined) {
-        this.category = '所有商品';
-      } else {
-        this.category = item.category;
-        if (item.selected === 'item') {
-          this.title = item.title;
-        }
-      }
-    });
-  },
+  inject: ['page'],
 };
 </script>
 

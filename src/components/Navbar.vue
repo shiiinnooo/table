@@ -1,15 +1,10 @@
 <template>
-  <div class="sticky-top bg-white border-bottom">
-    <div class="container">
+  <div class="sticky-top bg-white">
+    <div class="container-xl">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <h1
-            class="navbar-brand fs-1"
-            style="font-weight: 600; letter-spacing: 1.5px"
-          >
-            <router-link class="text-dark" to="/"
-              >TAbLe</router-link
-            >
+          <h1 class="navbar-brand fs-1">
+            <router-link class="text-dark" to="/">TAbLe</router-link>
           </h1>
           <button
             class="navbar-toggler"
@@ -24,39 +19,66 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <router-link class="nav-link fs-sm" aria-current="page" to="/"
-                  >HOME</router-link
-                >
+              <li class="home nav-item">
+                <router-link
+                  class="nav-link text-center"
+                  aria-current="page"
+                  to="/"
+                ></router-link>
               </li>
-              <li class="nav-item">
-                <router-link class="nav-link fs-sm" to="/product"
-                @click.prevent="selectCategory(''); recordPage('所有商品');"
-                  >PRODUCTS</router-link
+              <li class="product nav-item">
+                <router-link class="nav-link" aria-current="page" to="/product"
+                  @click.prevent="getProducts"
+                  ></router-link
+                >
+                <!-- <router-link class="nav-link" aria-current="page" to="/product"
+                  @click.prevent="
+                    selectCategory('');
+                    recordPage('所有商品');
+                  "
+                  ></router-link
+                > -->
+              </li>
+              <li class="about nav-item">
+                <router-link class="nav-link" aria-current="page" to="/"
+                  ></router-link
                 >
               </li>
             </ul>
             <div>
               <ul class="d-flex flex-row-reverse p-0 m-0">
-                <li class="position-relative ms-3"
+                <li
+                  class="position-relative ms-3"
                   type="button"
-                  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                  @click="$emit('open-offcanvas')">
-                  <span class="material-icons-outlined material-icons md-28 text-dark">
+                  data-bs-target="#offcanvasRight"
+                  aria-controls="offcanvasRight"
+                  @click="$emit('open-offcanvas')"
+                >
+                  <span
+                    class="
+                      material-icons-outlined material-icons
+                      md-28
+                      text-dark
+                    "
+                  >
                     shopping_bag
                   </span>
                   <div
                     class="badge rounded-pill bg-danger position-absolute"
-                    :class="{'px-1' : qty >= 10}"
-                    style="left: 14px; bottom: 20px;"
-                    >
-                      <small class="fw-normal">{{ qty }}</small>
+                    :class="{ 'px-1': qty >= 10 }"
+                    style="left: 14px; bottom: 20px"
+                  >
+                    <small class="fw-normal">{{ qty }}</small>
                   </div>
                 </li>
-                <li class="position-relative ms-3"
-                type="button"
-                @click="pushToFavoritePage">
-                  <span class="material-icons-round material-icons md-28 text-dark">
+                <li
+                  class="position-relative ms-3"
+                  type="button"
+                  @click="pushToFavoritePage"
+                >
+                  <span
+                    class="material-icons-round material-icons md-28 text-dark"
+                  >
                     favorite_border
                   </span>
                 </li>
@@ -105,6 +127,9 @@ export default {
     recordPage(category) {
       emitter.emit('record-current-page', { selected: 'list', category });
     },
+    getProducts() {
+      emitter.emit('navbar-get-product');
+    },
   },
   mounted() {
     this.getCart();
@@ -122,7 +147,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a {
-  font-family: 'Montserrat', sans-serif;
+.navbar h1 {
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+.navbar-nav {
+  .nav-item {
+    min-width: 90px;
+    text-align: center;
+    a {
+      font-family: "Josefin Sans", "Noto Sans TC", sans-serif;
+    }
+  }
+  .home a {
+    &::after {
+      content: "HOME";
+    }
+    &:hover::after {
+      content: "首頁";
+    }
+  }
+  .product a {
+    &::after {
+      content: "PRODUCT";
+    }
+    &:hover::after {
+      content: "商品專區";
+    }
+  }
+  .about a {
+    &::after {
+      content: "ABOUT";
+    }
+    &:hover::after {
+      content: "關於我們";
+    }
+  }
 }
 </style>
