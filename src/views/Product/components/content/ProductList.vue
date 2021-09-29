@@ -116,7 +116,6 @@ export default {
   data() {
     return {
       products: [],
-      category: '',
       myFavorite: storageMethods.getItem() || [],
     };
   },
@@ -136,7 +135,6 @@ export default {
         if (res.data.success) {
           this.products = res.data.products;
         }
-        console.log(res);
       });
     },
     addToCart(id) {
