@@ -21,6 +21,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-dark btn-sm"
+                  @click="addToCart(item.id)"
                 >
                   加入購物車
                 </button>
@@ -41,6 +42,8 @@
 </template>
 
 <script>
+import emitter from '../assets/javascript/emitter';
+
 const storageMethods = {
   setItem(item) {
     localStorage.setItem('myFavorite', JSON.stringify(item));
@@ -72,6 +75,22 @@ export default {
       this.myFavoriteId.splice(this.myFavoriteId.indexOf(id), 1);
       storageMethods.setItem(this.myFavoriteId);
       this.getProducts();
+    },
+    addToCart(id) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
+      const cart = {
+        product_id: id,
+        qty: 1,
+      };
+      this.$http.post(api, { data: cart }).then((res) => {
+        if (res.data.success) {
+          console.log(res);
+          emitter.emit('update-cart');
+          emitter.emit('get-cart-offcanvas');
+        } else {
+          console.log(res.data.message);
+        }
+      });
     },
   },
   created() {

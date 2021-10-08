@@ -34,12 +34,26 @@
             NT. {{ page.product.origin_price }}
           </span>
         </p>
+        <select class="form-select" v-model.number="qty">
+          <option disabled>選擇數量</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <br />
         <button type="button" class="btn btn-secondary me-1" @click="addToCart">
           加入購物車
         </button>
-        <button type="button" class="btn"
-        :class="[myFavorite.includes(page.product.id)? 'btn-primary' : 'btn-secondary']"
-        @click="$emit('addFavorite', page.product.id)">
+        <button
+          type="button"
+          class="btn"
+          :class="[
+            myFavorite.includes(page.product.id)
+              ? 'btn-primary'
+              : 'btn-secondary',
+          ]"
+          @click="$emit('addFavorite', page.product.id)"
+        >
           加入我的最愛
         </button>
         <p>{{ page.product.description }}</p>
@@ -56,6 +70,7 @@ export default {
   data() {
     return {
       product: {},
+      qty: 1,
     };
   },
   inject: ['page'],
@@ -72,7 +87,7 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: this.page.product.id,
-        qty: 1,
+        qty: this.qty,
       };
       this.$http.post(api, { data: cart }).then((res) => {
         if (res.data.success) {

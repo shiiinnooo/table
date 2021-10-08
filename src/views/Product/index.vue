@@ -35,7 +35,6 @@
 </template>
 
 <script>
-// import emitter from '../../assets/javascript/emitter';
 import ProductMenu from './components/ProductMenu.vue';
 import ProductContent from './components/ProductContent.vue';
 import Breadcrumb from './components/Breadcrumb.vue';
@@ -77,6 +76,7 @@ export default {
       if (category) {
         this.page.id = '';
         this.page.title = '';
+        this.page.product = {};
         this.page.selected = 'list';
         this.page.category = category;
       }

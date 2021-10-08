@@ -26,11 +26,11 @@
               style="object-fit: cover"
             />
           </div>
-          <div class="col-7">
+          <div class="col-9">
             <div class="card-body p-0">
               <h6 class="card-title fs-6 fw-normal">
                 <router-link :to="`/product/${item.product_id}`"
-                @click="changeProduct(item.product_id), $emit('close-offcanvas')">
+                @click="$emit('close-offcanvas')">
                   {{ item.product.title }}
                 </router-link>
               </h6>
@@ -39,7 +39,6 @@
                   <span class="me-2">價格</span>
                   <span
                     class="me-2"
-                    v-if="item.product.origin_price !== item.product.price"
                     :class="{
                       'text-decoration-line-through':
                         item.product.origin_price !== item.product.price,
@@ -48,10 +47,8 @@
                     NT.{{ item.product.origin_price }}
                   </span>
                   <span
-                    :class="{
-                      'text-danger':
-                        item.product.origin_price !== item.product.price,
-                    }"
+                    v-if="item.product.origin_price !== item.product.price"
+                    class="text-danger"
                     >NT.{{ item.product.price }}</span
                   >
                 </p>
@@ -61,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div class="col-2">
+          <!-- <div class="col-2">
             <button
               type="button"
               class="bg-transparent border border-secondary p-1"
@@ -69,7 +66,7 @@
             >
               刪除
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
       <hr />
@@ -120,25 +117,22 @@ export default {
         }
       });
     },
-    delCart(id) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
-      this.$http.delete(api).then((res) => {
-        if (res.data.success) {
-          this.getCarts();
-          emitter.emit('update-cart');
-        } else {
-          console.log(res.data.message);
-        }
-      });
-    },
+    // delCart(id) {
+    //   const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
+    //   this.$http.delete(api).then((res) => {
+    //     if (res.data.success) {
+    //       this.getCarts();
+    //       emitter.emit('update-cart');
+    //     } else {
+    //       console.log(res.data.message);
+    //     }
+    //   });
+    // },
     show() {
       this.cartOffcanvas.show();
     },
     hide() {
       this.cartOffcanvas.hide();
-    },
-    changeProduct(id) {
-      emitter.emit('cart-change-product', id);
     },
   },
   created() {

@@ -31,13 +31,6 @@
                   @click.prevent="getProducts"
                   ></router-link
                 >
-                <!-- <router-link class="nav-link" aria-current="page" to="/product"
-                  @click.prevent="
-                    selectCategory('');
-                    recordPage('所有商品');
-                  "
-                  ></router-link
-                > -->
               </li>
               <li class="about nav-item">
                 <router-link class="nav-link" aria-current="page" to="/"
@@ -108,7 +101,6 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.cart = res.data.data;
-          // console.log(this.cart);
           this.countNum();
         }
       });
@@ -119,23 +111,16 @@ export default {
         this.qty += item.qty;
       });
     },
-    selectCategory(category) {
-      emitter.emit('select-category', category);
-    },
-    recordPage(category) {
-      emitter.emit('record-current-page', { selected: 'list', category });
-    },
     getProducts() {
       emitter.emit('navbar-get-product');
     },
   },
   mounted() {
     this.getCart();
-    // 監聽購物車
+    // 監聽購物車，為了更新icon數字，可再調整到offcanvas
     emitter.on('update-cart', () => {
       this.getCart();
     });
-    console.log(this.$router);
     // window.addEventListener('scroll', () => {
     //   const windowY = window.scrollY;
     //   // console.log(windowY);
