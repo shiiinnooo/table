@@ -34,8 +34,13 @@
             NT. {{ page.product.origin_price }}
           </span>
         </p>
-        <button type="button" class="btn btn-secondary" @click="addToCart">
+        <button type="button" class="btn btn-secondary me-1" @click="addToCart">
           加入購物車
+        </button>
+        <button type="button" class="btn"
+        :class="[myFavorite.includes(page.product.id)? 'btn-primary' : 'btn-secondary']"
+        @click="$emit('addFavorite', page.product.id)">
+          加入我的最愛
         </button>
         <p>{{ page.product.description }}</p>
         <p>{{ page.product.content }}</p>
@@ -54,6 +59,14 @@ export default {
     };
   },
   inject: ['page'],
+  props: {
+    myFavorite: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   methods: {
     addToCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;

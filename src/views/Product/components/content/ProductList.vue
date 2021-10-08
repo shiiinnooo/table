@@ -28,7 +28,7 @@
             "
             style="top: 6px; right: 6px; width: 2rem; height: 2rem"
           >
-            <span
+            <!-- <span
               class="
                 material-icons-outlined material-icons
                 favorite-icon
@@ -49,6 +49,30 @@
               "
               style="font-weight: 100px; right: 0px; color: #ceb591"
               @click.prevent="addFavorite(product)"
+            >
+              favorite
+            </span> -->
+            <span
+              class="
+                material-icons-outlined material-icons
+                favorite-icon
+                fw-lighter
+                p-1
+              "
+              style="font-weight: 100px"
+              @click.prevent="$emit('addFavorite', product.id);"
+            >
+            </span>
+            <span
+              v-if="myFavorite.includes(product.id)"
+              class="
+                material-icons-outlined material-icons
+                fw-lighter
+                p-1
+                position-absolute
+              "
+              style="font-weight: 100px; right: 0px; color: #ceb591"
+              @click.prevent="$emit('addFavorite', product.id);"
             >
               favorite
             </span>
@@ -102,24 +126,32 @@
 <script>
 import emitter from '../../../../assets/javascript/emitter';
 
-const storageMethods = {
-  setItem(favorite) {
-    const favoriteStr = JSON.stringify(favorite);
-    localStorage.setItem('myFavorite', favoriteStr);
-  },
-  getItem() {
-    return JSON.parse(localStorage.getItem('myFavorite'));
-  },
-};
+// const storageMethods = {
+//   setItem(favorite) {
+//     const favoriteStr = JSON.stringify(favorite);
+//     localStorage.setItem('myFavorite', favoriteStr);
+//   },
+//   getItem() {
+//     return JSON.parse(localStorage.getItem('myFavorite'));
+//   },
+// };
 
 export default {
   data() {
     return {
       products: [],
-      myFavorite: storageMethods.getItem() || [],
+      // myFavorite: storageMethods.getItem() || [],
     };
   },
   inject: ['page'],
+  props: {
+    myFavorite: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   computed: {
     filterProducts() {
       if (this.page.category === '所有商品') {
@@ -134,6 +166,7 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
+          // this.compareToMyFavorite();
         }
       });
     },
@@ -153,17 +186,27 @@ export default {
         }
       });
     },
-    addFavorite(item) {
-      const myFavoriteId = this.myFavorite.map((product) => product.id);
-      if (myFavoriteId.includes(item.id)) {
-        this.myFavorite.splice(myFavoriteId.indexOf(item.id), 1);
-        console.log(item.id, '此商品已移除');
-      } else {
-        this.myFavorite.push(item);
-        storageMethods.setItem(this.myFavorite);
-        console.log(item.id, '此商品已加入');
-      }
-    },
+    // compareToMyFavorite() {
+    //   this.products.forEach((item, index) => {
+    //     if (this.myFavorite.includes(item.id)) {
+    //       this.products[index].isAddToMyFavorite = true;
+    //     } else {
+    //       this.products[index].isAddToMyFavorite = false;
+    //     }
+    //   });
+    //   console.log('比較過後', this.products);
+    // },
+    // addFavorite(item) {
+    //   const myFavoriteId = this.myFavorite.map((product) => product.id);
+    //   if (myFavoriteId.includes(item.id)) {
+    //     this.myFavorite.splice(myFavoriteId.indexOf(item.id), 1);
+    //     console.log(item.id, '此商品已移除');
+    //   } else {
+    //     this.myFavorite.push(item);
+    //     storageMethods.setItem(this.myFavorite);
+    //     console.log(item.id, '此商品已加入');
+    //   }
+    // },
   },
   mounted() {
     this.getProducts();

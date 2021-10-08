@@ -45,11 +45,10 @@
                 >
               </li>
             </ul>
-            <div>
+            <div class="navbar-icon">
               <ul class="d-flex flex-row-reverse p-0 m-0">
                 <li
                   class="position-relative ms-3"
-                  type="button"
                   data-bs-target="#offcanvasRight"
                   aria-controls="offcanvasRight"
                   @click="$emit('open-offcanvas')"
@@ -73,7 +72,6 @@
                 </li>
                 <li
                   class="position-relative ms-3"
-                  type="button"
                   @click="pushToFavoritePage"
                 >
                   <span
@@ -181,6 +179,13 @@ export default {
     }
     &:hover::after {
       content: "關於我們";
+    }
+  }
+}
+.navbar-icon {
+  li {
+    &:hover {
+      cursor: pointer;
     }
   }
 }
