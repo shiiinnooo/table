@@ -38,6 +38,14 @@ const routes = [
             path: 'step1',
             component: () => import('../views/Step1.vue'),
           },
+          {
+            path: 'step2',
+            component: () => import('../views/Step2.vue'),
+          },
+          {
+            path: 'step3/:orderId',
+            component: () => import('../views/Step3.vue'),
+          },
         ],
       },
       {

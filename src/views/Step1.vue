@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-4">
     <table class="table mt-4">
       <tbody>
         <tr v-for="item in carts.carts" :key="item.id">
@@ -38,6 +38,10 @@
         </tr>
       </tfoot>
     </table>
+    <button class="btn btn-primary" type="button"
+    @click="$router.push('/checkout/step2')">
+      Continue
+    </button>
   </div>
 </template>
 

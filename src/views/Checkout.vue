@@ -1,11 +1,24 @@
 <template>
-  <div class="container">
-    <p>結帳流程頁面</p>
-    <ul>
-      <li>step1</li>
-      <li>step2</li>
-      <li>step3</li>
-    </ul>
-    <router-view></router-view>
+  <div class="checkout bg-light">
+    <div class="container">
+      <div class="checkout-list">
+        <ul class="d-flex justify-content-center">
+          <li :class="{ 'bg-primary': $route.path.includes('step1') }">step1</li>
+          <li :class="{ 'bg-primary': $route.path.includes('step2') }">step2</li>
+          <li :class="{ 'bg-primary': $route.path.includes('step3') }">step3</li>
+        </ul>
+      </div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
+
+<style lang="scss">
+.checkout-list {
+  ul {
+    li {
+      width: 200px;
+    }
+  }
+}
+</style>

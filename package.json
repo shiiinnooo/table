@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
+    "@vee-validate/i18n": "^4.5.2",
+    "@vee-validate/rules": "^4.5.2",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "bootstrap-icons": "^1.5.0",
@@ -16,6 +18,7 @@
     "material-design-icons": "^3.0.1",
     "mitt": "^3.0.0",
     "swiper": "^6.7.5",
+    "vee-validate": "^4.5.2",
     "vue": "^3.2.19",
     "vue-axios": "^3.2.4",
     "vue-router": "^4.0.0-0"
