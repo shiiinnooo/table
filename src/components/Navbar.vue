@@ -33,7 +33,7 @@
                 >
               </li>
               <li class="about nav-item">
-                <router-link class="nav-link" aria-current="page" to="/"
+                <router-link class="nav-link" aria-current="page" to="/about"
                   ></router-link
                 >
               </li>
