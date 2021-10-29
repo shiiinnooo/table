@@ -1,14 +1,14 @@
 <template>
   <Navbar @open-offcanvas="offcanvasShow"></Navbar>
-  <router-view style="min-height: 70vh;"></router-view>
+  <router-view></router-view>
   <Offcanvas ref="offcanvas" @close-offcanvas="offcanvasHide"></Offcanvas>
   <footer class="py-5 bg-primary">
-    <p class="text-dark m-0">FOOTER</p>
+    <p class="text-dark text-center">Copyright &copy; 2021 TAbLe. 僅供練習使用無商業用途</p>
   </footer>
   <div
     @click="scrollTop"
     class="text-dark position-fixed position-relative" type="button"
-    style="right: 40px; bottom: 80px;">
+    style="right: 40px; bottom: 10px;">
     <span class="material-icons-outlined position-absolute"
       style="bottom: 10px; left: 2px;">
       arrow_drop_up

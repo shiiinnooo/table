@@ -1,5 +1,5 @@
 <template>
-  <div class="checkout bg-light">
+  <div class="checkout bg-light" style="min-height: 80vh;">
     <div class="container">
       <div class="checkout-list">
         <ul class="d-flex justify-content-center">
