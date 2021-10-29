@@ -1,6 +1,6 @@
 <template>
-  <div class="myFavorite bg-light pt-4">
-    <div class="bg-white mx-auto" style="width: 800px">
+  <div class="myFavorite bg-light py-4" style="min-height: 80vh;">
+    <div class="bg-white mx-auto" style="width: 800px;">
       <h3 class="p-5 text-secondary">My WishList</h3>
       <table class="table mt-4">
         <tbody>
@@ -37,6 +37,10 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary rounded py-2 px-4"
+        @click="$router.push('/product')">Continue shopping</button>
     </div>
   </div>
 </template>
