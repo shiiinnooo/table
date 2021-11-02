@@ -2,32 +2,28 @@
   <table class="table mt-4">
     <thead>
       <tr>
-        <th width="120">分類</th>
-        <th width="120">圖片</th>
-        <th>產品名稱</th>
-        <th width="120">原價</th>
-        <th width="120">售價</th>
-        <th width="100">是否啟用</th>
-        <th width="120">編輯</th>
+        <th width="200">訂單建立時間</th>
+        <th width="120">訂單編號</th>
+        <th width="120">品項</th>
+        <th width="120">金額</th>
+        <th width="120">付款狀態</th>
+        <th width="200">付款時間</th>
+        <th width="100">編輯</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in products" :key="item.id">
-        <td>{{ item.category }}</td>
+      <tr v-for="item in orders" :key="item.id">
+        <td>{{ new Date(item.create_at * 1000).toLocaleString() }}</td>
+        <td>{{ item.id }}</td>
+        <td class="text-start">{{ item.num }}</td>
+        <td class="text-start">{{ item.total }}</td>
         <td>
-          <img
-            :src="item.imageUrl"
-            width="120"
-            height="120"
-            style="object-fit: cover"
-          />
+          <span v-if="item.is_paid" class="text-success">已付款</span>
+          <span v-else>未付款</span>
         </td>
-        <td>{{ item.title }}</td>
-        <td class="text-start">{{ item.origin_price }}</td>
-        <td class="text-start">{{ item.price }}</td>
         <td>
-          <span v-if="item.is_enabled" class="text-success">啟用</span>
-          <span v-else>未啟用</span>
+          <span v-if="item.is_paid">{{ new Date(item.paid_date * 1000).toLocaleString() }}</span>
+          <span v-else></span>
         </td>
         <td>
           <div class="btn-group">
@@ -65,3 +61,33 @@
     @del-product="delProduct"
   ></DelModal> -->
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      orders: [],
+      pagination: {},
+    };
+  },
+  methods: {
+    getOrders(page = 1) {
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`;
+      this.$http.get(url).then((res) => {
+        if (res.data.success) {
+          console.log(res);
+          const { orders, pagination } = res.data;
+          this.orders = orders;
+          this.pagination = pagination;
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(res.data.message);
+        }
+      });
+    },
+  },
+  created() {
+    this.getOrders();
+  },
+};
+</script>
