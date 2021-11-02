@@ -46,10 +46,10 @@
       </tr>
     </tbody>
   </table>
-  <!-- <div class="d-flex justify-content-center">
-    <Pagination :page="pagination" @get-product="getProducts"></Pagination>
+  <div class="d-flex justify-content-center">
+    <Pagination :page="pagination" @get-product="getOrders"></Pagination>
   </div>
-  <Modal
+  <!-- <Modal
     ref="modal"
     :product="tempProduct"
     :is-new="isNew"
@@ -63,12 +63,17 @@
 </template>
 
 <script>
+import Pagination from '../../../components/Dashboard_Pagination.vue';
+
 export default {
   data() {
     return {
       orders: [],
       pagination: {},
     };
+  },
+  components: {
+    Pagination,
   },
   methods: {
     getOrders(page = 1) {
