@@ -47,7 +47,7 @@
           <tr>
             <th scope="row">付款狀態</th>
             <td :class="[ order.is_paid ? 'text-success' : 'text-danger']">
-              {{ order?.is_paid ? '付款完成' : '付款失敗' }}
+              {{ order?.is_paid ? '付款完成' : '尚未付款' }}
             </td>
           </tr>
           <tr>
@@ -73,6 +73,8 @@
           </tr>
         </tbody>
       </table>
+      <button v-if="!order.is_paid" class="btn btn-primary"
+        @click="payOrder">前往付款</button>
     </div>
   </div>
 </template>
@@ -96,6 +98,15 @@ export default {
           this.order.create_at = date;
         } else {
           console.log(res.data.message);
+        }
+      });
+    },
+    payOrder() {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
+      this.$http.post(api).then((res) => {
+        if (res.data.success) {
+          console.log(res.data.message);
+          this.getOrder();
         }
       });
     },

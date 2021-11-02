@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4">
+  <div>
     <table class="table mt-4">
       <tbody>
         <tr v-for="item in carts.carts" :key="item.id">

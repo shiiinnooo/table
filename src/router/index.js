@@ -64,11 +64,15 @@ const routes = [
   },
   {
     path: '/admin',
-    component: () => import('../views/Dashboard/Dashboard.vue'),
+    component: () => import('../views/Dashboard/index.vue'),
     children: [
       {
         path: 'product',
         component: () => import('../views/Dashboard/Dashboard_Products.vue'),
+      },
+      {
+        path: 'order',
+        component: () => import('../views/Dashboard/Dashboard_Orders/Dashboard_Orders.vue'),
       },
     ],
   },

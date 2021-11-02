@@ -3,7 +3,11 @@
   <router-view></router-view>
   <Offcanvas ref="offcanvas" @close-offcanvas="offcanvasHide"></Offcanvas>
   <footer class="py-5 bg-primary">
-    <p class="text-dark text-center">Copyright &copy; 2021 TAbLe. 僅供練習使用無商業用途</p>
+    <div class="text-dark text-center">
+      <p>Copyright &copy; 2021 TAbLe. 僅供練習使用無商業用途</p>
+      <a class="text-dark text-decoration-underline" href="#"
+        @click.prevent="$router.push('/login')">登入後台</a>
+    </div>
   </footer>
   <div
     @click="scrollTop"

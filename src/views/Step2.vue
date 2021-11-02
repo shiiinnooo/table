@@ -1,13 +1,8 @@
 <template>
   <h3 class="text-center">訂購人資訊</h3>
   <div class="row justify-content-center">
-    <Form
-      ref="form"
-      class="col-md-6"
-      v-slot="{ errors }"
-      @submit="createOrder"
-    >
-    {{ errors }}
+    <Form ref="form" class="col-md-6" v-slot="{ errors }" @submit="createOrder">
+      {{ errors }}
       <div class="mb-3">
         <label for="email" class="form-label">E-mail</label>
         <Field
@@ -89,14 +84,10 @@
         ></textarea>
       </div>
       <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-primary"
-          @click="goBack">Back 修改</button>
-        <button
-          type="submit"
-          class="btn btn-danger"
-        >
-          前往付款
+        <button type="button" class="btn btn-primary" @click="goBack">
+          Back 修改
         </button>
+        <button type="submit" class="btn btn-danger">建立訂單</button>
       </div>
     </Form>
   </div>
@@ -129,34 +120,24 @@ export default {
     },
     createOrder() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
-      this.$http.post(api, { data: this.form })
-        .then((res) => {
-          if (res.data.success) {
-            emitter.emit('update-cart');
-            emitter.emit('get-cart-offcanvas');
-            const { orderId } = res.data;
-            const api2 = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${orderId}`;
-            this.$http.post(api2)
-              .then((res2) => {
-                if (res2.data.success) {
-                  console.log(res2.data.message);
-                  this.$refs.form.resetForm();
-                  this.form = {
-                    user: {
-                      name: '',
-                      email: '',
-                      tel: '',
-                      address: '',
-                    },
-                    message: '',
-                  };
-                  this.$router.push(`/checkout/step3/${orderId}`);
-                }
-              });
-          } else {
-            // alert(res.data.message);
-          }
-        });
+      this.$http.post(api, { data: this.form }).then((res) => {
+        if (res.data.success) {
+          emitter.emit('update-cart');
+          emitter.emit('get-cart-offcanvas');
+          const { orderId } = res.data;
+          this.$refs.form.resetForm();
+          this.form = {
+            user: {
+              name: '',
+              email: '',
+              tel: '',
+              address: '',
+            },
+            message: '',
+          };
+          this.$router.push(`/checkout/step3/${orderId}`);
+        }
+      });
     },
     goBack() {
       this.$router.back();
