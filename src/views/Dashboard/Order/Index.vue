@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex justify-content-end mt-4">
-    <button class="btn btn-danger text-white" @click="openDelAllModal">刪除全部訂單</button>
+    <button class="btn btn-danger text-white" @click="openDelAllModal"
+      :class="{ 'disabled' : !orders.length }">刪除全部訂單</button>
   </div>
   <table class="table mt-4">
     <thead>
@@ -14,6 +15,9 @@
       </tr>
     </thead>
     <tbody>
+      <tr v-if="!orders.length">
+        <td class="fst-italic text-center py-5" colspan="6">無訂單</td>
+      </tr>
       <tr v-for="item in orders" :key="item.id">
         <td>{{ new Date(item.create_at * 1000).toLocaleString() }}</td>
         <td>{{ item.id }}</td>
