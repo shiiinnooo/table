@@ -48,22 +48,17 @@
     <Pagination :page="pagination" @get-product="getOrders"></Pagination>
   </div>
   <OrderModal ref="modal" :order="tempOrder"></OrderModal>
-  <!-- <Modal
-    ref="modal"
-    :product="tempProduct"
-    :is-new="isNew"
-    @update-product="updateProduct"
-  ></Modal> -->
-  <!-- <DelModal
+  <OrderDelModal
     ref="delModal"
-    :product="tempProduct"
-    @del-product="delProduct"
-  ></DelModal> -->
+    :order="tempOrder"
+    @del-order="delOrder"
+  ></OrderDelModal>
 </template>
 
 <script>
 import Pagination from '../../../components/Dashboard_Pagination.vue';
 import OrderModal from './components/OrderModal.vue';
+import OrderDelModal from './components/OrderDelModal.vue';
 
 export default {
   data() {
@@ -76,6 +71,7 @@ export default {
   components: {
     Pagination,
     OrderModal,
+    OrderDelModal,
   },
   methods: {
     getOrders(page = 1) {
@@ -91,6 +87,19 @@ export default {
         }
       });
     },
+    delOrder(id) {
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${id}`;
+      this.$http.delete(url).then((res) => {
+        if (res.data.success) {
+          console.log(res.data.message);
+          this.$refs.delModal.hide();
+          this.getOrders();
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(res.data.message);
+        }
+      });
+    },
     openModal(orderId) {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${orderId}`;
       this.$http.get(url).then((res) => {
@@ -100,6 +109,10 @@ export default {
         }
       });
       this.$refs.modal.show();
+    },
+    openDelModal(item) {
+      this.tempOrder = { ...item };
+      this.$refs.delModal.show();
     },
   },
   created() {
