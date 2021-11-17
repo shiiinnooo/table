@@ -72,7 +72,7 @@ const routes = [
       },
       {
         path: 'order',
-        component: () => import('../views/Dashboard/Dashboard_Orders/Dashboard_Orders.vue'),
+        component: () => import('../views/Dashboard/Order/Index.vue'),
       },
     ],
   },
