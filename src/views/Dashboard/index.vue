@@ -24,6 +24,10 @@
         </div>
       </div>
       <div class="col-10 px-5">
+        <div class="login text-end my-3">
+          <span v-if="loginStatus" class="px-2">已登入 /</span>
+          <button class="btn btn-secondary rounded py-1" @click="logout">登出</button>
+        </div>
         <router-view></router-view>
       </div>
     </div>
@@ -33,7 +37,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      loginStatus: false,
+    };
   },
   methods: {
     checkLogin() {
@@ -45,17 +51,33 @@ export default {
         this.$http.post(api).then((res) => {
           if (res.data.success) {
             console.log(res.data.message);
+            this.loginStatus = true;
           } else {
             // eslint-disable-next-line no-alert
             alert(res.data.message);
+            this.loginStatus = false;
             this.$router.push('/login');
           }
         });
       } else {
         // eslint-disable-next-line no-alert
         alert('尚未登入');
+        this.loginStatus = false;
         this.$router.push('/login');
       }
+    },
+    logout() {
+      const api = `${process.env.VUE_APP_API}/logout`;
+      this.$http.post(api).then((res) => {
+        if (res.data.success) {
+          console.log(res.data.message);
+          this.loginStatus = false;
+          this.$router.push('/login');
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(res.data.message);
+        }
+      });
     },
   },
   created() {
