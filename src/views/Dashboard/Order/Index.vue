@@ -1,4 +1,7 @@
 <template>
+  <div class="d-flex justify-content-end mt-4">
+    <button class="btn btn-danger text-white" @click="openDelAllModal">刪除全部訂單</button>
+  </div>
   <table class="table mt-4">
     <thead>
       <tr>
@@ -53,12 +56,14 @@
     :order="tempOrder"
     @del-order="delOrder"
   ></OrderDelModal>
+  <OrderDelAllModal ref="delAllModal" @del-allOrder="delAllOrder"></OrderDelAllModal>
 </template>
 
 <script>
 import Pagination from '../../../components/Dashboard_Pagination.vue';
 import OrderModal from './components/OrderModal.vue';
 import OrderDelModal from './components/OrderDelModal.vue';
+import OrderDelAllModal from './components/OrderDelAllModal.vue';
 
 export default {
   data() {
@@ -72,6 +77,7 @@ export default {
     Pagination,
     OrderModal,
     OrderDelModal,
+    OrderDelAllModal,
   },
   methods: {
     getOrders(page = 1) {
@@ -100,6 +106,19 @@ export default {
         }
       });
     },
+    delAllOrder() {
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders/all`;
+      this.$http.delete(url).then((res) => {
+        if (res.data.success) {
+          console.log(res.data.message);
+          this.$refs.delAllModal.hide();
+          this.getOrders();
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(res.data.message);
+        }
+      });
+    },
     openModal(orderId) {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${orderId}`;
       this.$http.get(url).then((res) => {
@@ -113,6 +132,9 @@ export default {
     openDelModal(item) {
       this.tempOrder = { ...item };
       this.$refs.delModal.show();
+    },
+    openDelAllModal() {
+      this.$refs.delAllModal.show();
     },
   },
   created() {
