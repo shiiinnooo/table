@@ -1,5 +1,5 @@
 <template>
-  <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+  <nav style="--bs-breadcrumb-divider: '/'" aria-label="breadcrumb" class="ps-2 py-1">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <router-link to="/">HOME</router-link>

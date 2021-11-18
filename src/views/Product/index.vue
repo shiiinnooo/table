@@ -1,9 +1,8 @@
 <template>
   <div v-if="page.selected === 'list'"
-    class="header-image d-flex align-items-center"
-      style="height: 240px; padding-left: 25%;">
+    class="header-image d-flex align-items-center justify-content-center">
     <h2 v-if="page.category" class="text-white">
-      {{ page.category }} <hr>
+      {{ page.category }}
       <span v-if="page.category === '所有商品'">All</span>
       <span v-if="page.category === '玻璃杯'">Glass</span>
       <span v-if="page.category === '馬克杯'">Cup</span>
@@ -20,11 +19,11 @@
   </div>
   <div class="container pt-4">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-lg-3">
         <ProductMenu>
         </ProductMenu>
       </div>
-      <div class="col-md-9">
+      <div class="col-lg-9">
         <Breadcrumb>
         </Breadcrumb>
         <ProductContent>
@@ -125,9 +124,13 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 180px;
   h2 {
     font-family: 'Playfair Display', "Noto Sans TC", serif;
     letter-spacing: 1.5px;
+  }
+  @media (max-width: 569px) {
+    height: 0px;
   }
 }
 </style>

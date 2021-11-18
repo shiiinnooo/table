@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div
-      class="col-6 col-lg-3 my-4"
+      class="col-6 col-lg-3"
       v-for="product in filterProducts"
       :key="product.id"
     >
@@ -28,30 +28,6 @@
             "
             style="top: 6px; right: 6px; width: 2rem; height: 2rem"
           >
-            <!-- <span
-              class="
-                material-icons-outlined material-icons
-                favorite-icon
-                fw-lighter
-                p-1
-              "
-              style="font-weight: 100px"
-              @click.prevent="addFavorite(product)"
-            >
-            </span>
-            <span
-              v-if="myFavorite.includes(product)"
-              class="
-                material-icons-outlined material-icons
-                fw-lighter
-                p-1
-                position-absolute
-              "
-              style="font-weight: 100px; right: 0px; color: #ceb591"
-              @click.prevent="addFavorite(product)"
-            >
-              favorite
-            </span> -->
             <span
               class="
                 material-icons-outlined material-icons
@@ -79,7 +55,7 @@
           </div>
         </router-link>
         <div class="card-body d-flex flex-column justify-content-between px-0">
-          <h6 class="card-title mb-3" style="font-weight: 400">
+          <h6 class="card-title mb-2" style="font-weight: 400">
             <router-link
               :to="`/product/${product.id}`"
             >
@@ -97,15 +73,16 @@
                 NT. {{ toCurrency(product.origin_price) }}
               </span>
               <span
-                class="text-danger ms-2"
+                class="text-danger ms-1"
                 v-if="product.price !== product.origin_price"
               >
                 NT. {{ toCurrency(product.price) }}
               </span>
             </div>
             <span
-              class="text-danger border border-danger fs-sm px-1"
+              class="saleText text-danger border border-danger px-1"
               v-if="product.price !== product.origin_price"
+              style="font-size: 10px;"
               >SALE</span
             >
           </div>
@@ -126,21 +103,10 @@
 <script>
 import emitter from '../../../../assets/javascript/emitter';
 
-// const storageMethods = {
-//   setItem(favorite) {
-//     const favoriteStr = JSON.stringify(favorite);
-//     localStorage.setItem('myFavorite', favoriteStr);
-//   },
-//   getItem() {
-//     return JSON.parse(localStorage.getItem('myFavorite'));
-//   },
-// };
-
 export default {
   data() {
     return {
       products: [],
-      // myFavorite: storageMethods.getItem() || [],
     };
   },
   inject: ['page'],
@@ -166,7 +132,6 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
-          // this.compareToMyFavorite();
         }
       });
     },
@@ -186,27 +151,6 @@ export default {
         }
       });
     },
-    // compareToMyFavorite() {
-    //   this.products.forEach((item, index) => {
-    //     if (this.myFavorite.includes(item.id)) {
-    //       this.products[index].isAddToMyFavorite = true;
-    //     } else {
-    //       this.products[index].isAddToMyFavorite = false;
-    //     }
-    //   });
-    //   console.log('比較過後', this.products);
-    // },
-    // addFavorite(item) {
-    //   const myFavoriteId = this.myFavorite.map((product) => product.id);
-    //   if (myFavoriteId.includes(item.id)) {
-    //     this.myFavorite.splice(myFavoriteId.indexOf(item.id), 1);
-    //     console.log(item.id, '此商品已移除');
-    //   } else {
-    //     this.myFavorite.push(item);
-    //     storageMethods.setItem(this.myFavorite);
-    //     console.log(item.id, '此商品已加入');
-    //   }
-    // },
   },
   mounted() {
     this.getProducts();
@@ -218,26 +162,21 @@ export default {
 *:not(.material-icons) {
   font-family: "Lato";
 }
-// .card-img-top {
-//   height: 200px;
-//   @media (min-width: 415px) {
-//     height: 280px;
-//   }
-//   @media (min-width: 576px) {
-//     height: 320px;
-//   }
-//   @media (min-width: 992px) {
-//     height: 240px;
-//   }
-//   @media (min-width: 1200px) {
-//     height: 270px;
-//   }
-// }
 .card-top {
   .card-img-hover,
   .card-img-icon {
     display: none;
     opacity: 0.1;
+    .favorite-icon {
+      &::after {
+        content: "favorite_border";
+        color: #ceb591;
+      }
+      &:hover::after {
+        content: "favorite";
+        color: #ceb591;
+      }
+    }
   }
   &:hover {
     .card-img-hover {
@@ -249,23 +188,21 @@ export default {
     }
   }
 }
-.favorite-icon {
-  &::after {
-    content: "favorite_border";
-    color: #ceb591;
+
+.card-body {
+  button {
+    background: none;
+    &:hover {
+      background-color: #f5f5f5;
+    }
   }
-  &:hover::after {
-    content: "favorite";
-    color: #ceb591;
+  .card-title a:hover {
+    text-decoration: underline;
   }
-}
-.card-title a:hover {
-  text-decoration: underline;
-}
-.card-body button {
-  background: none;
-  &:hover {
-    background-color: #f5f5f5;
+  .saleText {
+    @media (max-width: 569px) {
+      display: none;
+    }
   }
 }
 </style>
