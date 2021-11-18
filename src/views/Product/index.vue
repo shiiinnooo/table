@@ -21,7 +21,7 @@
   <div class="container pt-4">
     <div class="row">
       <div class="col-md-3">
-        <ProductMenu class="position-sticky" style="top: 80px;">
+        <ProductMenu>
         </ProductMenu>
       </div>
       <div class="col-md-9">

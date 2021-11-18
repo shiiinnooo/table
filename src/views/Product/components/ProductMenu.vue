@@ -1,64 +1,60 @@
 <template>
-  <div class="product-menu" style="min-height: 80vh">
-    <ul>
-      <li class="my-2">
-        <router-link class="fw-bold" to="/product?category=所有商品"
+  <div class="product-menu me-4">
+    <ul class="p-0 text-center border border-secondary rounded">
+      <li class="border-bottom p-2 border-secondary">
+        <router-link to="/product?category=所有商品"
           >所有商品</router-link
         >
       </li>
-      <li class="my-2">
+      <li class="p-2 border-bottom border-secondary">
         <a
-          class="fw-bold tableBtn"
+          class="tableBtn d-block"
           data-bs-toggle="collapse"
           role="button"
           href="#table-collapse"
-          aria-expanded="true"
         >
           <span>餐桌</span>
           <span
-            class="material-icons-outlined align-top fs-5 fw-light"
-            style="padding-left: 50%"
+            class="material-icons-outlined align-top fs-5 fw-light ms-1"
           >
           </span>
         </a>
-        <ul class="sub-product-menu show collapse" id="table-collapse">
-          <li class="my-1" v-for="item in categories.table" :key="item">
+        <ul class="sub-product-menu collapse" id="table-collapse">
+          <li class="my-2" v-for="item in categories.table" :key="item">
             <router-link :to="`/product?category=${item}`">
               {{ item }}
             </router-link>
           </li>
         </ul>
       </li>
-      <li class="my-2">
+      <li class="p-2 border-bottom border-secondary">
         <a
-          class="fw-bold tableBtn"
+          class="tableBtn d-block"
           data-bs-toggle="collapse"
           role="button"
           href="#kitchen-collapse"
-          aria-expanded="true"
         >
           <span>廚房</span>
           <span
-            class="material-icons-outlined align-top fs-5 fw-light"
-            style="padding-left: 50%"
+            class="material-icons-outlined align-top fs-5 fw-light ms-1"
           >
           </span>
         </a>
-        <ul class="sub-product-menu show collapse" id="kitchen-collapse">
-          <li class="my-1" v-for="item in categories.kitchen" :key="item">
+        <ul class="sub-product-menu collapse" id="kitchen-collapse">
+          <li class="my-2" v-for="item in categories.kitchen" :key="item">
             <router-link :to="`/product?category=${item}`">
               {{ item }}
             </router-link>
           </li>
         </ul>
       </li>
-      <li class="my-2">
-        <router-link class="fw-bold" to="/product?category=香氛系列"
+      <li class="p-2 border-bottom border-secondary">
+        <router-link to="/product?category=香氛系列"
           >香氛系列</router-link
         >
       </li>
-      <li class="my-2">
-        <router-link class="fw-bold" to="/product?category=TAbLe選物">
+      <li class="p-2 border-secondary">
+        <router-link to="/product?category=TAbLe選物">
           <span style="font-weight: 500">TAbLe </span>選物
         </router-link>
       </li>
@@ -84,10 +80,10 @@ export default {
   text-indent: -1.5rem;
 }
 .tableBtn .material-icons-outlined::after {
-  content: "add";
+  content: "arrow_drop_down";
 }
 .tableBtn[aria-expanded="true"] .material-icons-outlined::after {
-  content: "remove";
+  content: "arrow_drop_up";
 }
 a:hover {
   color: #9b9999;
