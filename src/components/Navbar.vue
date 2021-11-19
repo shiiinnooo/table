@@ -1,7 +1,7 @@
 <template>
   <div class="sticky-top bg-white">
     <div class="container-xl">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
           <h1 class="navbar-brand fs-1">
             <router-link class="text-dark" to="/">TAbLe</router-link>
@@ -20,7 +20,9 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
               <li class="home nav-item">
-                <a class="nav-link" aria-current="page"
+                <a
+                  class="nav-link"
+                  aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
                   href="#navbarNav"
@@ -28,16 +30,19 @@
                 ></a>
               </li>
               <li class="product nav-item">
-                <a class="nav-link" aria-current="page"
+                <a
+                  class="nav-link"
+                  aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
                   href="#navbarNav"
                   @click="getProducts, routerPush('product')"
-                  ></a
-                >
+                ></a>
               </li>
               <li class="about nav-item">
-                <a class="nav-link" aria-current="page"
+                <a
+                  class="nav-link"
+                  aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
                   href="#navbarNav"
@@ -45,7 +50,7 @@
                 ></a>
               </li>
             </ul>
-            <div class="navbar-icon">
+            <div class="navbar-icon d-none d-md-block">
               <ul class="d-flex flex-row-reverse p-0 m-0">
                 <li
                   class="position-relative ms-3"
@@ -72,7 +77,7 @@
                 </li>
                 <li
                   class="position-relative ms-3"
-                  @click="routerPush(favorite)"
+                  @click="routerPush('favorite')"
                 >
                   <span
                     class="material-icons-round material-icons md-28 text-dark"
@@ -86,6 +91,36 @@
         </div>
       </nav>
     </div>
+  </div>
+  <div class="navbar-icon d-md-none d-sm-block fixed-bottom">
+    <ul class="d-flex p-0 m-0 border-top">
+      <li
+        class="position-relative bg-white w-100 text-center py-1"
+        data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight"
+        @click="$emit('open-offcanvas')"
+      >
+        <span class="material-icons-outlined material-icons md-28 text-dark">
+          shopping_bag
+        </span>
+        <div
+          class="badge rounded-pill bg-danger position-absolute"
+          :class="{ 'px-1': qty >= 10 }"
+          style="left: 53%; bottom: 20px"
+        >
+          <small class="fw-normal">{{ qty }}</small>
+        </div>
+      </li>
+      <li
+        class="position-relative bg-white w-100 text-center py-1
+        border-start border-dark border-1"
+        @click="routerPush('favorite')"
+      >
+        <span class="material-icons-round material-icons md-28 text-dark">
+          favorite_border
+        </span>
+      </li>
+    </ul>
   </div>
 </template>
 
