@@ -21,7 +21,7 @@
         </a>
         <ul class="sub-product-menu collapse" id="table-collapse">
           <li class="my-2" v-for="item in categories.table" :key="item">
-            <router-link :to="`/product?category=${item}`">
+            <router-link :to="`/product?category=${item}`" @click="collapse('table')">
               {{ item }}
             </router-link>
           </li>
@@ -40,9 +40,9 @@
           >
           </span>
         </a>
-        <ul class="sub-product-menu collapse" id="kitchen-collapse">
+        <ul class="sub-product-menu collapse" ref="collapse" id="kitchen-collapse">
           <li class="my-2" v-for="item in categories.kitchen" :key="item">
-            <router-link :to="`/product?category=${item}`">
+            <router-link :to="`/product?category=${item}`" @click="collapse('kitchen')">
               {{ item }}
             </router-link>
           </li>
@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import Collapse from 'bootstrap/js/dist/collapse';
+
 export default {
   data() {
     return {
@@ -71,6 +73,18 @@ export default {
         kitchen: ['鍋具', '砧板', '托盤'],
       },
     };
+  },
+  methods: {
+    collapse(item) {
+      let myCollapse;
+      if (item === 'table') {
+        myCollapse = document.getElementById('table-collapse');
+      } else {
+        myCollapse = document.getElementById('kitchen-collapse');
+      }
+      const bsCollapse = new Collapse(myCollapse);
+      bsCollapse.hide();
+    },
   },
 };
 </script>
