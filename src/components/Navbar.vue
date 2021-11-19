@@ -20,22 +20,29 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
               <li class="home nav-item">
-                <router-link
-                  class="nav-link text-center"
-                  aria-current="page"
-                  to="/"
-                ></router-link>
+                <a class="nav-link" aria-current="page"
+                  data-bs-toggle="collapse"
+                  aria-controls="navbarNav"
+                  href="#navbarNav"
+                  @click="routerPush('')"
+                ></a>
               </li>
               <li class="product nav-item">
-                <router-link class="nav-link" aria-current="page" to="/product"
-                  @click.prevent="getProducts"
-                  ></router-link
+                <a class="nav-link" aria-current="page"
+                  data-bs-toggle="collapse"
+                  aria-controls="navbarNav"
+                  href="#navbarNav"
+                  @click="getProducts, routerPush('product')"
+                  ></a
                 >
               </li>
               <li class="about nav-item">
-                <router-link class="nav-link" aria-current="page" to="/about"
-                  ></router-link
-                >
+                <a class="nav-link" aria-current="page"
+                  data-bs-toggle="collapse"
+                  aria-controls="navbarNav"
+                  href="#navbarNav"
+                  @click="routerPush('about')"
+                ></a>
               </li>
             </ul>
             <div class="navbar-icon">
@@ -93,6 +100,9 @@ export default {
     };
   },
   methods: {
+    routerPush(page) {
+      this.$router.push(`/${page}`);
+    },
     pushToFavoritePage() {
       this.$router.push('/favorite');
     },
