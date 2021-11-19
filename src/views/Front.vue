@@ -1,7 +1,7 @@
 <template>
+  <Offcanvas ref="offcanvas" @close-offcanvas="offcanvasHide"></Offcanvas>
   <Navbar @open-offcanvas="offcanvasShow"></Navbar>
   <router-view></router-view>
-  <Offcanvas ref="offcanvas" @close-offcanvas="offcanvasHide"></Offcanvas>
   <footer class="py-5 mb-4 mb-md-0 bg-primary">
     <div class="text-dark text-center">
       <p>Copyright &copy; 2021 TAbLe. 僅供練習使用無商業用途</p>

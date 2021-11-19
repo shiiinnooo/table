@@ -134,6 +134,7 @@ export default {
       qty: 0,
     };
   },
+  emits: ['open-offcanvas'],
   methods: {
     routerPush(page) {
       this.$router.push(`/${page}`);
