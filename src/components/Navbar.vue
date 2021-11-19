@@ -72,7 +72,7 @@
                 </li>
                 <li
                   class="position-relative ms-3"
-                  @click="pushToFavoritePage"
+                  @click="routerPush(favorite)"
                 >
                   <span
                     class="material-icons-round material-icons md-28 text-dark"
@@ -102,9 +102,6 @@ export default {
   methods: {
     routerPush(page) {
       this.$router.push(`/${page}`);
-    },
-    pushToFavoritePage() {
-      this.$router.push('/favorite');
     },
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
