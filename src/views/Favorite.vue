@@ -1,6 +1,6 @@
 <template>
   <div class="myFavorite bg-light py-4" style="min-height: 80vh;">
-    <div class="bg-white mx-auto" style="width: 800px;">
+    <div class="content bg-white mx-auto">
       <h3 class="p-5 text-secondary">My WishList</h3>
       <table class="table mt-4">
         <tbody>
@@ -105,9 +105,25 @@ export default {
 
 <style lang="scss" scoped>
 .myFavorite {
+  .content {
+    width: 90%;
+    @media (min-width: 768px) {
+      width: 75%;
+    }
+    @media (min-width: 992px) {
+      width: 65%;
+    }
+    @media (min-width: 1200px) {
+      width: 60%;
+    }
+    @media (min-width: 1400px) {
+      width: 50%;
+    }
+  }
   h3 {
     font-family: "Playfair Display", serif;
     letter-spacing: 1px;
   }
+
 }
 </style>
