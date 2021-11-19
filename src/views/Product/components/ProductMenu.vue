@@ -1,6 +1,5 @@
 <template>
-  <div class="product-menu me-lg-4 sticky-lg-top"
-    style="top: 76px;">
+  <div class="product-menu me-lg-4">
     <ul class="p-0 text-center border border-secondary rounded">
       <li class="border-bottom p-2 border-secondary">
         <router-link to="/product?category=所有商品"
@@ -77,14 +76,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sub-product-menu li {
-  text-indent: -1.5rem;
-}
-.tableBtn .material-icons-outlined::after {
-  content: "arrow_drop_down";
-}
-.tableBtn[aria-expanded="true"] .material-icons-outlined::after {
-  content: "arrow_drop_up";
+.product-menu {
+  @media (min-width: 992px) {
+    position: sticky;
+    top: 80px;
+    padding-bottom: 1rem;
+  }
+  .sub-product-menu li {
+    text-indent: -1.5rem;
+  }
+  .tableBtn .material-icons-outlined::after {
+    content: "arrow_drop_down";
+  }
+  .tableBtn[aria-expanded="true"] .material-icons-outlined::after {
+    content: "arrow_drop_up";
+  }
 }
 a:hover {
   color: #9b9999;
