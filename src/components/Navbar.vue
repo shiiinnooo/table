@@ -21,7 +21,12 @@
             <ul class="navbar-nav me-auto">
               <li class="home nav-item">
                 <a
-                  class="nav-link"
+                  class="nav-link d-md-block d-none"
+                  aria-current="page"
+                  @click="routerPush('')"
+                ></a>
+                <a
+                  class="nav-link d-md-none"
                   aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
@@ -31,7 +36,12 @@
               </li>
               <li class="product nav-item">
                 <a
-                  class="nav-link"
+                  class="nav-link d-md-block d-none"
+                  aria-current="page"
+                  @click="getProducts, routerPush('product')"
+                ></a>
+                <a
+                  class="nav-link d-md-none"
                   aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
@@ -41,7 +51,12 @@
               </li>
               <li class="about nav-item">
                 <a
-                  class="nav-link"
+                  class="nav-link d-md-block d-none"
+                  aria-current="page"
+                  @click="routerPush('about')"
+                ></a>
+                <a
+                  class="nav-link d-md-none"
                   aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
@@ -183,6 +198,9 @@ export default {
     text-align: center;
     a {
       font-family: "Josefin Sans", "Noto Sans TC", sans-serif;
+      &:hover {
+      cursor: pointer;
+    }
     }
   }
   .home a {
