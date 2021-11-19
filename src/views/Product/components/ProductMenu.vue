@@ -12,6 +12,7 @@
           data-bs-toggle="collapse"
           role="button"
           href="#table-collapse"
+          aria-controls="table-collapse"
         >
           <span>餐桌</span>
           <span
@@ -21,9 +22,12 @@
         </a>
         <ul class="sub-product-menu collapse" id="table-collapse">
           <li class="my-2" v-for="item in categories.table" :key="item">
-            <router-link :to="`/product?category=${item}`" @click="collapse('table')">
+            <a @click="routerPush(item)"
+            data-bs-toggle="collapse"
+            href="#table-collapse" role="button"
+            aria-controls="table-collapse">
               {{ item }}
-            </router-link>
+            </a>
           </li>
         </ul>
       </li>
@@ -33,6 +37,7 @@
           data-bs-toggle="collapse"
           role="button"
           href="#kitchen-collapse"
+          aria-controls="kitchen-collapse"
         >
           <span>廚房</span>
           <span
@@ -40,11 +45,14 @@
           >
           </span>
         </a>
-        <ul class="sub-product-menu collapse" ref="collapse" id="kitchen-collapse">
+        <ul class="sub-product-menu collapse" id="kitchen-collapse">
           <li class="my-2" v-for="item in categories.kitchen" :key="item">
-            <router-link :to="`/product?category=${item}`" @click="collapse('kitchen')">
+            <a @click="routerPush(item)"
+            data-bs-toggle="collapse"
+            href="#kitchen-collapse" role="button"
+            aria-controls="kitchen-collapse">
               {{ item }}
-            </router-link>
+            </a>
           </li>
         </ul>
       </li>
@@ -63,7 +71,7 @@
 </template>
 
 <script>
-import Collapse from 'bootstrap/js/dist/collapse';
+// import Collapse from 'bootstrap/js/dist/collapse';
 
 export default {
   data() {
@@ -75,15 +83,8 @@ export default {
     };
   },
   methods: {
-    collapse(item) {
-      let myCollapse;
-      if (item === 'table') {
-        myCollapse = document.getElementById('table-collapse');
-      } else {
-        myCollapse = document.getElementById('kitchen-collapse');
-      }
-      const bsCollapse = new Collapse(myCollapse);
-      bsCollapse.hide();
+    routerPush(item) {
+      this.$router.push(`/product?category=${item}`);
     },
   },
 };
