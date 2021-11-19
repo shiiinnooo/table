@@ -19,7 +19,7 @@
   </div>
   <div class="container mt-4">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3" :class="{'d-none d-sm-block' : page.selected === 'item'}">
         <ProductMenu>
         </ProductMenu>
       </div>
