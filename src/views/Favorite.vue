@@ -41,14 +41,13 @@
                 <div class="btn-group">
                   <button
                     type="button"
-                    class="btn btn-outline-secondary btn-sm rounded px-2 py-0"
+                    class="btn btn-outline-secondary btn-sm rounded px-2 px-sm-3 py-0"
                     @click="addToCart(item.id)"
                   >
-                    加入購物車
+                    Add to bag
                   </button>
                   <span
-                    class="material-icons-outlined mx-3"
-                    type="button"
+                    class="delIcon material-icons-outlined mx-3 material-icons"
                     @click="removeFavItem(item.id, index)"
                   >
                     delete
@@ -88,6 +87,7 @@ export default {
     return {
       myFavoriteId: storageMethods.getItem() || [],
       myFavorite: [],
+      isIconHover: false,
     };
   },
   methods: {
@@ -159,6 +159,12 @@ export default {
       @media (min-width: 992px) {
         width: 120px;
         height: 120px;
+      }
+    }
+    .delIcon {
+      &:hover {
+        cursor: pointer;
+        color: rgb(168, 167, 167);
       }
     }
   }
