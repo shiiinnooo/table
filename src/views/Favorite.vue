@@ -20,7 +20,9 @@
           <div class="col-8 col-lg-9">
             <div class="row">
               <div class="col-12 col-lg-4 pb-1 py-lg-0">
-                {{ item.title }}
+                <router-link class="productTitle" :to="`/product/${item.id}`">
+                  {{ item.title }}
+                </router-link>
               </div>
               <div class="col-12 col-lg-4 pb-1 py-lg-0 text-lg-center">
                 <span
@@ -165,6 +167,11 @@ export default {
       &:hover {
         cursor: pointer;
         color: rgb(168, 167, 167);
+      }
+    }
+    .productTitle {
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
