@@ -41,7 +41,7 @@
                 <div class="btn-group">
                   <button
                     type="button"
-                    class="btn btn-outline-secondary btn-sm rounded px-2 px-sm-3 py-0"
+                    class="btn btn-outline-secondary btn-sm rounded px-2 px-sm-3 px-lg-2 py-0"
                     @click="addToCart(item.id)"
                   >
                     Add to bag
