@@ -163,8 +163,7 @@ export default {
   font-family: "Lato";
 }
 .card-top {
-  .card-img-hover,
-  .card-img-icon {
+  .card-img-hover, .card-img-icon {
     display: none;
     opacity: 0.1;
     .favorite-icon {
@@ -180,11 +179,17 @@ export default {
   }
   &:hover {
     .card-img-hover {
-      display: block;
+      @media (min-width: 992px) {
+        display: block;
+      }
+      display: none;
     }
     .card-img-icon {
-      display: block;
-      opacity: 1;
+      @media (min-width: 992px) {
+        display: block;
+        opacity: 1;
+      }
+      display: none;
     }
   }
 }
