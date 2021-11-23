@@ -68,10 +68,11 @@
             <div class="navbar-icon d-none d-md-block">
               <ul class="d-flex flex-row-reverse p-0 m-0">
                 <li
-                  class="position-relative ms-3"
+                  class="cart position-relative ms-1"
                   data-bs-target="#offcanvasRight"
                   aria-controls="offcanvasRight"
                   @click="$emit('open-offcanvas')"
+                  style="width: 48px;"
                 >
                   <span
                     class="
@@ -82,6 +83,8 @@
                   >
                     shopping_bag
                   </span>
+                  <p class="position-absolute fw-bold"
+                    style="font-size: 4px; left: -2px; top: 30px;">購物車</p>
                   <div
                     class="badge rounded-pill bg-danger position-absolute"
                     :class="{ 'px-1': qty >= 10 }"
@@ -91,14 +94,17 @@
                   </div>
                 </li>
                 <li
-                  class="position-relative ms-3"
+                  class="favorite position-relative ms-1"
                   @click="routerPush('favorite')"
+                  style="width: 48px;"
                 >
                   <span
                     class="material-icons-round material-icons md-28 text-dark"
                   >
                     favorite_border
                   </span>
+                  <p class="position-absolute fw-bold"
+                    style="font-size: 4px; left: -10px; top: 30px;">我的收藏</p>
                 </li>
               </ul>
             </div>
@@ -232,7 +238,14 @@ export default {
   li {
     &:hover {
       cursor: pointer;
+      p {
+        display: block;
+      }
     }
+  }
+  .cart p, .favorite p {
+    display: none;
+    letter-spacing: 0px;
   }
 }
 </style>
