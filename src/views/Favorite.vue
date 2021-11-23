@@ -1,46 +1,72 @@
 <template>
-  <div class="myFavorite bg-light py-4" style="min-height: 80vh;">
-    <div class="content bg-white mx-auto">
-      <h3 class="p-5 text-secondary">My WishList</h3>
-      <table class="table mt-4">
-        <tbody>
-          <tr v-for="(item, index) in myFavorite" :key="item.id">
-            <td>
-              <img
-                :src="item.imageUrl"
-                width="120"
-                height="120"
-                style="object-fit: cover"
-              />
-            </td>
-            <td>{{ item.title }}</td>
-            <td class="text-start">{{ item.origin_price }}</td>
-            <td class="text-start">{{ item.price }}</td>
-            <td>
-              <div class="btn-group">
-                <button
-                  type="button"
-                  class="btn btn-outline-dark btn-sm"
-                  @click="addToCart(item.id)"
-                >
-                  加入購物車
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-outline-danger btn-sm"
-                  @click="removeFavItem(item.id, index)"
-                >
-                  刪除
-                </button>
+  <div class="myFavorite bg-light py-4" style="min-height: 80vh">
+    <div class="content bg-white mx-auto px-4 pb-4">
+      <h2 class="py-4 py-lg-5 px-3 m-0 text-secondary">
+        My WishList
+        <span class="px-1 fs-6 fw-bold d-block d-sm-inline">我的收藏</span>
+      </h2>
+      <div class="container">
+        <div
+          class="row align-items-center border-bottom py-2"
+          v-for="(item, index) in myFavorite"
+          :key="item.id"
+        >
+          <div class="col-4 col-lg-3 text-center">
+            <img
+              :src="item.imageUrl"
+              style="object-fit: cover"
+            />
+          </div>
+          <div class="col-8 col-lg-9">
+            <div class="row">
+              <div class="col-12 col-lg-4 pb-1 py-lg-0">
+                {{ item.title }}
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <div class="col-12 col-lg-4 pb-1 py-lg-0 text-lg-center">
+                <span
+                  v-if="item.price !== item.origin_price"
+                  :class="{
+                    'text-decoration-line-through':
+                      item.price !== item.origin_price,
+                  }"
+                  class="pe-2"
+                >
+                  NT.{{ item.origin_price }}</span
+                >
+                <span :class="{ 'text-danger': item.price !== item.origin_price }">
+                  NT.{{ item.price }}</span
+                >
+              </div>
+              <div class="col-12 col-lg-4 pb-1 py-lg-0">
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm rounded px-2 py-0"
+                    @click="addToCart(item.id)"
+                  >
+                    加入購物車
+                  </button>
+                  <span
+                    class="material-icons-outlined mx-3"
+                    type="button"
+                    @click="removeFavItem(item.id, index)"
+                  >
+                    delete
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="text-center">
-      <button class="btn btn-primary rounded py-2 px-4"
-        @click="$router.push('/product')">Continue shopping</button>
+      <button
+        class="btn btn-primary rounded py-2 px-4 mt-3"
+        @click="$router.push('/product')"
+      >
+        Continue shopping
+      </button>
     </div>
   </div>
 </template>
@@ -111,19 +137,34 @@ export default {
       width: 75%;
     }
     @media (min-width: 992px) {
-      width: 65%;
+      width: 70%;
     }
     @media (min-width: 1200px) {
-      width: 60%;
+      width: 65%;
     }
     @media (min-width: 1400px) {
-      width: 50%;
+      width: 60%;
+    }
+    img {
+      width: 60px;
+      height: 60px;
+      @media (min-width: 375px) {
+        width: 80px;
+        height: 80px;
+      }
+      @media (min-width: 768px) {
+        width: 100px;
+        height: 100px;
+      }
+      @media (min-width: 992px) {
+        width: 120px;
+        height: 120px;
+      }
     }
   }
-  h3 {
+  h2 {
     font-family: "Playfair Display", serif;
     letter-spacing: 1px;
   }
-
 }
 </style>
