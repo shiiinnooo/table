@@ -5,20 +5,29 @@
       v-for="product in filterProducts"
       :key="product.id"
     >
-      <div class="card h-100 border-0">
+      <div class="card h-100 w-100 border-0">
         <router-link
           :to="`/product/${product.id}`"
           class="card-top d-block position-relative"
         >
           <img
             :src="product.imageUrl"
-            class="card-img-top w-100 d-block"
+            class="card-img-top d-block"
             style="object-fit: cover; height: auto"
           />
           <div
             class="card-img-hover position-absolute bg-secondary w-100 h-100"
             style="top: 0"
-          ></div>
+          >
+          </div>
+          <p class="card-text-hover text-white position-absolute text-center"
+          style="top:0; left:0; right: 0; bottom:0;
+          margin: auto; width: 100px; height: 30px; opacity: 0.8">
+            View
+            <span class="material-icons-outlined fs-4 align-bottom">
+              search
+            </span>
+          </p>
           <div
             class="
               card-img-icon
@@ -159,13 +168,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-*:not(.material-icons) {
+*:not(.material-icons, .material-icons-outlined) {
   font-family: "Lato";
 }
 .card-top {
   .card-img-hover, .card-img-icon {
     display: none;
-    opacity: 0.1;
+    opacity: 0.3;
     .favorite-icon {
       &::after {
         content: "favorite_border";
@@ -177,8 +186,11 @@ export default {
       }
     }
   }
+  .card-text-hover {
+    display: none;
+  }
   &:hover {
-    .card-img-hover {
+    .card-img-hover, .card-text-hover {
       @media (min-width: 992px) {
         display: block;
       }
