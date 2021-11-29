@@ -81,9 +81,12 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  // linkActiveClass: 'active',
-  scrollBehavior() {
-    return { top: 0, left: 0 };
+  linkActiveClass: 'active',
+  scrollBehavior(to, from) {
+    if (to.path === '/product' && from.path === '/') {
+      return { left: 0, top: 0 };
+    }
+    return { left: 0, top: 0 };
   },
 });
 
