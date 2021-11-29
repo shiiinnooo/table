@@ -2,7 +2,7 @@
   <Offcanvas ref="offcanvas" @close-offcanvas="offcanvasHide"></Offcanvas>
   <Navbar @open-offcanvas="offcanvasShow"></Navbar>
   <router-view></router-view>
-  <footer class="py-5 mb-4 mb-md-0 bg-primary">
+  <footer class="py-5 mb-4 mb-md-0 bg-light">
     <div class="text-dark text-center">
       <p>Copyright &copy; 2021 TAbLe. 僅供練習使用無商業用途</p>
       <a class="text-dark text-decoration-underline" href="#"
@@ -11,8 +11,8 @@
   </footer>
   <div
     @click="scrollTop"
-    class="text-dark position-fixed position-relative" type="button"
-    style="right: 40px; bottom: 10px;">
+    class="btnScrollTop text-dark position-fixed position-relative" type="button"
+    style="right: 30px; bottom: 10px;">
     <span class="material-icons-outlined position-absolute"
       style="bottom: 10px; left: 2px;">
       arrow_drop_up
@@ -40,6 +40,31 @@ export default {
     scrollTop() {
       window.scrollTo(0, 0);
     },
+    handleScroll() {
+      const btnScrollTop = document.querySelector('.btnScrollTop');
+      const rootElement = document.documentElement;
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      if ((rootElement.scrollTop / scrollTotal) > 0.50) {
+        btnScrollTop.classList.add('showBtn');
+      } else {
+        btnScrollTop.classList.remove('showBtn');
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
   },
 };
 </script>
+
+<style lang="scss">
+  .btnScrollTop {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .3s ease;
+  }
+  .showBtn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
