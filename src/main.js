@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import 'bootstrap';
+import 'animate.css';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import {
