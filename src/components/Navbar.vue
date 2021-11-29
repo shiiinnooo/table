@@ -38,7 +38,7 @@
                 <a
                   class="nav-link d-md-block d-none"
                   aria-current="page"
-                  @click="getProducts, routerPush('product')"
+                  @click="routerPush('product')"
                 ></a>
                 <a
                   class="nav-link d-md-none"
@@ -46,7 +46,7 @@
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
                   href="#navbarNav"
-                  @click="getProducts, routerPush('product')"
+                  @click="routerPush('product')"
                 ></a>
               </li>
               <li class="about nav-item">
@@ -159,6 +159,9 @@ export default {
   methods: {
     routerPush(page) {
       this.$router.push(`/${page}`);
+      if (page === 'product') {
+        this.getProducts();
+      }
     },
     getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
