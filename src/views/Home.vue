@@ -1,6 +1,6 @@
 <template>
   <div class="swiper">
-    <swiper :autoplay="{ delay: 50000000 }">
+    <swiper :autoplay="{ delay: 5000 }">
       <swiper-slide>
         <div class="slide slide-1">
           <div class="container-xl h-100 d-flex flex-column justify-content-around">
@@ -16,7 +16,7 @@
             <div class="align-self-center text-center">
               <button
                 type="button"
-                class="btn btn-outline-light border-2 py-3 px-5 rounded-pill"
+                class="btn btn-outline-light border-2 py-3 px-5 rounded-pill fw-bold"
                 @click="$router.push('/product')"
               >
                 SHOP NOW
@@ -40,7 +40,7 @@
             <div class="align-self-center text-center">
               <button
                 type="button"
-                class="btn btn-outline-light border-2 py-3 px-5 rounded-pill"
+                class="btn btn-outline-light border-2 py-3 px-5 rounded-pill fw-bold"
                 @click="$router.push('/product')"
               >
                 SHOP NOW
@@ -64,7 +64,7 @@
             <div class="align-self-center text-center">
               <button
                 type="button"
-                class="btn btn-outline-light border-2 py-3 px-5 rounded-pill"
+                class="btn btn-outline-light border-2 py-3 px-5 rounded-pill fw-bold"
                 @click="$router.push('/product')"
               >
                 SHOP NOW
@@ -304,7 +304,7 @@ export default {
         }
       }
       button {
-        letter-spacing: 1px;
+        letter-spacing: 2px;
       }
     }
   }
