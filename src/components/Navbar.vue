@@ -30,6 +30,7 @@
                   aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
+                  aria-expanded="false"
                   href="#navbarNav"
                   @click="routerPush('')"
                 ></a>
@@ -45,6 +46,7 @@
                   aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
+                  aria-expanded="false"
                   href="#navbarNav"
                   @click="routerPush('product')"
                 ></a>
@@ -60,6 +62,7 @@
                   aria-current="page"
                   data-bs-toggle="collapse"
                   aria-controls="navbarNav"
+                  aria-expanded="false"
                   href="#navbarNav"
                   @click="routerPush('about')"
                 ></a>
@@ -95,16 +98,18 @@
                 </li>
                 <li
                   class="favorite position-relative ms-1"
-                  @click="routerPush('favorite')"
                   style="width: 48px;"
                 >
-                  <span
-                    class="material-icons-round material-icons md-28 text-dark"
-                  >
-                    favorite_border
-                  </span>
-                  <p class="position-absolute fw-bold"
-                    style="font-size: 4px; left: -10px; top: 30px;">我的收藏</p>
+                  <a class="d-block" href="#"
+                    @click.prevent="routerPush('favorite')">
+                    <span
+                      class="material-icons-round material-icons md-28 text-dark"
+                    >
+                      favorite_border
+                    </span>
+                    <p class="position-absolute fw-bold"
+                      style="font-size: 4px; left: -10px; top: 30px;">我的收藏</p>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -135,11 +140,16 @@
       <li
         class="position-relative bg-white w-100 text-center py-1
         border-start border-dark border-1"
-        @click="routerPush('favorite')"
       >
-        <span class="material-icons-round material-icons md-28 text-dark">
-          favorite_border
-        </span>
+        <a
+          class="d-block"
+          aria-expanded="false"
+          aria-controls="navbarNav"
+          @click="routerPush('favorite')">
+          <span class="material-icons-round material-icons md-28 text-dark">
+            favorite_border
+          </span>
+        </a>
       </li>
     </ul>
   </div>
