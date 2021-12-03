@@ -59,6 +59,9 @@
             </div>
           </div>
         </div>
+        <div v-if="!myFavorite.length">
+          <p class="text-secondary text-center fst-italic py-5">目前無收藏</p>
+        </div>
       </div>
     </div>
     <div class="text-center">
