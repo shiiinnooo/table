@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div
-      class="col-6 col-lg-3"
+      class="col-6 col-lg-4 col-xl-3"
       v-for="product in filterProducts"
       :key="product.id"
     >
@@ -116,6 +116,7 @@ export default {
   data() {
     return {
       products: [],
+      isLoading: false,
     };
   },
   inject: ['page'],
@@ -137,10 +138,12 @@ export default {
   },
   methods: {
     getProducts() {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
+          this.isLoading = false;
         }
       });
     },
