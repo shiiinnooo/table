@@ -1,8 +1,8 @@
 <template>
   <div class="row">
-    <div class="col-8">
+    <div class="col-md-8">
       <img class="w-100 mb-3" :src="page.product.imageUrl" alt="" />
-      <div v-for="image in page.product.imagesUrl" :key="image">
+      <div class="d-none d-md-block" v-for="image in page.product.imagesUrl" :key="image">
         <img
           v-if="image !== page.product.imageUrl"
           class="w-100 my-3"
@@ -11,7 +11,7 @@
         />
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
       <div class="product-title">
         <h4 class="py-3 fw-normal">
           {{ page.product.title }}
@@ -39,27 +39,49 @@
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
         </select>
         <br />
-        <button type="button" class="btn btn-secondary me-1" @click="addToCart">
+        <button type="button" class="btn btn-outline-secondary me-1 w-100 border-2"
+          @click="addToCart">
           加入購物車
         </button>
-        <button
-          type="button"
-          class="btn"
-          :class="[
-            myFavorite.includes(page.product.id)
-              ? 'btn-primary'
-              : 'btn-secondary',
-          ]"
-          @click="$emit('addFavorite', page.product.id)"
-        >
-          加入我的最愛
-        </button>
+        <div>
+          <span v-if="myFavorite.includes(page.product.id)"
+            class="material-icons-outlined fs-5 align-text-top me-2 text-primary">
+            favorite
+          </span>
+          <span v-else class="material-icons-outlined fs-5 align-text-top me-2">
+            favorite_border
+          </span>
+          <p
+            class="d-inline-block py-3"
+            @click="$emit('addFavorite', page.product.id)"
+            style="cursor: pointer;"
+          >
+            <span v-if="myFavorite.includes(page.product.id)">已收藏</span>
+            <span v-else class="text-decoration-underline">加入我的最愛</span>
+          </p>
+        </div>
+        <hr />
         <p>{{ page.product.description }}</p>
         <p>{{ page.product.content }}</p>
       </div>
     </div>
+    <div class="d-md-none col-12" v-for="image in page.product.imagesUrl" :key="image">
+        <img
+          v-if="image !== page.product.imageUrl"
+          class="w-100 my-3"
+          :src="image"
+          alt=""
+        />
+      </div>
   </div>
 </template>
 
