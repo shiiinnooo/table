@@ -52,7 +52,7 @@ export default {
     },
   },
   emits: ['del-order'],
-  deta() {
+  data() {
     return {
       delModal: '',
     };

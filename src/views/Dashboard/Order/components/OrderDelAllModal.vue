@@ -42,7 +42,7 @@ import Modal from 'bootstrap/js/dist/modal';
 
 export default {
   emits: ['del-allOrder'],
-  deta() {
+  data() {
     return {
       delModal: '',
     };

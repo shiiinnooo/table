@@ -55,7 +55,7 @@
                 </li>
               </ul>
             </div>
-            <div class="ordercContent w-100">
+            <div class="orderContent w-100">
               <h6>訂單內容</h6>
               <table class="table table-borderless">
                 <tbody v-for="item in order.products" :key="item.id"

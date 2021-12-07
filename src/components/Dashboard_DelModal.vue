@@ -52,7 +52,7 @@ export default {
     },
   },
   emits: ['del-product'],
-  deta() {
+  data() {
     return {
       delModal: '',
     };
