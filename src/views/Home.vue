@@ -277,7 +277,8 @@ export default {
           padding: 40px 50px;
         }
         @media (max-width: 575px) {
-          max-width: 400px;
+          width: 100%;
+          padding: 30px 40px;
         }
         h2 {
           font-size: 36px;
@@ -289,6 +290,9 @@ export default {
           }
           @media (max-width: 575px) {
             font-size: 28px;
+          }
+          @media (max-width: 374px) {
+            font-size: 24px;
           }
         }
         p {
