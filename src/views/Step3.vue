@@ -1,36 +1,90 @@
 <template>
-  <h3 class="text-center py-4">付款確認</h3>
-  <div class="mx-auto">
-    <div>
-      <h4 class="text-center">訂單內容</h4>
-      <table class="table table-sm table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">商品名稱</th>
-            <th scope="col">數量</th>
-            <th scope="col">金額</th>
-          </tr>
-        </thead>
-        <tbody v-for="item in order.products" :key="item.id">
-          <tr>
-            <td>{{ item.product.title }}</td>
-            <td>{{ item.qty }}</td>
-            <td>NT.{{ item.total }}</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th scope="row" colspan="2" class="text-center">總計金額</th>
-            <td>NT.{{ order.total }}</td>
-          </tr>
-        </tfoot>
-      </table>
+  <div class="order-completed container-lg bg-white mt-4">
+    <p
+      class="py-5 text-center fs-4"
+      style="
+        font-family: 'Playfair Display', 'Noto Sans TC', serif;
+        letter-spacing: 0.8px;
+      "
+    >
+      訂單已建立！感謝您的訂購
+      <span class="material-icons-outlined"> sentiment_satisfied </span>
+    </p>
+  </div>
+  <div
+    class="
+      order-payment
+      container-lg
+      bg-white
+      mt-4
+      px-4
+      pb-4
+      px-sm-5
+      position-relative
+    "
+  >
+    <h2
+      class="py-4 fw-bold position-absolute"
+      style="
+        font-family: 'Playfair Display', 'Noto Sans TC', serif;
+        letter-spacing: 0.8px;
+      "
+    >
+      Order info
+    </h2>
+    <div class="shopping-info pt-4">
+      <p class="text-sm-end pt-5 pt-sm-0">
+        <a
+          class="btnCollapse"
+          data-bs-toggle="collapse"
+          href="#shoppingInfo"
+          role="button"
+          aria-expanded="false"
+          aria-controls="shoppingInfo"
+        >
+          點此<span class="fw-bold"></span> 訂單內容
+        </a>
+      </p>
+      <div class="collapse" id="shoppingInfo">
+        <div
+          class="row py-2 py-sm-3"
+          v-for="item in order.products"
+          :key="item.id"
+        >
+          <div class="col-3 col-sm-2 text-md-center">
+            <img :src="item.product.imageUrl" />
+          </div>
+          <div class="col-6 col-sm-8 d-flex flex-column justify-content-center">
+            <p class="m-0 p-0">{{ item.product.title }}</p>
+            <p class="m-0 p-0">
+              單價
+              <span>NT. {{ toCurrency(Number(item.product.price)) }}</span>
+              <span
+                class="text-decoration-line-through ms-2"
+                v-if="item.product.price !== item.product.origin_price"
+              >
+                NT. {{ toCurrency(Number(item.product.origin_price)) }}
+              </span>
+            </p>
+            <p class="m-0 p-0">
+              小計
+              <span>NT. {{ toCurrency(Number(item.total)) }}</span>
+            </p>
+          </div>
+          <div class="col-3 col-sm-2 text-end">
+            <p>數量:{{ item.qty }}</p>
+          </div>
+        </div>
+        <div class="text-end">
+          <p>
+            總金額
+            <span class="ps-5">NT.{{ toCurrency(Number(order?.total)) }}</span>
+          </p>
+        </div>
+      </div>
     </div>
-    <div>
-      <table class="table caption-top">
-        <caption>
-          <h4 class="text-center">訂購資訊</h4>
-        </caption>
+    <div class="order-info py-3">
+      <table class="table">
         <tbody>
           <tr>
             <th scope="row">訂單金額</th>
@@ -46,8 +100,8 @@
           </tr>
           <tr>
             <th scope="row">付款狀態</th>
-            <td :class="[ order.is_paid ? 'text-success' : 'text-danger']">
-              {{ order?.is_paid ? '付款完成' : '尚未付款' }}
+            <td class="fw-bold" :class="[order.is_paid ? 'text-success' : 'text-danger']">
+              {{ order?.is_paid ? "付款完成" : "尚未付款" }}
             </td>
           </tr>
           <tr>
@@ -73,8 +127,16 @@
           </tr>
         </tbody>
       </table>
-      <button v-if="!order.is_paid" class="btn btn-primary"
-        @click="payOrder">前往付款</button>
+    </div>
+    <div class="text-center">
+      <button v-if="!order.is_paid" class="btn btn-primary w-100 rounded py-2" @click="payOrder">
+        前往付款
+      </button>
+      <button v-if="order.is_paid"
+        class="btn btn-outline-primary w-50 rounded py-2 fw-bold"
+        style="letter-spacing: 2px;">
+        繼續選購
+      </button>
     </div>
   </div>
 </template>
@@ -117,3 +179,44 @@ export default {
   },
 };
 </script>
+
+.<style lang="scss" scoped>
+.order-completed {
+  width: 75%;
+  @media (max-width: 991px) {
+    width: 80%;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+.order-payment {
+  width: 75%;
+  @media (max-width: 991px) {
+    width: 80%;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  .shopping-info {
+    img {
+      width: 60px;
+      height: 60px;
+    }
+    .btnCollapse {
+      span {
+        &::after {
+          content: "展開";
+        }
+      }
+    }
+    .btnCollapse[aria-expanded="true"] {
+      span {
+        &::after {
+          content: "收合";
+        }
+      }
+    }
+  }
+}
+</style>
