@@ -198,10 +198,6 @@ export default {
     emitter.on('update-cart', () => {
       this.getCart();
     });
-    // window.addEventListener('scroll', () => {
-    //   const windowY = window.scrollY;
-    //   // console.log(windowY);
-    // });
   },
 };
 </script>
