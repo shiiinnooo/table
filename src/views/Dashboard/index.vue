@@ -50,7 +50,6 @@ export default {
         const api = `${process.env.VUE_APP_API}/api/user/check`;
         this.$http.post(api).then((res) => {
           if (res.data.success) {
-            console.log(res.data.message);
             this.loginStatus = true;
           } else {
             // eslint-disable-next-line no-alert
@@ -70,7 +69,6 @@ export default {
       const api = `${process.env.VUE_APP_API}/logout`;
       this.$http.post(api).then((res) => {
         if (res.data.success) {
-          console.log(res.data.message);
           this.loginStatus = false;
           this.$router.push('/login');
         } else {

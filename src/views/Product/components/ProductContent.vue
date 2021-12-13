@@ -22,10 +22,8 @@ export default {
     addFavorite(id) {
       if (this.myFavorite.includes(id)) {
         this.myFavorite.splice(this.myFavorite.indexOf(id), 1);
-        console.log(id, '此商品已移除');
       } else {
         this.myFavorite.push(id);
-        console.log(id, '此商品已加入');
       }
       storageMethods.setItem(this.myFavorite);
     },

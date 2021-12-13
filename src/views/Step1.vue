@@ -121,9 +121,6 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.carts = res.data.data;
-          console.log(this.carts, 'carts');
-        } else {
-          console.log(res.data.message);
         }
       });
     },
@@ -134,8 +131,6 @@ export default {
           this.getCarts();
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
-        } else {
-          console.log(res.data.message);
         }
       });
     },
@@ -150,8 +145,6 @@ export default {
           this.getCarts();
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
-        } else {
-          console.log(res.data.message);
         }
       });
     },

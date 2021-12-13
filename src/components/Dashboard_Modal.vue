@@ -332,7 +332,6 @@ export default {
       this.productModal.hide();
     },
     uploadImage(image) {
-      console.log(image);
       if (!this.tempProduct.imageUrl) {
         this.tempProduct.imageUrl = image;
       }
@@ -357,8 +356,6 @@ export default {
           const image = res.data.imageUrl;
           this.uploadImage(image);
           this.fileInput.value = '';
-        } else {
-          console.log(`上傳失敗: ${res.data.message}`);
         }
       });
     },

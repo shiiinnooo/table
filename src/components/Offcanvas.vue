@@ -111,23 +111,9 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.carts = res.data.data.carts;
-          console.log(this.carts, 'carts');
-        } else {
-          console.log(res.data.message);
         }
       });
     },
-    // delCart(id) {
-    //   const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
-    //   this.$http.delete(api).then((res) => {
-    //     if (res.data.success) {
-    //       this.getCarts();
-    //       emitter.emit('update-cart');
-    //     } else {
-    //       console.log(res.data.message);
-    //     }
-    //   });
-    // },
     show() {
       this.cartOffcanvas.show();
     },

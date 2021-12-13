@@ -155,11 +155,8 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.order = res.data.order;
-          console.log(this.order);
           const date = new Date(this.order.create_at * 1000).toLocaleString();
           this.order.create_at = date;
-        } else {
-          console.log(res.data.message);
         }
       });
     },
@@ -167,7 +164,6 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
       this.$http.post(api).then((res) => {
         if (res.data.success) {
-          console.log(res.data.message);
           this.getOrder();
         }
       });

@@ -119,11 +119,8 @@ export default {
       };
       this.$http.post(api, { data: cart }).then((res) => {
         if (res.data.success) {
-          console.log(res);
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
-        } else {
-          console.log(res.data.message);
         }
       });
     },

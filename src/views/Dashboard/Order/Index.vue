@@ -101,7 +101,6 @@ export default {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${id}`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
-          console.log(res.data.message);
           this.$refs.delModal.hide();
           this.getOrders();
         } else {
@@ -114,7 +113,6 @@ export default {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders/all`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
-          console.log(res.data.message);
           this.$refs.delAllModal.hide();
           this.getOrders();
         } else {
@@ -128,7 +126,6 @@ export default {
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.tempOrder = res.data.order;
-          console.log(this.tempOrder);
         }
       });
       this.$refs.modal.show();

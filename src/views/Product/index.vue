@@ -64,7 +64,6 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log('to', to);
       const { id } = to.params;
       const { category } = to.query;
       if (id) {
@@ -89,9 +88,6 @@ export default {
           this.page.category = res.data.product.category;
           this.page.title = res.data.product.title;
           this.page.product = res.data.product;
-          console.log(res.data.product);
-        } else {
-          console.log(res.data.message);
         }
       });
     },

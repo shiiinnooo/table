@@ -117,8 +117,6 @@ export default {
         if (res.data.success) {
           this.getProducts();
           this.$refs.modal.hide();
-        } else {
-          console.log(res.data.message);
         }
       });
     },
@@ -126,7 +124,6 @@ export default {
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${id}`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
-          console.log(res.data.message);
           this.$refs.delModal.hide();
           this.getProducts();
         } else {

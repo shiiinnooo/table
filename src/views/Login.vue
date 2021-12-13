@@ -36,12 +36,7 @@ export default {
             const { token, expired } = res.data;
             document.cookie = `token=${token}; expires=${new Date(expired)}; path=/`;
             this.$router.push('/admin/product');
-          } else {
-            console.log(res.data.message);
           }
-        })
-        .catch((err) => {
-          console.log(err);
         });
     },
   },
