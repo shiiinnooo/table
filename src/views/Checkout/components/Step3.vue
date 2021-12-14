@@ -134,7 +134,8 @@
       </button>
       <button v-if="order.is_paid"
         class="btn btn-outline-primary w-50 rounded py-2 fw-bold"
-        style="letter-spacing: 2px;">
+        style="letter-spacing: 2px;"
+        @click="$router.push('/product')">
         繼續選購
       </button>
     </div>
