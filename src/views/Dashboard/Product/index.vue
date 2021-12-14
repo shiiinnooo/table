@@ -70,9 +70,9 @@
 </template>
 
 <script>
-import Pagination from '../../components/Dashboard_Pagination.vue';
-import Modal from '../../components/Dashboard_Modal.vue';
-import DelModal from '../../components/Dashboard_DelModal.vue';
+import Pagination from '@/components/Dashboard_Pagination.vue';
+import Modal from './components/ProductModal.vue';
+import DelModal from './components/ProductDelModal.vue';
 
 export default {
   data() {

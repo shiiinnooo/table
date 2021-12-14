@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import Pagination from '../../../components/Dashboard_Pagination.vue';
+import Pagination from '@/components/Dashboard_Pagination.vue';
 import OrderModal from './components/OrderModal.vue';
 import OrderDelModal from './components/OrderDelModal.vue';
 import OrderDelAllModal from './components/OrderDelAllModal.vue';

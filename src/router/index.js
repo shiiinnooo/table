@@ -68,11 +68,11 @@ const routes = [
     children: [
       {
         path: 'product',
-        component: () => import('../views/Dashboard/Dashboard_Products.vue'),
+        component: () => import('../views/Dashboard/Product/index.vue'),
       },
       {
         path: 'order',
-        component: () => import('../views/Dashboard/Order/Index.vue'),
+        component: () => import('../views/Dashboard/Order/index.vue'),
       },
     ],
   },
