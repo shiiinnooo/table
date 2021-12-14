@@ -23,7 +23,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
-import Offcanvas from '../components/Offcanvas.vue';
+import Offcanvas from '../components/CartOffcanvas.vue';
 
 export default {
   components: {
