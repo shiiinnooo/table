@@ -17,7 +17,7 @@
     </h2>
     <h2 v-else class="text-white">商品總覽</h2>
   </div>
-  <div class="container mt-4">
+  <div class="container mt-0 mt-sm-4">
     <div class="row">
       <div class="col-lg-3" :class="{'d-none d-sm-block' : page.selected === 'item'}">
         <ProductMenu>

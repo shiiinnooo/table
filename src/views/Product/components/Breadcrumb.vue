@@ -30,4 +30,9 @@ export default {
   a:hover {
     text-decoration: underline;
   }
+  @media (max-width: 375px) {
+    nav {
+      display: none;
+    }
+  }
 </style>

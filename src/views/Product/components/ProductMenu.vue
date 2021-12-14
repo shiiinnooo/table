@@ -1,5 +1,5 @@
 <template>
-  <div class="product-menu me-lg-4">
+  <div class="product-menu pe-lg-4">
     <ul class="p-0 text-center border border-secondary rounded">
       <li class="border-bottom p-2 border-secondary">
         <router-link to="/product?category=所有商品"
