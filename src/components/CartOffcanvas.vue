@@ -21,6 +21,7 @@
           <div class="col-3">
             <img
               :src="item.product.imageUrl"
+              @click="$emit('close-offcanvas'); $router.push(`/product/${item.product_id}`)"
               width="80"
               height="80"
               style="object-fit: cover"
@@ -28,11 +29,9 @@
           </div>
           <div class="col-9">
             <div class="card-body p-0">
-              <h6 class="card-title fs-6 fw-normal">
-                <router-link :to="`/product/${item.product_id}`"
-                @click="$emit('close-offcanvas')">
-                  {{ item.product.title }}
-                </router-link>
+              <h6 class="card-title fs-6 fw-normal"
+              @click="$emit('close-offcanvas'); $router.push(`/product/${item.product_id}`)">
+                {{ item.product.title }}
               </h6>
               <div class="card-text">
                 <p class="my-1">
@@ -70,26 +69,24 @@
         </div>
       </div>
       <hr />
-      <router-link
+      <button
         type="button"
-        to="/checkout/step1"
-        class="button border py-2 w-100 text-white fw-bold text-center"
+        class="btn btn-primary py-2 w-100 fw-bold text-center"
         style="letter-spacing: 2px"
-        @click="$emit('close-offcanvas')"
-        >前往結帳</router-link
-      >
+        @click="$emit('close-offcanvas'); $router.push('/checkout/step1');"
+        >前往結帳
+      </button>
     </div>
     <div v-else class="offcanvas-body">
       <p class="text-center py-2">您目前尚未選購任何商品喔！</p>
       <hr />
-      <router-link
+      <button
         type="button"
-        to="/product"
-        class="button border py-2 w-100 text-white fw-bold text-center"
+        class="btn btn-outline-primary py-2 w-100 fw-bold text-center"
         style="letter-spacing: 2px"
-        @click="$emit('close-offcanvas')"
-        >繼續選購</router-link
-      >
+        @click="$emit('close-offcanvas'); $router.push('/product');"
+        >繼續選購
+        </button>
     </div>
   </div>
 </template>
@@ -134,13 +131,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-title a:hover {
-  text-decoration: underline;
-}
-.button {
-  background-color: #af926b;
-  &:hover {
-    background-color: #ceb591;
+.card {
+  img {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .card-title {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }
 </style>
