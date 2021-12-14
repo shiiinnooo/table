@@ -16,7 +16,7 @@
             <p class="w-25 fs-2 fw-bold m-0">02</p>
             <div class="w-75 m-0">
               <p class="m-0">填寫訂購資料</p>
-              <p class="m-0">Order info</p>
+              <p class="m-0">Shipping info</p>
             </div>
           </li>
           <li class="px-4 py-3 rounded w-100 d-flex"
