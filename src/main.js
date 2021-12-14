@@ -3,6 +3,8 @@ import 'bootstrap';
 import 'animate.css';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import {
   Field, Form, ErrorMessage, defineRule, configure,
 } from 'vee-validate';
@@ -34,5 +36,6 @@ app.component('Field', Field);
 app.component('ErrorMessage', ErrorMessage);
 
 app.use(VueAxios, axios);
+app.use(VueLoading);
 app.use(router);
 app.mount('#app');
