@@ -48,7 +48,8 @@
           <option value="10">10</option>
         </select>
         <br />
-        <button type="button" class="btn btn-outline-secondary me-1 w-100 border-2"
+        <button type="button" class="btn btn-outline-primary me-1 w-100 border-2 fw-bold"
+          style="letter-spacing: 1.5px;"
           @click="addToCart">
           加入購物車
         </button>
