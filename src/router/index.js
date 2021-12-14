@@ -36,19 +36,19 @@ const routes = [
       },
       {
         path: 'checkout',
-        component: () => import('../views/Checkout.vue'),
+        component: () => import('../views/Checkout/index.vue'),
         children: [
           {
             path: 'step1',
-            component: () => import('../views/Step1.vue'),
+            component: () => import('../views/Checkout/components/Step1.vue'),
           },
           {
             path: 'step2',
-            component: () => import('../views/Step2.vue'),
+            component: () => import('../views/Checkout/components/Step2.vue'),
           },
           {
             path: 'step3/:orderId',
-            component: () => import('../views/Step3.vue'),
+            component: () => import('../views/Checkout/components/Step3.vue'),
           },
         ],
       },

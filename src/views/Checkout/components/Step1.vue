@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import emitter from '../assets/javascript/emitter';
+import emitter from '@/assets/javascript/emitter';
 
 export default {
   data() {
