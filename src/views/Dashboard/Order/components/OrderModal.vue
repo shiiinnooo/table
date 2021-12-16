@@ -19,85 +19,89 @@
           ></button>
         </div>
         <div class="modal-body">
-          <div class="orderStatus border p-1">
-            <p>
-              訂單編號:<span>{{ order.id }}</span>
+          <div class="orderStatus border p-2">
+            <p class="m-0 py-1">
+              訂單編號：<span>{{ order.id }}</span>
             </p>
-            <p>
-              付款狀態:
+            <p class="m-0 py-1">
+              付款狀態：
               <span v-if="order.is_paid" class="text-success">已付款</span>
               <span v-else>未付款</span>
             </p>
           </div>
-          <div class="d-flex justify-content-between">
-            <div class="orderUser w-100">
-              <h6>訂購資訊</h6>
-              <ul class="p-0">
-                <li>
-                  建立時間:<span>{{
-                    new Date(order?.create_at * 1000).toLocaleString()
-                  }}</span>
-                </li>
-                <li>
-                  email:<span>{{ order?.user?.email }}</span>
-                </li>
-                <li>
-                  姓名:<span>{{ order?.user?.name }}</span>
-                </li>
-                <li>
-                  手機:<span>{{ order?.user?.tel }}</span>
-                </li>
-                <li>
-                  地址:<span>{{ order?.user?.address }}</span>
-                </li>
-                <li>
-                  備註:<span>{{ order?.message }}</span>
-                </li>
-              </ul>
+          <div class="d-flex justify-content-between p-2 mt-4">
+            <div class="orderInfo w-100">
+              <h6 class="pb-1">訂購資訊</h6>
+              <table>
+                <tbody>
+                  <tr>
+                    <th scope="row" style="width: 40%" class="align-top">建立時間</th>
+                    <td>
+                      <span class="d-block">{{
+                        new Date(order?.create_at * 1000).toLocaleDateString()
+                      }}</span>
+                      <span style="font-size: 6px">
+                        {{
+                          new Date(order?.create_at * 1000).toLocaleTimeString()
+                        }}
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">email</th>
+                    <td>{{ order?.user?.email }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">姓名</th>
+                    <td>{{ order?.user?.name }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">手機</th>
+                    <td>{{ order?.user?.tel }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">地址</th>
+                    <td>{{ order?.user?.address }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">備註</th>
+                    <td v-if="order.message" class="text-center">
+                      {{ order?.message }}
+                    </td>
+                    <td>無</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div class="orderContent w-100">
               <h6>訂單內容</h6>
-              <table class="table table-borderless">
-                <tbody v-for="item in order.products" :key="item.id"
-                  style="font-size: 6px;">
+              <table>
+                <tbody
+                  v-for="item in order.products"
+                  :key="item.id"
+                >
                   <tr>
-                    <td rowspan="3">
+                    <td class="pb-3">
                       <img
                         :src="item.product.imageUrl"
                         width="60"
                         height="60"
                         style="object-fit: cover"
+                        class="me-3"
                       />
                     </td>
-                    <td class="p-0 text-start">{{ item.product.title }}</td>
-                  </tr>
-                  <tr>
-                    <td class="p-0 text-start">價格: NT. {{ item.product.price }}</td>
-                  </tr>
-                  <tr>
-                    <td class="p-0 text-start">數量: {{ item.qty }}</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td class="text-end p-4" colspan="5">
-                      總計金額: NT. {{ order.total }}
+                    <td class="pb-3">
+                      <p class="m-0">{{ item.product.title }}</p>
+                      <p class="m-0">價格：NT. {{ toCurrency(Number(item.product.price)) }}</p>
+                      <p class="m-0">數量：{{ item.qty }}</p>
                     </td>
                   </tr>
-                </tfoot>
+                </tbody>
               </table>
+              <p class="text-end py-2 border-top h6">
+                總計：NT. {{ toCurrency(Number(order.total)) }}</p>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>

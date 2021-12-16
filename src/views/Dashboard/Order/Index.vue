@@ -3,13 +3,13 @@
     <button class="btn btn-danger text-white" @click="openDelAllModal"
       :class="{ 'disabled' : !orders.length }">刪除全部訂單</button>
   </div>
-  <table class="table mt-4">
+  <table class="table mt-4 text-center">
     <thead>
       <tr>
-        <th width="200">訂單建立時間</th>
-        <th width="120">訂單編號</th>
-        <th width="120">金額</th>
-        <th width="120">付款狀態</th>
+        <th width="120">訂單建立時間</th>
+        <th width="240">訂單編號</th>
+        <th width="100" class="text-start">金額</th>
+        <th width="100">付款狀態</th>
         <th width="200">付款時間</th>
         <th width="100">編輯</th>
       </tr>
@@ -19,29 +19,45 @@
         <td class="fst-italic text-center py-5" colspan="6">無訂單</td>
       </tr>
       <tr v-for="item in orders" :key="item.id">
-        <td>{{ new Date(item.create_at * 1000).toLocaleString() }}</td>
+        <td>
+          <div>
+            <p class="m-0">
+              {{ new Date(item.create_at * 1000).toLocaleDateString() }}
+            </p>
+            <p class="m-0" style="font-size: 6px;">
+              {{ new Date(item.create_at * 1000).toLocaleTimeString() }}
+            </p>
+          </div>
+        </td>
         <td>{{ item.id }}</td>
-        <td class="text-start">{{ item.total }}</td>
+        <td class="text-start">NT. {{ toCurrency(item.total) }}</td>
         <td>
           <span v-if="item.is_paid" class="text-success">已付款</span>
           <span v-else>未付款</span>
         </td>
         <td>
-          <span v-if="item.is_paid">{{ new Date(item.paid_date * 1000).toLocaleString() }}</span>
-          <span v-else></span>
+          <div v-if="item.is_paid">
+            <p class="m-0">
+              {{ new Date(item.paid_date * 1000).toLocaleDateString() }}
+            </p>
+            <p class="m-0" style="font-size: 6px;">
+              {{ new Date(item.paid_date * 1000).toLocaleTimeString() }}
+            </p>
+          </div>
+          <div v-else></div>
         </td>
         <td>
           <div class="btn-group">
             <button
               type="button"
-              class="btn btn-outline-dark btn-sm"
+              class="btn btn-outline-dark btn-sm rounded-start"
               @click="openModal(item.id)"
             >
               查看
             </button>
             <button
               type="button"
-              class="btn btn-outline-danger btn-sm"
+              class="btn btn-outline-danger btn-sm rounded-end"
               @click="openDelModal(item)"
             >
               刪除
