@@ -2,14 +2,16 @@
   <div class="bg-light py-5">
     <div class="mx-auto" style="width: 600px; height: 70vh">
       <h2 class="py-4">登入後台</h2>
-      <form @submit.prevent="login">
+      <form @submit="login">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input type="email" v-model="user.username" class="form-control" id="email" />
+          <input autoComplete="username"
+          type="email" v-model="user.username" class="form-control" id="email" />
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" v-model="user.password" class="form-control" id="password" />
+          <input autoComplete="current-password"
+          type="password" v-model="user.password" class="form-control" id="password" />
         </div>
         <button type="submit" class="btn btn-primary">登入</button>
       </form>
@@ -33,7 +35,6 @@ export default {
   },
   methods: {
     login() {
-      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/admin/signin`;
       this.$http.post(api, this.user)
         .then((res) => {
@@ -41,6 +42,8 @@ export default {
             const { token, expired } = res.data;
             document.cookie = `token=${token}; expires=${new Date(expired)}; path=/`;
             this.$router.push('/admin/product');
+          } else {
+            console.log(res.data.message);
           }
         });
     },
