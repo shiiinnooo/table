@@ -15,6 +15,8 @@
       </form>
     </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -25,10 +27,13 @@ export default {
         username: '',
         password: '',
       },
+      isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
     login() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/admin/signin`;
       this.$http.post(api, this.user)
         .then((res) => {
@@ -38,6 +43,12 @@ export default {
             this.$router.push('/admin/product');
           }
         });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
 };

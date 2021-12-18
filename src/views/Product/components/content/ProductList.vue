@@ -107,16 +107,19 @@
       </div>
     </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
-import emitter from '../../../../assets/javascript/emitter';
+import emitter from '@/assets/javascript/emitter';
 
 export default {
   data() {
     return {
       products: [],
       isLoading: false,
+      fullPage: true,
     };
   },
   inject: ['page'],
@@ -138,16 +141,17 @@ export default {
   },
   methods: {
     getProducts() {
-      this.isLoading = true;
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
-          this.isLoading = false;
+          this.loadingHide();
         }
       });
     },
     addToCart(id) {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: id,
@@ -157,8 +161,15 @@ export default {
         if (res.data.success) {
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
+          this.loadingHide();
         }
       });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   mounted() {

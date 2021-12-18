@@ -77,6 +77,8 @@
     @del-order="delOrder"
   ></OrderDelModal>
   <OrderDelAllModal ref="delAllModal" @del-allOrder="delAllOrder"></OrderDelAllModal>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -91,6 +93,8 @@ export default {
       orders: [],
       tempOrder: {},
       pagination: {},
+      isLoading: false,
+      fullPage: true,
     };
   },
   components: {
@@ -101,50 +105,61 @@ export default {
   },
   methods: {
     getOrders(page = 1) {
+      this.loadingShow();
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           const { orders, pagination } = res.data;
           this.orders = orders;
           this.pagination = pagination;
+          this.loadingHide();
         } else {
+          this.loadingHide();
           // eslint-disable-next-line no-alert
           alert(res.data.message);
         }
       });
     },
     delOrder(id) {
+      this.loadingShow();
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${id}`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
+          this.loadingHide();
           this.$refs.delModal.hide();
           this.getOrders();
         } else {
+          this.loadingHide();
           // eslint-disable-next-line no-alert
           alert(res.data.message);
         }
       });
     },
     delAllOrder() {
+      this.loadingShow();
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/orders/all`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
+          this.loadingHide();
           this.$refs.delAllModal.hide();
           this.getOrders();
         } else {
+          this.loadingHide();
           // eslint-disable-next-line no-alert
           alert(res.data.message);
         }
       });
     },
     openModal(orderId) {
+      this.loadingShow();
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${orderId}`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.tempOrder = res.data.order;
+          this.loadingHide();
+          this.$refs.modal.show();
         }
       });
-      this.$refs.modal.show();
     },
     openDelModal(item) {
       this.tempOrder = { ...item };
@@ -152,6 +167,12 @@ export default {
     },
     openDelAllModal() {
       this.$refs.delAllModal.show();
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   created() {

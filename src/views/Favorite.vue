@@ -73,6 +73,8 @@
       </button>
     </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -93,25 +95,31 @@ export default {
       myFavoriteId: storageMethods.getItem() || [],
       myFavorite: [],
       isIconHover: false,
+      isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
     getProducts() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           const { products } = res.data;
           this.myFavorite = products.filter((item) => this.myFavoriteId.includes(item.id));
+          this.loadingHide();
         }
       });
     },
     removeFavItem(id, index) {
+      this.loadingShow();
       this.myFavorite.splice(index, 1);
       this.myFavoriteId.splice(this.myFavoriteId.indexOf(id), 1);
       storageMethods.setItem(this.myFavoriteId);
       this.getProducts();
     },
     addToCart(id) {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: id,
@@ -121,8 +129,15 @@ export default {
         if (res.data.success) {
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
+          this.loadingHide();
         }
       });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   created() {

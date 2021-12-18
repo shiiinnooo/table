@@ -104,6 +104,8 @@
       </div>
     </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -113,28 +115,35 @@ export default {
   data() {
     return {
       carts: {},
+      isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
     getCarts() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.carts = res.data.data;
+          this.loadingHide();
         }
       });
     },
     delCartItem(id) {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http.delete(api).then((res) => {
         if (res.data.success) {
           this.getCarts();
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
+          this.loadingHide();
         }
       });
     },
     updateCart(item) {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
       const cart = {
         product_id: item.product.id,
@@ -145,8 +154,15 @@ export default {
           this.getCarts();
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
+          this.loadingHide();
         }
       });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   created() {

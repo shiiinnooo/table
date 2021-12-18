@@ -1,6 +1,8 @@
 <template>
-  <div v-if="page.selected === 'list'"
-    class="header-image d-flex align-items-center justify-content-center">
+  <div
+    v-if="page.selected === 'list'"
+    class="header-image d-flex align-items-center justify-content-center"
+  >
     <h2 v-if="page.category" class="text-white">
       {{ page.category }}
       <span v-if="page.category === '所有商品'">All</span>
@@ -19,18 +21,20 @@
   </div>
   <div class="container mt-0 mt-sm-4">
     <div class="row">
-      <div class="col-lg-3" :class="{'d-none d-sm-block' : page.selected === 'item'}">
-        <ProductMenu>
-        </ProductMenu>
+      <div
+        class="col-lg-3"
+        :class="{ 'd-none d-sm-block': page.selected === 'item' }"
+      >
+        <ProductMenu> </ProductMenu>
       </div>
       <div class="col-lg-9">
-        <Breadcrumb>
-        </Breadcrumb>
-        <ProductContent>
-        </ProductContent>
+        <Breadcrumb> </Breadcrumb>
+        <ProductContent> </ProductContent>
       </div>
     </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -50,6 +54,8 @@ export default {
         title: '',
         product: {},
       },
+      isLoading: false,
+      fullPage: true,
     };
   },
   components: {
@@ -82,14 +88,22 @@ export default {
   },
   methods: {
     getProduct(id) {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.page.category = res.data.product.category;
           this.page.title = res.data.product.title;
           this.page.product = res.data.product;
+          this.loadingHide();
         }
       });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   created() {
@@ -116,13 +130,13 @@ export default {
 
 <style lang="scss" scoped>
 .header-image {
-  background-image: url('https://images.unsplash.com/photo-1595871213029-7476de0d71dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1844&q=80');
+  background-image: url("https://images.unsplash.com/photo-1595871213029-7476de0d71dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1844&q=80");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 180px;
   h2 {
-    font-family: 'Playfair Display', "Noto Sans TC", serif;
+    font-family: "Playfair Display", "Noto Sans TC", serif;
     letter-spacing: 1.5px;
   }
   @media (max-width: 569px) {

@@ -32,6 +32,8 @@
       </div>
     </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -39,6 +41,8 @@ export default {
   data() {
     return {
       loginStatus: false,
+      isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
@@ -66,6 +70,8 @@ export default {
       }
     },
     logout() {
+      this.loadingShow();
+      this.loginStatus = true;
       const api = `${process.env.VUE_APP_API}/logout`;
       this.$http.post(api).then((res) => {
         if (res.data.success) {
@@ -76,6 +82,12 @@ export default {
           alert(res.data.message);
         }
       });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   created() {

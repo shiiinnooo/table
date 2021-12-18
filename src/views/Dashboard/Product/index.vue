@@ -67,6 +67,8 @@
     :product="tempProduct"
     @del-product="delProduct"
   ></DelModal>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -83,6 +85,8 @@ export default {
       tempProduct: {
         imagesUrl: [],
       },
+      isLoading: false,
+      fullPage: true,
     };
   },
   components: {
@@ -92,19 +96,23 @@ export default {
   },
   methods: {
     getProducts(page = 1) {
+      this.loadingShow();
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           const { products, pagination } = res.data;
           this.products = products;
           this.pagination = pagination;
+          this.loadingHide();
         } else {
+          this.loadingHide();
           // eslint-disable-next-line no-alert
           alert(res.data.message);
         }
       });
     },
     updateProduct(product) {
+      this.loadingShow();
       let url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`;
       let method = '';
       if (this.isNew) {
@@ -115,18 +123,22 @@ export default {
       }
       this.$http[method](url, { data: product }).then((res) => {
         if (res.data.success) {
-          this.getProducts();
+          this.loadingHide();
           this.$refs.modal.hide();
+          this.getProducts();
         }
       });
     },
     delProduct(id) {
+      this.loadingShow();
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${id}`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
+          this.loadingHide();
           this.$refs.delModal.hide();
           this.getProducts();
         } else {
+          this.loadingHide();
           // eslint-disable-next-line no-alert
           alert(res.data.message);
         }
@@ -153,6 +165,12 @@ export default {
     openDelModal(item) {
       this.tempProduct = { ...item };
       this.$refs.delModal.show();
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   created() {

@@ -140,6 +140,8 @@
       </button>
     </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -148,26 +150,37 @@ export default {
     return {
       orderId: '',
       order: {},
+      isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
     getOrder() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${this.orderId}`;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.order = res.data.order;
           const date = new Date(this.order.create_at * 1000).toLocaleString();
           this.order.create_at = date;
+          this.loadingHide();
         }
       });
     },
     payOrder() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
       this.$http.post(api).then((res) => {
         if (res.data.success) {
           this.getOrder();
         }
       });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
   created() {

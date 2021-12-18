@@ -84,16 +84,20 @@
         />
       </div>
   </div>
+  <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
-import emitter from '../../../../assets/javascript/emitter';
+import emitter from '@/assets/javascript/emitter';
 
 export default {
   data() {
     return {
       product: {},
       qty: 1,
+      isLoading: false,
+      fullPage: true,
     };
   },
   inject: ['page'],
@@ -107,6 +111,7 @@ export default {
   },
   methods: {
     addToCart() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
         product_id: this.page.product.id,
@@ -116,8 +121,15 @@ export default {
         if (res.data.success) {
           emitter.emit('update-cart');
           emitter.emit('get-cart-offcanvas');
+          this.loadingHide();
         }
       });
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
 };

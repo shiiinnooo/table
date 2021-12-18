@@ -104,6 +104,8 @@
       </Form>
     </div>
   </div>
+    <loading :active="isLoading"
+    :is-full-page="fullPage"/>
 </template>
 
 <script>
@@ -121,6 +123,8 @@ export default {
         },
         message: '',
       },
+      isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
@@ -132,6 +136,7 @@ export default {
       return phoneNumber.test(value) ? true : '手機號碼格式不正確';
     },
     createOrder() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
       this.$http.post(api, { data: this.form }).then((res) => {
         if (res.data.success) {
@@ -154,6 +159,12 @@ export default {
     },
     goBack() {
       this.$router.back();
+    },
+    loadingShow() {
+      this.isLoading = true;
+    },
+    loadingHide() {
+      this.isLoading = false;
     },
   },
 };
