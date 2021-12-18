@@ -30,13 +30,14 @@
           <p class="m-0 p-0">{{ item.product.title }}</p>
           <p class="m-0 p-0">
             單價
-            <span>NT. {{ toCurrency(Number(item.product.price)) }}</span>
             <span
-              class="text-decoration-line-through ms-2"
+              class="text-decoration-line-through me-1"
               v-if="item.product.price !== item.product.origin_price"
             >
               NT. {{ toCurrency(Number(item.product.origin_price)) }}
             </span>
+            <span :class="{'text-danger': item.product.price !== item.product.origin_price}">
+              NT. {{ toCurrency(Number(item.product.price)) }}</span>
           </p>
           <p class="m-0 p-0">
             小計
