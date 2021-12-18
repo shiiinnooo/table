@@ -21,12 +21,16 @@
         <div class="modal-body">
           <div class="orderStatus border p-2">
             <p class="m-0 py-1">
-              訂單編號：<span>{{ order.id }}</span>
+              訂單編號：<span class="orderId">{{ order.id }}</span>
             </p>
             <p class="m-0 py-1">
               付款狀態：
               <span v-if="order.is_paid" class="text-success">已付款</span>
-              <span v-else>未付款</span>
+              <span v-else>
+                未付款
+                <button @click="copyUrl"
+                class="btn btn-dark rounded px-2 py-1 ms-2">付款連結</button>
+              </span>
             </p>
           </div>
           <div class="d-flex justify-content-between p-2 mt-4">
@@ -131,6 +135,13 @@ export default {
     },
     hide() {
       this.orderModal.hide();
+    },
+    copyUrl() {
+      const copyText = document.querySelector('.orderId');
+      navigator.clipboard.writeText(`https://shiiinnooo.github.io/table/#/checkout/step3/${copyText.textContent}`);
+
+      // eslint-disable-next-line no-alert
+      alert('已複製連結');
     },
   },
   mounted() {
