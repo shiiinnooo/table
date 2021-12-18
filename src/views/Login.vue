@@ -2,15 +2,15 @@
   <div class="bg-light py-5">
     <div class="mx-auto" style="width: 600px; height: 70vh">
       <h2 class="py-4">登入後台</h2>
-      <form @submit="login">
+      <form @submit.prevent="login">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input autoComplete="username"
+          <input
           type="email" v-model="user.username" class="form-control" id="email" />
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input autoComplete="current-password"
+          <input
           type="password" v-model="user.password" class="form-control" id="password" />
         </div>
         <button type="submit" class="btn btn-primary">登入</button>
@@ -35,6 +35,7 @@ export default {
   },
   methods: {
     login() {
+      this.loadingShow();
       const api = `${process.env.VUE_APP_API}/admin/signin`;
       this.$http.post(api, this.user)
         .then((res) => {
