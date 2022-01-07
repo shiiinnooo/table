@@ -76,7 +76,7 @@
     </swiper>
   </div>
   <div class="slogan container-lg">
-    <div class="row py-5 animate__animated animate__backInUp">
+    <div class="row py-5">
       <div
         class="
           slogan-item
@@ -89,7 +89,7 @@
           py-4
         "
       >
-        <div>
+        <div class="wow fadeInUp" data-wow-offset="30">
           <span class="material-icons-outlined material-icons md-36">
             thumb_up_off_alt
           </span>
@@ -108,7 +108,7 @@
           py-4
         "
       >
-        <div>
+        <div class="wow fadeInUp" data-wow-offset="30">
           <span class="material-icons-outlined material-icons md-36">
             timer
           </span>
@@ -126,7 +126,7 @@
           py-4
         "
       >
-        <div>
+        <div class="wow fadeInUp" data-wow-offset="30">
           <span class="material-icons-outlined material-icons md-36">
             sentiment_satisfied_alt
           </span>
@@ -146,8 +146,8 @@
           @click="$router.push('/product')"
           >SHOP NOW</button>
       </div>
-      <div class="sub-img col-lg-5 d-flex align-items-end d-none d-lg-flex
-        animate__animated animate__backInUp">
+      <div class="sub-img col-lg-5 d-flex align-items-end d-none d-lg-flex wow fadeInRight"
+        data-wow-offset="200">
         <img class="w-100 position-relative"
         style="left: -48px;"
         src="https://images.pexels.com/photos/8112775/pexels-photo-8112775.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
@@ -248,6 +248,11 @@ export default {
     routerPush(category) {
       this.$router.push(`/product?category=${category}`);
     },
+  },
+  mounted() {
+    new this.$wow.WOW({
+      live: true,
+    }).init();
   },
 };
 </script>

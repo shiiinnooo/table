@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
 import 'bootstrap';
-import 'animate.css';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import Loading from 'vue-loading-overlay';
+import 'wowjs/css/libs/animate.css';
+import wow from 'wowjs';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import {
@@ -30,6 +31,7 @@ const app = createApp(App);
 
 // 將 toCurrency 加到全域屬性下
 app.config.globalProperties.toCurrency = toCurrency;
+app.config.globalProperties.$wow = wow;
 
 app.component('Form', Form);
 app.component('Field', Field);
