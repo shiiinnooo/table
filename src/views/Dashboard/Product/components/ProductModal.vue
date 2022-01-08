@@ -250,17 +250,6 @@
                 >
                 </textarea>
               </div>
-              <div class="form-group mt-1">
-                <label for="content">說明內容</label>
-                <textarea
-                  id="description"
-                  type="text"
-                  class="form-control"
-                  placeholder="請輸入說明內容"
-                  v-model="tempProduct.content"
-                >
-                </textarea>
-              </div>
             </div>
           </div>
         </div>

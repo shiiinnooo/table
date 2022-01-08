@@ -62,7 +62,7 @@
             favorite_border
           </span>
           <p
-            class="d-inline-block py-3"
+            class="d-inline-block pt-3"
             @click="$emit('addFavorite', page.product.id)"
             style="cursor: pointer;"
           >
@@ -71,8 +71,7 @@
           </p>
         </div>
         <hr />
-        <p>{{ page.product.description }}</p>
-        <p>{{ page.product.content }}</p>
+        <p v-html="page.product.description" style="font-size: 12px;"></p>
       </div>
     </div>
     <div class="d-md-none col-12" v-for="image in page.product.imagesUrl" :key="image">
