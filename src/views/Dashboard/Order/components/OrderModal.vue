@@ -72,7 +72,7 @@
                     <td v-if="order.message" class="text-center">
                       {{ order?.message }}
                     </td>
-                    <td>無</td>
+                    <td v-else>無</td>
                   </tr>
                 </tbody>
               </table>
