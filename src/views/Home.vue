@@ -388,11 +388,11 @@ export default {
         -o-filter: grayscale(0.9); /* Opera */
         @media (max-width: 767px) {
           height: 200px;
-          filter: 0;
-          -ms-filter: grayscale(0); /* IE 9 */
-          -moz-filter: grayscale(0); /* Firefox */
-          -webkit-filter: grayscale(0); /* Safari and Chrome */
-          -o-filter: grayscale(0); /* Opera */
+          filter: grayscale(0.7);
+          -ms-filter: grayscale(0.7); /* IE 9 */
+          -moz-filter: grayscale(0.7); /* Firefox */
+          -webkit-filter: grayscale(0.7); /* Safari and Chrome */
+          -o-filter: grayscale(0.7); /* Opera */
         }
         @media (max-width: 767px) {
           height: 160px;
