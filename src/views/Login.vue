@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-light py-5">
-    <div class="mx-auto" style="width: 600px; height: 70vh">
+  <div class="bg-light py-5" style="height: 70vh">
+    <div class="mx-auto login">
       <h2 class="py-4">登入後台</h2>
       <form @submit.prevent="login">
         <div class="mb-3">
@@ -57,3 +57,15 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.login {
+  width: 80%;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+  @media (min-width: 992px) {
+    width: 40%;
+  }
+}
+</style>
