@@ -24,10 +24,16 @@
         <div class="col-4 col-sm-3 text-md-center">
           <img
             :src="item.product.imageUrl"
+            @click.prevent="$router.push(`/product/${item.product_id}`)"
+            style="cursor: pointer;"
           />
         </div>
         <div class="col-8 col-sm-6 ps-0 ps-lg-3 d-flex flex-column justify-content-center">
-          <p class="m-0 p-0">{{ item.product.title }}</p>
+          <p class="m-0 p-0">
+            <a href="#" class="text-dark text-decoration-underline"
+              @click.prevent="$router.push(`/product/${item.product_id}`)">
+              {{ item.product.title }}</a>
+          </p>
           <p class="m-0 p-0">
             單價
             <span
