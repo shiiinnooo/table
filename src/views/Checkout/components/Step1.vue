@@ -1,5 +1,5 @@
 <template>
-  <div class="shopping-bag container-lg bg-white mt-4 px-4 pb-4 px-sm-5">
+  <div class="shopping-bag container-lg bg-white my-4 px-4 pb-4 px-sm-5">
     <h2
       class="py-4 fw-bold"
       style="
