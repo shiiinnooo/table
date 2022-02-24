@@ -44,7 +44,9 @@ export default {
             document.cookie = `token=${token}; expires=${new Date(expired)}; path=/`;
             this.$router.push('/admin/product');
           } else {
-            console.log(res.data.message);
+            this.loadingHide();
+            // eslint-disable-next-line no-alert
+            alert(res.data.message);
           }
         });
     },
