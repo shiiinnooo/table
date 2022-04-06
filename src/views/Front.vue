@@ -4,8 +4,8 @@
   <router-view></router-view>
   <footer class="py-5 mb-4 mb-md-0 bg-primary">
     <div class="text-center">
-      <p class="text-white">Copyright &copy; 2021 TAbLe. 僅供練習使用無商業用途</p>
-      <a class="text-white text-decoration-underline ms-2 fw-bold" href="#"
+      <span class="text-dark">Copyright &copy; 2021 TAbLe. 僅供練習使用無商業用途</span>
+      <a class="btn btn-light rounded ms-2 my-2 my-sm-0 py-1 fw-bold" href="#"
         @click.prevent="$router.push('/login')">登入後台</a>
     </div>
   </footer>
