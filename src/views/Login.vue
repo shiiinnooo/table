@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light py-5" style="height: 70vh">
+  <div class="bg-light py-5" style="height: 80vh">
     <div class="mx-auto login">
       <h2 class="py-4">登入後台</h2>
       <form @submit.prevent="login">
