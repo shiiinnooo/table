@@ -69,7 +69,7 @@
                   </tr>
                   <tr>
                     <th scope="row">備註</th>
-                    <td v-if="order.message" class="text-center">
+                    <td v-if="order.message">
                       {{ order?.message }}
                     </td>
                     <td v-else>無備註</td>
