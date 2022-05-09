@@ -44,7 +44,7 @@
 
 ![](https://i.imgur.com/7iJ3dYl.png)
 
-![](https://i.imgur.com/ijFfdXy.png)
+![](https://i.imgur.com/VT1cING.png)
 - 首頁下方有做分類導覽，有 hover 效果。
 - 當畫面滑過特定比例，右下方出現回到頂部按鈕。
 
@@ -78,7 +78,7 @@
 ### 結帳頁
 - STEP1 可調整購物車商品，點選 Continue 前往下一步。
 
-![](https://i.imgur.com/MhqyAo9.png)
+![](https://i.imgur.com/mSFqdEK.png)
 
 - STEP2 填寫訂購資料 ( 表單驗證 )。
 
