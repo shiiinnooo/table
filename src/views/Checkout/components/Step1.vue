@@ -16,23 +16,39 @@
         type="button"
         @click="$router.push('/product')"
       >
-      前往購物
+        前往購物
       </button>
     </div>
     <div v-else>
-      <div class="row border-bottom py-3" v-for="item in carts.carts" :key="item.id">
-        <div class="col-4 col-sm-3 text-md-center">
+      <div
+        class="row border-bottom py-3"
+        v-for="item in carts.carts"
+        :key="item.id"
+      >
+        <div class="col-4 col-md-3 text-md-center">
           <img
             :src="item.product.imageUrl"
             @click.prevent="$router.push(`/product/${item.product_id}`)"
-            style="cursor: pointer;"
+            style="cursor: pointer"
           />
         </div>
-        <div class="col-8 col-sm-6 ps-0 ps-lg-3 d-flex flex-column justify-content-center">
+        <div
+          class="
+            col-8 col-md-5 col-lg-6
+            ps-0 ps-lg-3
+            d-flex
+            flex-column
+            justify-content-center
+          "
+        >
           <p class="m-0 p-0">
-            <a href="#" class="text-dark text-decoration-underline"
-              @click.prevent="$router.push(`/product/${item.product_id}`)">
-              {{ item.product.title }}</a>
+            <a
+              href="#"
+              class="text-dark text-decoration-underline"
+              @click.prevent="$router.push(`/product/${item.product_id}`)"
+            >
+              {{ item.product.title }}</a
+            >
           </p>
           <p class="m-0 p-0">
             單價
@@ -42,36 +58,60 @@
             >
               NT. {{ toCurrency(Number(item.product.origin_price)) }}
             </span>
-            <span :class="{'text-danger': item.product.price !== item.product.origin_price}">
-              NT. {{ toCurrency(Number(item.product.price)) }}</span>
+            <span
+              :class="{
+                'text-danger': item.product.price !== item.product.origin_price,
+              }"
+            >
+              NT. {{ toCurrency(Number(item.product.price)) }}</span
+            >
           </p>
           <p class="m-0 p-0">
             小計
             <span>NT. {{ toCurrency(Number(item.total)) }}</span>
           </p>
         </div>
-        <div class="col-12 col-sm-3 py-3 py-sm-0 d-flex flex-column justify-content-center">
-          <select
-            class="form-select rounded d-inline-block d-sm-block text-center py-1"
-            v-model.number="item.qty"
-            @change="updateCart(item)"
-          >
-            <option disabled>選擇數量</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
+        <div
+          class="
+            col-12 col-md-4 col-lg-3
+            py-3 py-md-0
+            d-flex
+            flex-column
+            justify-content-center
+          "
+        >
+          <div class="input-group w-100">
+            <button
+              :class="{'disabled' : item.qty === 1}"
+              class="btn btn-outline-secondary py-1 rounded-start"
+              type="button"
+              @click="updateCart(item, 'minus')"
+            >
+              -
+            </button>
+            <input
+              type="text"
+              class="form-control bg-white border-secondary text-center py-1"
+              v-model.number="item.qty"
+              readonly
+            />
+            <button
+              class="btn btn-outline-secondary py-1 rounded-end"
+              type="button"
+              @click="updateCart(item, 'plus')"
+            >
+              +
+            </button>
+          </div>
           <button
             type="button"
-            class="btn btn-outline-secondary btn-sm my-2 py-1
-              rounded d-inline-block d-sm-block"
+            class="
+              btn btn-outline-secondary btn-sm
+              mt-2
+              py-1
+              rounded
+              d-inline-block d-md-block
+            "
             @click="delCartItem(item.id)"
           >
             刪除
@@ -92,9 +132,7 @@
           @click="$router.push('/checkout/step2')"
         >
           Continue
-          <span class="material-icons-outlined fs-6 align-middle">
-            east
-          </span>
+          <span class="material-icons-outlined fs-6 align-middle"> east </span>
         </button>
       </div>
       <div class="d-block d-md-none">
@@ -104,15 +142,12 @@
           @click="$router.push('/checkout/step2')"
         >
           Continue
-          <span class="material-icons-outlined fs-6 align-middle">
-            east
-          </span>
+          <span class="material-icons-outlined fs-6 align-middle"> east </span>
         </button>
       </div>
     </div>
   </div>
-  <loading :active="isLoading"
-    :is-full-page="fullPage"/>
+  <loading :active="isLoading" :is-full-page="fullPage" />
 </template>
 
 <script>
@@ -149,12 +184,18 @@ export default {
         }
       });
     },
-    updateCart(item) {
+    updateCart(item, state) {
       this.loadingShow();
+      let qty = 0;
+      if (state === 'plus') {
+        qty = item.qty + 1;
+      } else {
+        qty = item.qty - 1;
+      }
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
       const cart = {
         product_id: item.product.id,
-        qty: item.qty,
+        qty,
       };
       this.$http.put(api, { data: cart }).then((res) => {
         if (res.data.success) {

@@ -57,15 +57,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-2">
-            <button
-              type="button"
-              class="bg-transparent border border-secondary p-1"
-              @click="delCart(item.id)"
-            >
-              刪除
-            </button>
-          </div> -->
         </div>
       </div>
       <hr />
