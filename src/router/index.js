@@ -16,7 +16,7 @@ const routes = [
       },
       {
         path: 'product',
-        component: () => import('../views/Product/index.vue'),
+        component: () => import('../views/Product/Index.vue'),
         children: [
           {
             path: '',
@@ -36,7 +36,7 @@ const routes = [
       },
       {
         path: 'checkout',
-        component: () => import('../views/Checkout/index.vue'),
+        component: () => import('../views/Checkout/Index.vue'),
         children: [
           {
             path: 'step1',
@@ -64,15 +64,15 @@ const routes = [
   },
   {
     path: '/admin',
-    component: () => import('../views/Dashboard/index.vue'),
+    component: () => import('../views/Dashboard/Index.vue'),
     children: [
       {
         path: 'product',
-        component: () => import('../views/Dashboard/Product/index.vue'),
+        component: () => import('../views/Dashboard/Product/Index.vue'),
       },
       {
         path: 'order',
-        component: () => import('../views/Dashboard/Order/index.vue'),
+        component: () => import('../views/Dashboard/Order/Index.vue'),
       },
     ],
   },
