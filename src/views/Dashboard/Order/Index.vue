@@ -24,7 +24,7 @@
             <p class="m-0">
               {{ new Date(item.create_at * 1000).toLocaleDateString() }}
             </p>
-            <p class="m-0" style="font-size: 6px;">
+            <p class="m-0" style="font-size: 12px;">
               {{ new Date(item.create_at * 1000).toLocaleTimeString() }}
             </p>
           </div>
@@ -40,7 +40,7 @@
             <p class="m-0">
               {{ new Date(item.paid_date * 1000).toLocaleDateString() }}
             </p>
-            <p class="m-0" style="font-size: 6px;">
+            <p class="m-0" style="font-size: 12px;">
               {{ new Date(item.paid_date * 1000).toLocaleTimeString() }}
             </p>
           </div>

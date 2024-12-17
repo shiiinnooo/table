@@ -44,7 +44,7 @@
                       <span class="d-block">{{
                         new Date(order?.create_at * 1000).toLocaleDateString()
                       }}</span>
-                      <span style="font-size: 6px">
+                      <span style="font-size: 12px">
                         {{
                           new Date(order?.create_at * 1000).toLocaleTimeString()
                         }}

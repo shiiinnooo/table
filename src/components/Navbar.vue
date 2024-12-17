@@ -87,7 +87,7 @@
                     shopping_bag
                   </span>
                   <p class="position-absolute fw-bold"
-                    style="font-size: 4px; left: -2px; top: 30px;">購物車</p>
+                    style="font-size: 12px; left: -2px; top: 30px;">購物車</p>
                   <div
                     class="badge rounded-pill bg-danger position-absolute"
                     :class="{ 'px-1': qty >= 10 }"
@@ -108,7 +108,7 @@
                       favorite_border
                     </span>
                     <p class="position-absolute fw-bold"
-                      style="font-size: 4px; left: -10px; top: 30px;">我的收藏</p>
+                      style="font-size: 12px; left: -10px; top: 30px;">我的收藏</p>
                   </a>
                 </li>
               </ul>
